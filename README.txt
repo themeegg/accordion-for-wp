@@ -26,7 +26,7 @@ You can put all WP_Query arguments to this shortcode.
 == Installation ==
 
 1. Download the plugin and extract the files
-2. Upload "afwp-accordion" to your wp-
+2. Upload "accordion-for-wp" to your wp-
 content/plugins/directory
 3. Activate the plugin through the 'Plugins' menu in WordPress
 4. Put shortcode to anywhere [dg_accordion post_type="post" posts_per_page="3"][/dg_accordion]
@@ -43,10 +43,8 @@ All WP_Query arguments args accepts by this plugin.
 You can make accordion of post type, category, tags or taxonomy also.
 
 == Changelog ==
-= 1.0 =
+= 1.0	21/08/2017 =
 * Initial Release
-= 1.0.1 =
-* Change README.TXT 
 
 == A brief Markdown Example ==
 
