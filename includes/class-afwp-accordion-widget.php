@@ -20,11 +20,11 @@ class AFWP_Accordion_Widgets extends WP_Widget{
     public function __construct() {
         $widget_ops = array(
             'classname' => 'afwp_accordion_widget',
-            'description' => __( 'Widget for Accordion' ),
+            'description' => __( 'Widget for Accordion', 'accordion-for-wp' ),
             'customize_selective_refresh' => true,
         );
         $control_ops = array( 'width' => 300, 'height' => 350 );
-        parent::__construct( 'afwp_accordion_widget', __( 'Accordion Post Widget' ), $widget_ops, $control_ops );
+        parent::__construct( 'afwp_accordion_widget', __( 'Accordion Post Widget', 'accordion-for-wp' ), $widget_ops, $control_ops );
     }
 
     /**
@@ -131,10 +131,10 @@ class AFWP_Accordion_Widgets extends WP_Widget{
         $templates = sanitize_text_field($instance['templates']);
         $style = sanitize_text_field($instance['style']);
         ?>
-        <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+        <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'accordion-for-wp'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
 
-        <p><label for="<?php echo $this->get_field_id('post_type'); ?>"><?php _e('Post Type:'); ?></label>
+        <p><label for="<?php echo $this->get_field_id('post_type'); ?>"><?php _e('Post Type:', 'accordion-for-wp'); ?></label>
             <?php
             $args = array(
                 'public'=>true,
@@ -147,7 +147,7 @@ class AFWP_Accordion_Widgets extends WP_Widget{
                 <?php endforeach; ?>
             </select></p>
 
-        <p><label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy:'); ?></label>
+        <p><label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy:', 'accordion-for-wp'); ?></label>
             <?php
             $all_object_taxonomies = get_object_taxonomies($post_type, 'objects');
             ?>
@@ -158,7 +158,7 @@ class AFWP_Accordion_Widgets extends WP_Widget{
                 <?php endforeach; ?>
             </select></p>
 
-        <p><label for="<?php echo $this->get_field_id('term'); ?>"><?php _e('Term:'); ?></label>
+        <p><label for="<?php echo $this->get_field_id('term'); ?>"><?php _e('Term:', 'accordion-for-wp'); ?></label>
             <?php
             $all_terms = get_terms(array(
                 'taxonomy' => $taxonomy,
@@ -174,10 +174,10 @@ class AFWP_Accordion_Widgets extends WP_Widget{
                 <?php endif; ?>
             </select></p>
 
-        <p><label for="<?php echo $this->get_field_id('no_of_post'); ?>"><?php _e('Show no of post:'); ?></label>
+        <p><label for="<?php echo $this->get_field_id('no_of_post'); ?>"><?php _e('Show no of post:', 'accordion-for-wp'); ?></label>
             <input class="widefat" min="1" max="99" id="<?php echo $this->get_field_id('no_of_post'); ?>" name="<?php echo $this->get_field_name('no_of_post'); ?>" type="number" value="<?php echo $no_of_post; ?>" /></p>
         <hr/>
-        <p><label for="<?php echo $this->get_field_id('templates'); ?>"><?php _e('Template:'); ?></label>
+        <p><label for="<?php echo $this->get_field_id('templates'); ?>"><?php _e('Template:', 'accordion-for-wp'); ?></label>
         <?php
             $all_templates = array(
                     'default'=>'Default',
@@ -189,7 +189,7 @@ class AFWP_Accordion_Widgets extends WP_Widget{
                     <option <?php selected($templates, $template_key, true); ?> value="<?php echo $template_key; ?>"><?php echo $template_value; ?></option>
                 <?php endforeach; ?>
             </select></p>
-        <p><label for="<?php echo $this->get_field_id('style'); ?>"><?php _e('Style:'); ?></label>
+        <p><label for="<?php echo $this->get_field_id('style'); ?>"><?php _e('Style:', 'accordion-for-wp'); ?></label>
         <?php
             $all_style = array(
                 'vertical'=>'Vertical',

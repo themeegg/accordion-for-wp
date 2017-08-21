@@ -24,10 +24,10 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget{
      */
     public function __construct() {
         $widget_ops = array(
-            'description' => __( 'Add a custom accordion menu to your sidebar.' ),
+            'description' => __( 'Add a custom accordion menu to your sidebar.', 'accordion-for-wp' ),
             'customize_selective_refresh' => true,
         );
-        parent::__construct( 'accordion_nav_menu', __('Accordion Menu'), $widget_ops );
+        parent::__construct( 'accordion_nav_menu', __('Accordion Menu' , 'accordion-for-wp'), $widget_ops );
     }
 
     /**
@@ -161,17 +161,17 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget{
                 $url = admin_url( 'nav-menus.php' );
             }
             ?>
-            <?php echo sprintf( __( 'No menus have been created yet. <a href="%s">Create some</a>.' ), esc_attr( $url ) ); ?>
+            <?php echo sprintf( __( 'No menus have been created yet. <a href="%s">Create some</a>.' , 'accordion-for-wp'), esc_attr( $url ) ); ?>
         </p>
         <div class="nav-menu-widget-form-controls" <?php if ( empty( $menus ) ) { echo ' style="display:none" '; } ?>>
             <p>
-                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ) ?></label>
+                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'accordion-for-wp' ) ?></label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ); ?>"/>
             </p>
             <p>
-                <label for="<?php echo $this->get_field_id( 'nav_menu' ); ?>"><?php _e( 'Select Menu:' ); ?></label>
+                <label for="<?php echo $this->get_field_id( 'nav_menu' ); ?>"><?php _e( 'Select Menu:', 'accordion-for-wp' ); ?></label>
                 <select id="<?php echo $this->get_field_id( 'nav_menu' ); ?>" name="<?php echo $this->get_field_name( 'nav_menu' ); ?>">
-                    <option value="0"><?php _e( '&mdash; Select &mdash;' ); ?></option>
+                    <option value="0"><?php _e( '&mdash; Select &mdash;', 'accordion-for-wp' ); ?></option>
                     <?php foreach ( $menus as $menu ) : ?>
                         <option value="<?php echo esc_attr( $menu->term_id ); ?>" <?php selected( $nav_menu, $menu->term_id ); ?>>
                             <?php echo esc_html( $menu->name ); ?>
@@ -181,7 +181,7 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget{
             </p>
             <p>
                 <input type="checkbox" class="checkbox"  id="<?php echo $this->get_field_id( 'show_accordion' ); ?>" name="<?php echo $this->get_field_name( 'show_accordion' ); ?>" <?php checked($show_accordion); ?> />
-                <label for="<?php echo $this->get_field_id( 'show_accordion' ); ?>"><?php _e( 'Show as Accordion:' ) ?></label>
+                <label for="<?php echo $this->get_field_id( 'show_accordion' ); ?>"><?php _e( 'Show as Accordion:', 'accordion-for-wp' ) ?></label>
             </p>
             <?php
             $all_templates = array(
@@ -190,7 +190,7 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget{
             );
             ?>
             <p>
-                <label for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php _e('Template:'); ?></label>
+                <label for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php _e('Template:', 'accordion-for-wp'); ?></label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'templates' ); ?>" name="<?php echo $this->get_field_name( 'templates' ); ?>">
                     <?php foreach($all_templates as $template_key=>$template_value): ?>
                         <option <?php selected($templates, $template_key, true); ?> value="<?php echo $template_key; ?>"><?php echo $template_value; ?></option>
@@ -204,7 +204,7 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget{
             );
             ?>
             <p>
-                <label for="<?php echo $this->get_field_id( 'style' ); ?>"><?php _e('Style:'); ?></label>
+                <label for="<?php echo $this->get_field_id( 'style' ); ?>"><?php _e('Style:', 'accordion-for-wp'); ?></label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'style' ); ?>" name="<?php echo $this->get_field_name( 'style' ); ?>">
                     <?php foreach($all_style as $style_key=>$style_value): ?>
                         <option <?php selected($style, $style_key, true); ?> value="<?php echo $style_key; ?>"><?php echo $style_value; ?></option>
@@ -213,7 +213,7 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget{
             </p>
             <?php if ( $wp_customize instanceof WP_Customize_Manager ) : ?>
                 <p class="edit-selected-nav-menu" style="<?php if ( ! $nav_menu ) { echo 'display: none;'; } ?>">
-                    <button type="button" class="button"><?php _e( 'Edit Menu' ) ?></button>
+                    <button type="button" class="button"><?php _e( 'Edit Menu', 'accordion-for-wp' ) ?></button>
                 </p>
             <?php endif; ?>
         </div>
