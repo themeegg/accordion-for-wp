@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This is accordion widge shortcode plugin. You can enter all argument of WP_Query to this shortcodes.
+This is accordion widgets/accordion shortcode plugin. You can enter all argument of WP_Query to this shortcodes.
 
 == Description ==
 
