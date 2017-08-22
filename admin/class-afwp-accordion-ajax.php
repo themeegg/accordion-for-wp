@@ -7,7 +7,7 @@
  * @subpackage Accordion_For_WP/admin
  * @author     ThemeEgg <themeeggofficial@gmail.com>
  */
-class DG_Accordion_Ajax{
+class AFWP_Accordion_Ajax{
 
     /**
      * Accordion Data of this plugin.
@@ -105,4 +105,4 @@ class DG_Accordion_Ajax{
 
 }
 
-new DG_Accordion_Ajax();
+new AFWP_Accordion_Ajax();
