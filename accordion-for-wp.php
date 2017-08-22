@@ -1,8 +1,8 @@
 <?php
 /**
-* Plugin Name:       Accordion For WP
+* Plugin Name:       Accordion for WordPress
 * Plugin URI:        http://demo.themeegg.com/accordion/
-* Description:       This is accordion plugin.
+* Description:       Accordion for wordpress widgets and shortcode plugin with multiple templates.
 * Version:           1.0.0
 * Author:            ThemeEgg
 * Author URI:        http://themeegg.com/
