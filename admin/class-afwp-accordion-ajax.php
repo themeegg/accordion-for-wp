@@ -58,8 +58,8 @@ class DG_Accordion_Ajax{
             die();
         }
 
-        $data_type = $_POST['data']['data_type'];
-        $data_value = $_POST['data']['data_value'];
+        $data_type = sanitize_text_field($_POST['data']['data_type']);
+        $data_value = sanitize_text_field($_POST['data']['data_value']);
         $data = array();
         switch($data_type){
             case 'post_type':
@@ -74,18 +74,18 @@ class DG_Accordion_Ajax{
                 }
                 break;
             case 'taxonomy':
-                
+
                 $args = array(
                     'taxonomy' => $data_value,
                     'hide_empty' => false,
                 );
-                
+
                 $all_terms = get_terms($args);
-                
+
                 if( is_array($all_terms) ):
                     $data = $all_terms;
                 endif;
-                
+
                 break;
             default:
                 $data = array();
