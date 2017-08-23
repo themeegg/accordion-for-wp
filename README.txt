@@ -80,9 +80,10 @@ Supprot URL : [http://support.themeegg.com/](http://support.themeegg.com/)
 
 == Changelog ==
 
-= 1.1.0  2017-08-22 =
+= 1.1.0  2017-08-23 =
 * Custom post type for accordion 
 * Design improvement
+* Template not loading issue resovled 
 
 = 1.0  2017-08-22 =
 * Initial Release
