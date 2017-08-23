@@ -68,11 +68,11 @@ class Accordion_Shortcode {
 			return;
 		}
 
-		$taxonomy_id = $atts['id'];
+		$taxonomy_id = absint( $atts['id'] );
 
 		$post_limit = isset( $atts['limit'] ) ? $atts['limit'] : - 1;
 
-		$this->group_accordion_template = '';//get_term_meta( $taxonomy_id, 'acwp_term_template', true );
+		$this->group_accordion_template = get_term_meta( $taxonomy_id, 'acwp_term_template', true );
 
 		$this->group_accordion_style = get_term_meta( $taxonomy_id, 'acwp_term_style', true );
 
