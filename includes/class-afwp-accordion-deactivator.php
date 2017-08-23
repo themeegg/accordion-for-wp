@@ -1,9 +1,14 @@
 <?php
 
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Fired during plugin deactivation
  *
- * @link       http://projects.dinesh-ghimire.com.np/
+ * @link       http://themeegg.com/plugins/accordion-for-wp//
  * @since      1.0.0
  *
  * @package    Accordion_For_WP

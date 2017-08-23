@@ -1,9 +1,14 @@
 <?php
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       http://projects.dinesh-ghimire.com.np/
+ * @link       http://themeegg.com/plugins/accordion-for-wp//
  * @since      1.0.0
  *
  * @package    Accordion_For_WP
@@ -27,7 +32,7 @@ class Accordion_For_WP_Admin {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -36,7 +41,7 @@ class Accordion_For_WP_Admin {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
@@ -44,17 +49,35 @@ class Accordion_For_WP_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 *
+	 * @param      string $plugin_name The name of this plugin.
+	 * @param      string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
+		$this->define_admin_hooks();
+
 		/*
 		 * @since    1.1.0
 		 */
 		$this->accordion_dependencies();
+
+	}
+
+
+	/**
+	 * Register all of the hooks related to the admin area functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_admin_hooks() {
+
+		$this->loader->add_action( 'admin_enqueue_scripts', $this, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $this, 'enqueue_scripts' );
 
 	}
 
@@ -109,9 +132,9 @@ class Accordion_For_WP_Admin {
 	 *
 	 * @since    1.1.0
 	 */
-	public function accordion_dependencies(){
+	public function accordion_dependencies() {
 
-		if(!is_admin()){
+		if ( ! is_admin() ) {
 			return;
 		}
 

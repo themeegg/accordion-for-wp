@@ -1,4 +1,9 @@
 <?php
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * The admin-specific Accordion Ajax functionality of the plugin.
  *

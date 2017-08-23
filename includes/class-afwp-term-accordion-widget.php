@@ -1,4 +1,9 @@
 <?php
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * The class for accordion shortcode
@@ -158,17 +163,16 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 				<?php endforeach; ?>
 			</select></p>
 
-		<p><label for="<?php echo $this->get_field_id( 'no_of_term' ); ?>"><?php _e( 'Show no of term:' , 'accordion-for-wp' ); ?></label>
+		<p><label
+				for="<?php echo $this->get_field_id( 'no_of_term' ); ?>"><?php _e( 'Show no of term:', 'accordion-for-wp' ); ?></label>
 			<input class="widefat" min="1" max="99" id="<?php echo $this->get_field_id( 'no_of_term' ); ?>"
 			       name="<?php echo $this->get_field_name( 'no_of_term' ); ?>" type="number"
 			       value="<?php echo $no_of_term; ?>"/></p>
 		<hr/>
-		<p><label for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php _e( 'Template:', 'accordion-for-wp' ); ?></label>
+		<p><label
+				for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php _e( 'Template:', 'accordion-for-wp' ); ?></label>
 			<?php
-			$all_templates = array(
-				'default'    => 'Default',
-				'template-1' => 'Template 1'
-			);
+			$all_templates = afwp_accordion_templates();
 			?>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'templates' ); ?>"
 			        name="<?php echo $this->get_field_name( 'templates' ); ?>" type="text"
@@ -178,12 +182,10 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 						value="<?php echo $template_key; ?>"><?php echo $template_value; ?></option>
 				<?php endforeach; ?>
 			</select></p>
-		<p><label for="<?php echo $this->get_field_id( 'style' ); ?>"><?php _e( 'Style:', 'accordion-for-wp' ); ?></label>
+		<p><label
+				for="<?php echo $this->get_field_id( 'style' ); ?>"><?php _e( 'Style:', 'accordion-for-wp' ); ?></label>
 			<?php
-			$all_style = array(
-				'vertical'   => 'Vertical',
-				'horizontal' => 'Horizontal',
-			);
+			$all_style = afwp_accordion_styles();
 			?>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'style' ); ?>"
 			        name="<?php echo $this->get_field_name( 'style' ); ?>" type="text"

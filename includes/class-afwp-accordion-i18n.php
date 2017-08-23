@@ -6,7 +6,7 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       http://projects.dinesh-ghimire.com.np/
+ * @link       http://themeegg.com/plugins/accordion-for-wp//
  * @since      1.0.0
  *
  * @package    Accordion_For_WP

@@ -1,12 +1,17 @@
 <?php
 
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * The file that defines the core plugin class
  *
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       http://projects.dinesh-ghimire.com.np/
+ * @link       http://themeegg.com/plugins/accordion-for-wp//
  * @since      1.0.0
  *
  * @package    Accordion_For_WP
@@ -73,13 +78,19 @@ class Accordion_For_WP {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->add_shortcodes();
+		$this->add_admin_options();
 		add_action( 'widgets_init', [$this, 'add_widgets'] );
 
 	}
 
+
+	public function add_admin_options() {
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-afwp-accordion-admin-options.php';
+
+	}
 	/**
 	 * Load the required dependencies for this plugin.
 	 *
@@ -113,8 +124,12 @@ class Accordion_For_WP {
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-afwp-accordion-admin.php';
 
+		if(is_admin()){
+
+ 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-afwp-accordion-admin.php';
+
+		}
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
@@ -122,7 +137,7 @@ class Accordion_For_WP {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-afwp-accordion-public.php';
 
 		$this->loader = new Accordion_For_WP_Loader();
-        
+
 	}
 
 	/**
@@ -163,21 +178,7 @@ class Accordion_For_WP {
 
 	}
 
-	/**
-	 * Register all of the hooks related to the admin area functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function define_admin_hooks() {
 
-		$plugin_admin = new Accordion_For_WP_Admin( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-	}
 
 	/**
 	 * Register all of the hooks related to the public-facing functionality

@@ -1,9 +1,14 @@
 <?php
 
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Register all actions and filters for the plugin
  *
- * @link       http://projects.dinesh-ghimire.com.np/
+ * @link       http://themeegg.com/plugins/accordion-for-wp//
  * @since      1.0.0
  *
  * @package    Accordion_For_WP
@@ -108,7 +113,7 @@ class Accordion_For_WP_Loader {
 		return $hooks;
 
 	}
-    
+
     function afwp_template_part($templateFile){
 
         if ( $overridden_template = locate_template( DIRECTORY_SEPARATOR.'afwp-accordion'.DIRECTORY_SEPARATOR.$templateFile ) ) {
