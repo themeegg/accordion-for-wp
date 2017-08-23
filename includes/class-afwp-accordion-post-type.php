@@ -41,17 +41,21 @@ class Accordion_For_WP_Post_Type {
 
 	public function save_accordion_group_custom_meta( $term_id ) {
 
+
 		if ( isset( $_POST['term_meta'] ) ) {
-			$t_id      = $term_id;
-			$term_meta = get_option( "taxonomy_$t_id" );
-			$cat_keys  = array_keys( $_POST['term_meta'] );
+
+			$cat_keys = array_keys( $_POST['term_meta'] );
 			foreach ( $cat_keys as $key ) {
 				if ( isset ( $_POST['term_meta'][ $key ] ) ) {
-					$term_meta[ $key ] = $_POST['term_meta'][ $key ];
+
+					$term_meta_value = sanitize_text_field( $_POST['term_meta'][ $key ] );
+					update_term_meta( $term_id, $key, $term_meta_value );
+
 				}
 			}
+
 			// Save the option array.
-			update_option( "taxonomy_$t_id", $term_meta );
+
 		}
 	}
 
@@ -60,7 +64,7 @@ class Accordion_For_WP_Post_Type {
 
 		<div class="form-field">
 			<label for="term_meta[acwp_term_template]"><?php _e( 'Accordion template', 'accordion-for-wp' ); ?></label>
-			<select name="term_meta[acwp_term_template]" id="term_meta[acwp_term_template]">
+			<select style="width:94%" name="term_meta[acwp_term_template]" id="term_meta[acwp_term_template]">
 				<?php
 				foreach ( afwp_accordion_templates() as $template_index => $template_value ) {
 
@@ -76,7 +80,7 @@ class Accordion_For_WP_Post_Type {
 		</div>
 		<div class="form-field">
 			<label for="term_meta[acwp_term_style]"><?php _e( 'Accordion style', 'accordion-for-wp' ); ?></label>
-			<select name="term_meta[acwp_term_style]" id="term_meta[acwp_term_style]">
+			<select style="width:94%" name="term_meta[acwp_term_style]" id="term_meta[acwp_term_style]">
 				<?php
 				foreach ( afwp_accordion_styles() as $template_index => $template_value ) {
 					?>
@@ -97,15 +101,17 @@ class Accordion_For_WP_Post_Type {
 		// put the term ID into a variable
 		$t_id = $term->term_id;
 		// retrieve the existing value(s) for this meta field. This returns an array
-		$term_meta = get_option( "taxonomy_$t_id" ); ?>
+		$acwp_term_template1 = get_term_meta( $t_id );
+
+		?>
 		<tr class="form-field">
 			<th scope="row" valign="top"><label
 					for="term_meta[acwp_term_template]"><?php _e( 'Accordion template', 'accordion-for-wp' ); ?></label>
 			</th>
 			<td>
-				<select name="term_meta[acwp_term_template]" id="term_meta[acwp_term_template]">
+				<select style="width:94%" name="term_meta[acwp_term_template]" id="term_meta[acwp_term_template]">
 					<?php
-					$acwp_term_template = isset( $term_meta['acwp_term_template'] ) ? esc_attr( $term_meta['acwp_term_template'] ) : '';
+					$acwp_term_template = get_term_meta( $t_id, 'acwp_term_template', true );
 
 					foreach ( afwp_accordion_templates() as $template_index => $template_value ) {
 						?>
@@ -127,9 +133,9 @@ class Accordion_For_WP_Post_Type {
 					for="term_meta[acwp_term_style]"><?php _e( 'Accordion style', 'accordion-for-wp' ); ?></label>
 			</th>
 			<td>
-				<select name="term_meta[acwp_term_style]" id="term_meta[acwp_term_style]">
+				<select style="width:94%" name="term_meta[acwp_term_style]" id="term_meta[acwp_term_style]">
 					<?php
-					$acwp_term_style = isset( $term_meta['acwp_term_style'] ) ? esc_attr( $term_meta['acwp_term_style'] ) : '';
+					$acwp_term_style = get_term_meta( $t_id, 'acwp_term_style', true );
 
 					foreach ( afwp_accordion_styles() as $template_index => $template_value ) {
 						?>
@@ -162,7 +168,7 @@ class Accordion_For_WP_Post_Type {
 		//run a switch statement for all of the custom columns created
 		switch ( $column_id ) {
 			case 'accordion_shortcode':
-				return '<span onclick="">[accordion-for-wp id="' . $taxonomy_id . '"]</span>';
+				return '<span onclick="">[afwp_group_accordion id="' . $taxonomy_id . '"]</span>';
 				break;
 
 		}
@@ -206,9 +212,10 @@ class Accordion_For_WP_Post_Type {
 		);
 
 		$args = array(
-			'hierarchical'      => true,
+			'hierarchical'      => false,
 			'labels'            => $labels,
 			'show_ui'           => true,
+			//'meta_box_cb'       => array( $this, 'accordion_group_dropdown' ),
 			'show_admin_column' => true,
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => 'accordion-group' ),
@@ -239,6 +246,7 @@ class Accordion_For_WP_Post_Type {
 			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,
+			'meta_box_cb'        => 'accordion-for-wp_categories_meta_box',
 			'show_in_menu'       => true,
 			'query_var'          => true,
 			'rewrite'            => array( 'slug' => 'accordion-for-wp' ),
@@ -250,6 +258,22 @@ class Accordion_For_WP_Post_Type {
 		);
 
 		register_post_type( 'accordion-for-wp', $args );
+	}
+
+	public function accordion_group_dropdown( $post, $box ) {
+
+
+		/*wp_dropdown_categories( array(
+			'taxonomy'         => $taxonomy,
+			'hide_empty'       => 0,
+			'name'             => "{$name}[]",
+			'selected'         => 1,
+			'orderby'          => 'name',
+			'hierarchical'     => 0,
+			'show_option_none' => '&mdash;'
+		) );*/
+
+
 	}
 
 

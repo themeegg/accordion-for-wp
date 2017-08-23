@@ -22,10 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 $atts=array();
 $templates="template-1";
 $style="vertical";
-
 $atts = apply_filters('afwp_accordion_args', $atts);
 $templates = apply_filters('afwp_accordian_templates', $templates);
-$style = apply_filters('afwp_accordian_templates', $style);
+$style = apply_filters('afwp_accordian_styles', $style);
 
 $query = new WP_Query($atts);
 if($query->have_posts()):
