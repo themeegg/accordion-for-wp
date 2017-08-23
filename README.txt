@@ -83,7 +83,8 @@ Supprot URL : [http://support.themeegg.com/](http://support.themeegg.com/)
 = 1.1.0  2017-08-23 =
 * Custom post type for accordion 
 * Design improvement
-* Template not loading issue resovled 
+* Template not loading issue resolved 
+* Some minor issue fixed
 
 = 1.0  2017-08-22 =
 * Initial Release
