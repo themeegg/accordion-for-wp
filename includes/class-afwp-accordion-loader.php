@@ -116,14 +116,15 @@ class Accordion_For_WP_Loader {
 
     function afwp_template_part($templateFile){
 
+
         if ( $overridden_template = locate_template( DIRECTORY_SEPARATOR.'afwp-accordion'.DIRECTORY_SEPARATOR.$templateFile ) ) {
            // locate_template() returns path to file
            // if either the child theme or the parent theme have overridden the template
-            load_template( $overridden_template );
+	        include( $overridden_template );
         } else {
            // If neither the child nor parent theme have overridden the template,
            // we load the template from the 'templates' sub-directory of the directory this file is in
-            load_template( dirname( dirname( __FILE__ ) ) .DIRECTORY_SEPARATOR. $templateFile );
+            include( dirname( dirname( __FILE__ ) ) .DIRECTORY_SEPARATOR. $templateFile );
         }
 
     }

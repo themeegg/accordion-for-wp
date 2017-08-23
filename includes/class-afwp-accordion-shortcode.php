@@ -88,18 +88,12 @@ class Accordion_Shortcode {
 				)
 			)
 		);
-
 		add_filter( 'afwp_accordion_args', [ $this, 'group_accordion_atts' ], 10, 1 );
 		add_filter( 'afwp_accordian_templates', [ $this, 'group_accordion_template' ], 10, 1 );
 		add_filter( 'afwp_accordian_styles', [ $this, 'group_accordion_style' ], 10, 1 );
-
 		$accordion = new Accordion_For_WP_Loader();
-
 		$accordion->afwp_template_part( 'public/partials/afwp-accordion-public-display.php' );
 
-		/*echo '<pre>';
-		print_r( $posts_array );
-		echo '</pre>';*/
 
 	}
 

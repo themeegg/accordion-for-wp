@@ -254,6 +254,7 @@ class Accordion_For_WP_Post_Type {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
+			'menu_icon'           => 'dashicons-cart',
 			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 		);
 
