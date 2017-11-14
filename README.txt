@@ -2,8 +2,8 @@
 Contributors: themeegg
 Tags: accordion, accordion, accordion widget, term accordion, accordion for wordpress, wordpress accordion, menu accordion, post accordion, page accordion, product accordion
 Requires at least: 4.0
-Tested up to: 4.8
-Stable tag: 1.1.0
+Tested up to: 4.9
+Stable tag: 1.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -79,6 +79,8 @@ Supprot URL : [http://support.themeegg.com/](http://support.themeegg.com/)
 5. Front view of accordion widgets and shortcode
 
 == Changelog ==
+= 1.1.1  2017/11/14 =
+* Issue fixed
 
 = 1.1.0  2017-08-23 =
 * Custom post type for accordion 
