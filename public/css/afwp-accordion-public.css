@@ -304,6 +304,7 @@
 	text-transform: uppercase;
 	line-height: 1.4em;
 	cursor: pointer;
+	margin-top: -20px;
 }
 
 .afwp-theme-default label::after {
