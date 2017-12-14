@@ -11,8 +11,9 @@ function afwp_accordion_templates() {
 
 		'afwp_accordion_templates', array(
 
-			'default'    => __( 'Default', 'accordion-for-wp' ),
-			'template-1' => __( 'Template 1', 'accordion-for-wp' ),
+			'default'       => __( 'Default', 'accordion-for-wp' ),
+			'template-1'    => __( 'Template 1', 'accordion-for-wp' ),
+			'theme-default' => __( 'Theme default', 'accordion-for-wp' ),
 		)
 	);
 }
