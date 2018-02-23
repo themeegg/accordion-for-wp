@@ -73,8 +73,8 @@ class Accordion_For_WP {
 	 */
 	public function __construct() {
 
-		$this->plugin_name = 'afwp-accordion';
-		$this->version = '1.1.0';
+		$this->plugin_name = AFWP_PLUGIN_NAME;
+		$this->version = AFWP_PLUGIN_VERSION;
 
 		$this->load_dependencies();
 		$this->set_locale();

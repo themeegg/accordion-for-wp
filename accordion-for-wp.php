@@ -3,7 +3,7 @@
  * Plugin Name:       Accordion for WordPress
  * Plugin URI:        http://themeegg.com/plugins/accordion-for-wp/
  * Description:       Accordion for wordpress widgets and shortcode plugin with multiple templates.
- * Version:           1.1.2
+ * Version:           1.1.3
  * Author:            ThemeEgg
  * Author URI:        http://themeegg.com/
  * License:           GPL-2.0+
@@ -17,7 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
+define('AFWP_PLUGIN_NAME', 'afwp-accordion');
+define('AFWP_PLUGIN_VERSION', '1.1.3');
 
 require plugin_dir_path( __FILE__ ) . 'includes/function-afwp-core.php';
 
