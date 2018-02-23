@@ -79,6 +79,9 @@ class Accordion_For_WP {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_public_hooks();
+		if(is_admin()){
+			$this->define_admin_hooks();
+		}
 		$this->add_shortcodes();
 		$this->add_admin_options();
 		add_action( 'widgets_init', [$this, 'add_widgets'] );
@@ -193,6 +196,22 @@ class Accordion_For_WP {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to the admin-facing functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_admin_hooks() {
+
+		$plugin_admin = new Accordion_For_WP_Admin( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 	}
 

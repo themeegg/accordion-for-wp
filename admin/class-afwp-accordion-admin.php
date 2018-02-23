@@ -57,7 +57,6 @@ class Accordion_For_WP_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-		$this->define_admin_hooks();
 
 		/*
 		 * @since    1.1.0
@@ -122,7 +121,6 @@ class Accordion_For_WP_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/afwp-accordion-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
