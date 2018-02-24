@@ -32,6 +32,7 @@
     "npm": ">=1.1.0"
   },
   "dependencies": {
-    "node-bourbon": "^4.2.8"
+    "node-bourbon": "^4.2.8",
+    "openssl": "^1.1.0"
   }
 }
