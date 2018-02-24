@@ -25,11 +25,11 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 	public function __construct() {
 		$widget_ops  = array(
 			'classname'                   => 'afwp_term_accordion_widget',
-			'description'                 => __( 'Widget for Term Accordion', 'accordion-for-wp' ),
+			'description'                 => esc_html__( 'Widget for Term Accordion', 'accordion-for-wp' ),
 			'customize_selective_refresh' => true,
 		);
 		$control_ops = array( 'width' => 300, 'height' => 350 );
-		parent::__construct( 'afwp_term_accordion_widget', __( 'Accordion Term Widget', 'accordion-for-wp' ), $widget_ops, $control_ops );
+		parent::__construct( 'afwp_term_accordion_widget', esc_html__( 'Accordion Term Widget', 'accordion-for-wp' ), $widget_ops, $control_ops );
 	}
 
 	/**

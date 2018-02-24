@@ -47,7 +47,7 @@
 
 		MouseEvents: function(){
 			var _this=afwp_accordion, widget=_this.Snipits.Accordion_Widget;
-			$('.afwp-widget-post-type, .afwp-widget-taxonomy').on('change', function(evt){
+			$(document).on('change', '.afwp-widget-post-type, .afwp-widget-taxonomy', function(evt){
 				widget.Change_Data($(this));
 			});
 		},

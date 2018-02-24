@@ -2,12 +2,12 @@
 Contributors: themeegg
 Tags: accordion, accordion, accordion widget, term accordion, accordion for wordpress, wordpress accordion, menu accordion, post accordion, page accordion, product accordion
 Requires at least: 4.0
-Tested up to: 4.9
-Stable tag: 1.1.2
+Tested up to: 4.9.4
+Stable tag: 1.1.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-This plugin help you to make accordion of post type, category, tags, taxonomy etc. You can show accordion from accordion post widget, accordion term widget, accordion menu widget and shortcode. You can also customize shortcode template of this plugin.
+This plugin help you to make accordion of post type, category, tags, taxonomy, menu etc. You can show accordion from accordion post widget, accordion term widget, accordion menu widget and shortcode. You can also customize shortcode template of this plugin. This plugin support all post type, Taxonomy, Term And Posts. If anyone need more feature to accordion for wordpress plugin you can request here https://themeegg.com/request-new-features/ 
 
 == Description ==
 
@@ -79,17 +79,20 @@ Supprot URL : [http://themeegg.com/support-forum/](http://themeegg.com/support-f
 5. Front view of accordion widgets and shortcode
 
 == Changelog ==
+= 1.1.3  2018/2/23 =
+* Fixed - Admin Css/Js not enqueued
+
 = 1.1.2  2017/12/14 =
-* New tempalte added
+* Added - New tempalte added
 
 = 1.1.1  2017/11/14 =
-* Issue fixed
+* Fixed - Issue fixed
 
 = 1.1.0  2017-08-23 =
-* Custom post type for accordion 
-* Design improvement
-* Template not loading issue resolved 
-* Some minor issue fixed
+* Added - Custom post type for accordion 
+* Improvement - Design improvement
+* Fixed - Template not loading issue resolved 
+* Fixed - Some minor issue fixed
 
 = 1.0  2017-08-22 =
 * Initial Release
