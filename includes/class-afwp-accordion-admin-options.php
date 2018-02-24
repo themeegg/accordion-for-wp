@@ -34,7 +34,7 @@ class Accordion_For_WP_Admin_Options {
 
 	public function register_custom_post_type() {
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-afwp-accordion-post-type.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/posttype/class-afwp-accordion-post-type.php';
 	}
 
 

@@ -4,28 +4,44 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if(!function_exists('afwp_accordion_templates')){
+	function afwp_accordion_templates() {
 
-function afwp_accordion_templates() {
+		return apply_filters(
 
-	return apply_filters(
+			'afwp_accordion_templates', array(
 
-		'afwp_accordion_templates', array(
-
-			'default'       => __( 'Default', 'accordion-for-wp' ),
-			'template-1'    => __( 'Template 1', 'accordion-for-wp' ),
-			'theme-default' => __( 'Theme default', 'accordion-for-wp' ),
-		)
-	);
+				'default'       => esc_html__( 'Default', 'accordion-for-wp' ),
+				'template-1'    => esc_html__( 'Template 1', 'accordion-for-wp' ),
+				'theme-default' => esc_html__( 'Theme default', 'accordion-for-wp' ),
+			)
+		);
+	}
 }
 
-function afwp_accordion_styles() {
+if(!function_exists('afwp_accordion_styles')){
+	function afwp_accordion_styles() {
 
-	return apply_filters(
+		return apply_filters(
 
-		'afwp_accordion_styles', array(
-			'vertical'   => __( 'Vertical', 'accordion-for-wp' ),
-			'horizontal' => __( 'Horizontal', 'accordion-for-wp' ),
-		)
-	);
+			'afwp_accordion_styles', array(
+				'vertical'   => esc_html__( 'Vertical', 'accordion-for-wp' ),
+				'horizontal' => esc_html__( 'Horizontal', 'accordion-for-wp' ),
+			)
+		);
+	}
+}
+
+if(!function_exists('afwp_accordion_type')){
+	function afwp_accordion_type() {
+
+		return apply_filters(
+
+			'afwp_accordion_type', array(
+				'accordion'   => esc_html__( 'Accordion', 'accordion-for-wp' ),
+				'tab' => esc_html__( 'Tab', 'accordion-for-wp' ),
+			)
+		);
+	}
 }
 

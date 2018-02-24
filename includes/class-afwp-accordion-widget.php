@@ -25,11 +25,11 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 	public function __construct() {
 		$widget_ops  = array(
 			'classname'                   => 'afwp_accordion_widget',
-			'description'                 => __( 'Widget for Accordion', 'accordion-for-wp' ),
+			'description'                 => esc_html__( 'Widget for Accordion', 'accordion-for-wp' ),
 			'customize_selective_refresh' => true,
 		);
 		$control_ops = array( 'width' => 300, 'height' => 350 );
-		parent::__construct( 'afwp_accordion_widget', __( 'Accordion Post Widget', 'accordion-for-wp' ), $widget_ops, $control_ops );
+		parent::__construct( 'afwp_accordion_widget', esc_html__( 'Accordion Post Widget', 'accordion-for-wp' ), $widget_ops, $control_ops );
 	}
 
 	/**
@@ -54,6 +54,8 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 		$templates = ! empty( $instance['templates'] ) ? $instance['templates'] : '';
 		$style     = ! empty( $instance['style'] ) ? $instance['style'] : '';
 
+		$accordion_type     = ! empty( $instance['accordion_type'] ) ? $instance['accordion_type'] : '';
+
 		echo $args['before_widget'];
 		if ( ! empty( $title ) ) {
 			echo $args['before_title'] . $title . $args['after_title'];
@@ -72,7 +74,7 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 		$query = new WP_Query( $wp_args );
 		if ( $query->have_posts() ):
 			?>
-			<div class="afwp-accordion-template afwp-widget afwp-<?php echo $templates; ?>">
+			<div class="afwp-accordion-template afwp-widget afwp-<?php echo $templates; ?> afwp-<?php echo $accordion_type; ?>">
 				<div class="afwp-accordion <?php echo $style; ?>">
 					<ul class="afwp-accordion-list">
 						<?php while ( $query->have_posts() ):$query->the_post(); ?>
@@ -115,6 +117,7 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 
 		$instance['templates'] = sanitize_text_field( $new_instance['templates'] );
 		$instance['style']     = sanitize_text_field( $new_instance['style'] );
+		$instance['accordion_type']     = sanitize_text_field( $new_instance['accordion_type'] );
 
 		return $instance;
 	}
@@ -135,7 +138,8 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 			'term'       => '',
 			'no_of_post' => '5',
 			'templates'  => 'default',
-			'style'      => 'vertical'
+			'style'      => 'vertical',
+			'accordion_type' => 'accordion',
 		) );
 		$title      = sanitize_text_field( $instance['title'] );
 		$post_type  = sanitize_text_field( $instance['post_type'] );
@@ -145,15 +149,16 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 
 		$templates = sanitize_text_field( $instance['templates'] );
 		$style     = sanitize_text_field( $instance['style'] );
+		$type     = sanitize_text_field( $instance['accordion_type'] );
 		?>
 		<p><label
-				for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'accordion-for-wp' ); ?></label>
+				for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'accordion-for-wp' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
 			       name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
 			       value="<?php echo esc_attr( $title ); ?>"/></p>
 
 		<p><label
-				for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type:', 'accordion-for-wp' ); ?></label>
+				for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php esc_html_e( 'Post Type:', 'accordion-for-wp' ); ?></label>
 			<?php
 			$args           = array(
 				'public' => true,
@@ -172,7 +177,7 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 			</select></p>
 
 		<p><label
-				for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><?php _e( 'Taxonomy:', 'accordion-for-wp' ); ?></label>
+				for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><?php esc_html_e( 'Taxonomy:', 'accordion-for-wp' ); ?></label>
 			<?php
 			$all_object_taxonomies = get_object_taxonomies( $post_type, 'objects' );
 			?>
@@ -188,7 +193,7 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 				<?php endforeach; ?>
 			</select></p>
 
-		<p><label for="<?php echo $this->get_field_id( 'term' ); ?>"><?php _e( 'Term:', 'accordion-for-wp' ); ?></label>
+		<p><label for="<?php echo $this->get_field_id( 'term' ); ?>"><?php esc_html_e( 'Term:', 'accordion-for-wp' ); ?></label>
 			<?php
 			$all_terms = get_terms( array(
 				'taxonomy'   => $taxonomy,
@@ -208,13 +213,13 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 			</select></p>
 
 		<p><label
-				for="<?php echo $this->get_field_id( 'no_of_post' ); ?>"><?php _e( 'Show no of post:', 'accordion-for-wp' ); ?></label>
+				for="<?php echo $this->get_field_id( 'no_of_post' ); ?>"><?php esc_html_e( 'Show no of post:', 'accordion-for-wp' ); ?></label>
 			<input class="widefat" min="1" max="99" id="<?php echo $this->get_field_id( 'no_of_post' ); ?>"
 			       name="<?php echo $this->get_field_name( 'no_of_post' ); ?>" type="number"
 			       value="<?php echo $no_of_post; ?>"/></p>
 		<hr/>
 		<p><label
-				for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php _e( 'Template:', 'accordion-for-wp' ); ?></label>
+				for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php esc_html_e( 'Template:', 'accordion-for-wp' ); ?></label>
 			<?php
 			$all_templates = afwp_accordion_templates();
 			?>
@@ -226,7 +231,7 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 				<?php endforeach; ?>
 			</select></p>
 		<p><label
-				for="<?php echo $this->get_field_id( 'style' ); ?>"><?php _e( 'Style:', 'accordion-for-wp' ); ?></label>
+				for="<?php echo $this->get_field_id( 'style' ); ?>"><?php esc_html_e( 'Style:', 'accordion-for-wp' ); ?></label>
 			<?php
 			$all_style = afwp_accordion_styles();
 			?>
@@ -235,6 +240,18 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 				<?php foreach ( $all_style as $style_key => $style_value ): ?>
 					<option <?php selected( $style, $style_key, true ); ?>
 						value="<?php echo $style_key; ?>"><?php echo $style_value; ?></option>
+				<?php endforeach; ?>
+			</select></p>
+		<p><label
+				for="<?php echo $this->get_field_id( 'accordion_type' ); ?>"><?php esc_html_e( 'Type:', 'accordion-for-wp' ); ?></label>
+			<?php
+			$all_type = afwp_accordion_type();
+			?>
+			<select class="widefat" id="<?php echo $this->get_field_id( 'accordion_type' ); ?>"
+			        name="<?php echo $this->get_field_name( 'accordion_type' ); ?>">
+				<?php foreach ( $all_type as $type_key => $type_value ): ?>
+					<option <?php selected( $type, $type_key, true ); ?>
+						value="<?php echo $type_key; ?>"><?php echo $type_value; ?></option>
 				<?php endforeach; ?>
 			</select></p>
 		<?php

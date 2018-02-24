@@ -63,7 +63,7 @@ class Accordion_For_WP_Post_Type {
 		?>
 
 		<div class="form-field">
-			<label for="term_meta[acwp_term_template]"><?php _e( 'Accordion template', 'accordion-for-wp' ); ?></label>
+			<label for="term_meta[acwp_term_template]"><?php esc_html_e( 'Accordion template', 'accordion-for-wp' ); ?></label>
 			<select style="width:94%" name="term_meta[acwp_term_template]" id="term_meta[acwp_term_template]">
 				<?php
 				foreach ( afwp_accordion_templates() as $template_index => $template_value ) {
@@ -76,10 +76,10 @@ class Accordion_For_WP_Post_Type {
 
 				?>
 			</select>
-			<p class="description"><?php _e( 'Select template for accordion', 'accordion-for-wp' ); ?></p>
+			<p class="description"><?php esc_html_e( 'Select template for accordion', 'accordion-for-wp' ); ?></p>
 		</div>
 		<div class="form-field">
-			<label for="term_meta[acwp_term_style]"><?php _e( 'Accordion style', 'accordion-for-wp' ); ?></label>
+			<label for="term_meta[acwp_term_style]"><?php esc_html_e( 'Accordion style', 'accordion-for-wp' ); ?></label>
 			<select style="width:94%" name="term_meta[acwp_term_style]" id="term_meta[acwp_term_style]">
 				<?php
 				foreach ( afwp_accordion_styles() as $template_index => $template_value ) {
@@ -90,7 +90,7 @@ class Accordion_For_WP_Post_Type {
 
 				?>
 			</select>
-			<p class="description"><?php _e( 'Select style for accordion', 'accordion-for-wp' ); ?></p>
+			<p class="description"><?php esc_html_e( 'Select style for accordion', 'accordion-for-wp' ); ?></p>
 		</div>
 		<?php
 
@@ -106,7 +106,7 @@ class Accordion_For_WP_Post_Type {
 		?>
 		<tr class="form-field">
 			<th scope="row" valign="top"><label
-					for="term_meta[acwp_term_template]"><?php _e( 'Accordion template', 'accordion-for-wp' ); ?></label>
+					for="term_meta[acwp_term_template]"><?php esc_html_e( 'Accordion template', 'accordion-for-wp' ); ?></label>
 			</th>
 			<td>
 				<select style="width:94%" name="term_meta[acwp_term_template]" id="term_meta[acwp_term_template]">
@@ -125,12 +125,12 @@ class Accordion_For_WP_Post_Type {
 
 					?>
 				</select>
-				<p class="description"><?php _e( 'Select template for accordion', 'accordion-for-wp' ); ?></p>
+				<p class="description"><?php esc_html_e( 'Select template for accordion', 'accordion-for-wp' ); ?></p>
 			</td>
 		</tr>
 		<tr class="form-field">
 			<th scope="row" valign="top"><label
-					for="term_meta[acwp_term_style]"><?php _e( 'Accordion style', 'accordion-for-wp' ); ?></label>
+					for="term_meta[acwp_term_style]"><?php esc_html_e( 'Accordion style', 'accordion-for-wp' ); ?></label>
 			</th>
 			<td>
 				<select style="width:94%" name="term_meta[acwp_term_style]" id="term_meta[acwp_term_style]">
@@ -148,7 +148,7 @@ class Accordion_For_WP_Post_Type {
 
 					?>
 				</select>
-				<p class="description"><?php _e( 'Select style for accordion', 'accordion-for-wp' ); ?></p>
+				<p class="description"><?php esc_html_e( 'Select style for accordion', 'accordion-for-wp' ); ?></p>
 			</td>
 		</tr>
 
@@ -187,7 +187,7 @@ class Accordion_For_WP_Post_Type {
 		$result = array_merge
 		(
 			array_slice( $columns, 0, $offset ),
-			array( 'accordion_shortcode' => __( 'Shortcode', 'accordion-for-wp' ) ),
+			array( 'accordion_shortcode' => esc_html__( 'Shortcode', 'accordion-for-wp' ) ),
 			array_slice( $columns, $offset, null )
 		);
 
@@ -200,15 +200,15 @@ class Accordion_For_WP_Post_Type {
 		$labels = array(
 			'name'              => _x( 'Accordion group', 'taxonomy general name', 'accordion-for-wp' ),
 			'singular_name'     => _x( 'Accordion group', 'taxonomy singular name', 'accordion-for-wp' ),
-			'search_items'      => __( 'Search accordion group', 'accordion-for-wp' ),
-			'all_items'         => __( 'All Accordion groups', 'accordion-for-wp' ),
-			'parent_item'       => __( 'Parent Accordion group', 'accordion-for-wp' ),
-			'parent_item_colon' => __( 'Parent Accordion group:', 'accordion-for-wp' ),
-			'edit_item'         => __( 'Edit Accordion group', 'accordion-for-wp' ),
-			'update_item'       => __( 'Update Accordion group', 'accordion-for-wp' ),
-			'add_new_item'      => __( 'Add New Accordion group', 'accordion-for-wp' ),
-			'new_item_name'     => __( 'New Accordion group Name', 'accordion-for-wp' ),
-			'menu_name'         => __( 'Accordion group', 'accordion-for-wp' ),
+			'search_items'      => esc_html__( 'Search accordion group', 'accordion-for-wp' ),
+			'all_items'         => esc_html__( 'All Accordion groups', 'accordion-for-wp' ),
+			'parent_item'       => esc_html__( 'Parent Accordion group', 'accordion-for-wp' ),
+			'parent_item_colon' => esc_html__( 'Parent Accordion group:', 'accordion-for-wp' ),
+			'edit_item'         => esc_html__( 'Edit Accordion group', 'accordion-for-wp' ),
+			'update_item'       => esc_html__( 'Update Accordion group', 'accordion-for-wp' ),
+			'add_new_item'      => esc_html__( 'Add New Accordion group', 'accordion-for-wp' ),
+			'new_item_name'     => esc_html__( 'New Accordion group Name', 'accordion-for-wp' ),
+			'menu_name'         => esc_html__( 'Accordion group', 'accordion-for-wp' ),
 		);
 
 		$args = array(
@@ -229,20 +229,20 @@ class Accordion_For_WP_Post_Type {
 			'menu_name'          => _x( 'Accordions', 'admin menu', 'accordion-for-wp' ),
 			'name_admin_bar'     => _x( 'Accordion', 'add new on admin bar', 'accordion-for-wp' ),
 			'add_new'            => _x( 'Add New', 'book', 'accordion-for-wp' ),
-			'add_new_item'       => __( 'Add New Accordion', 'accordion-for-wp' ),
-			'new_item'           => __( 'New Accordion', 'accordion-for-wp' ),
-			'edit_item'          => __( 'Edit Accordion', 'accordion-for-wp' ),
-			'view_item'          => __( 'View Accordion', 'accordion-for-wp' ),
-			'all_items'          => __( 'All Accordions', 'accordion-for-wp' ),
-			'search_items'       => __( 'Search Accordions', 'accordion-for-wp' ),
-			'parent_item_colon'  => __( 'Parent Accordions:', 'accordion-for-wp' ),
-			'not_found'          => __( 'No accordions found.', 'accordion-for-wp' ),
-			'not_found_in_trash' => __( 'No accordions found in Trash.', 'accordion-for-wp' )
+			'add_new_item'       => esc_html__( 'Add New Accordion', 'accordion-for-wp' ),
+			'new_item'           => esc_html__( 'New Accordion', 'accordion-for-wp' ),
+			'edit_item'          => esc_html__( 'Edit Accordion', 'accordion-for-wp' ),
+			'view_item'          => esc_html__( 'View Accordion', 'accordion-for-wp' ),
+			'all_items'          => esc_html__( 'All Accordions', 'accordion-for-wp' ),
+			'search_items'       => esc_html__( 'Search Accordions', 'accordion-for-wp' ),
+			'parent_item_colon'  => esc_html__( 'Parent Accordions:', 'accordion-for-wp' ),
+			'not_found'          => esc_html__( 'No accordions found.', 'accordion-for-wp' ),
+			'not_found_in_trash' => esc_html__( 'No accordions found in Trash.', 'accordion-for-wp' )
 		);
 
 		$args = array(
 			'labels'             => $labels,
-			'description'        => __( 'Description.', 'accordion-for-wp' ),
+			'description'        => esc_html__( 'Description.', 'accordion-for-wp' ),
 			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,

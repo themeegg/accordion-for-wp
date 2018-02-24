@@ -140,12 +140,12 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 		$style     = sanitize_text_field( $instance['style'] );
 		?>
 		<p><label
-				for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'accordion-for-wp' ); ?></label>
+				for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'accordion-for-wp' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
 			       name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
 			       value="<?php echo esc_attr( $title ); ?>"/></p>
 		<p><label
-				for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><?php _e( 'Taxonomy:', 'accordion-for-wp' ); ?></label>
+				for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><?php esc_html_e( 'Taxonomy:', 'accordion-for-wp' ); ?></label>
 			<?php
 			$all_object_taxonomies = get_taxonomies();
 			?>
@@ -164,13 +164,13 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 			</select></p>
 
 		<p><label
-				for="<?php echo $this->get_field_id( 'no_of_term' ); ?>"><?php _e( 'Show no of term:', 'accordion-for-wp' ); ?></label>
+				for="<?php echo $this->get_field_id( 'no_of_term' ); ?>"><?php esc_html_e( 'Show no of term:', 'accordion-for-wp' ); ?></label>
 			<input class="widefat" min="1" max="99" id="<?php echo $this->get_field_id( 'no_of_term' ); ?>"
 			       name="<?php echo $this->get_field_name( 'no_of_term' ); ?>" type="number"
 			       value="<?php echo $no_of_term; ?>"/></p>
 		<hr/>
 		<p><label
-				for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php _e( 'Template:', 'accordion-for-wp' ); ?></label>
+				for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php esc_html_e( 'Template:', 'accordion-for-wp' ); ?></label>
 			<?php
 			$all_templates = afwp_accordion_templates();
 			?>
@@ -183,7 +183,7 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 				<?php endforeach; ?>
 			</select></p>
 		<p><label
-				for="<?php echo $this->get_field_id( 'style' ); ?>"><?php _e( 'Style:', 'accordion-for-wp' ); ?></label>
+				for="<?php echo $this->get_field_id( 'style' ); ?>"><?php esc_html_e( 'Style:', 'accordion-for-wp' ); ?></label>
 			<?php
 			$all_style = afwp_accordion_styles();
 			?>
