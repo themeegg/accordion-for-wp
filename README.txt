@@ -3,7 +3,7 @@ Contributors: themeegg
 Tags: accordion, accordion, accordion widget, term accordion, accordion for wordpress, wordpress accordion, menu accordion, post accordion, page accordion, product accordion
 Requires at least: 4.0
 Tested up to: 4.9.4
-Stable tag: 1.1.3
+Stable tag: 1.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
