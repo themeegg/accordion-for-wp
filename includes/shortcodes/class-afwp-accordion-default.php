@@ -63,7 +63,9 @@ class AFWP_Accordion_Shortcode_Default{
 		$this->template();
 
 		$output = ob_get_contents();
+
 		ob_get_clean();
+
 		return $output;
 
 
