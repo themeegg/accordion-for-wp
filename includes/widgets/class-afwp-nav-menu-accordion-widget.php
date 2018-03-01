@@ -93,7 +93,7 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 		if ( $show_accordion ) {
 			echo '<div class="afwp-accordion-template afwp-widget afwp-' . $templates . '">';
 			$menu_args['container_class'] = 'afwp-accordion ' . $style;
-			$menu_args['menu_class']      = 'aafwp-accordion-list';
+			$menu_args['menu_class']      = 'afwp-accordion-list';
 			wp_nav_menu( $menu_args );
 			echo '</div>';
 		} else {
