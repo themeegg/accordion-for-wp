@@ -79,7 +79,7 @@ Supprot URL : [http://themeegg.com/support-forum/](http://themeegg.com/support-f
 5. Front view of accordion widgets and shortcode
 
 == Changelog ==
-= 1.2.3  2018/03/01 =
+= 1.2.0  2018/03/01 =
 * Added - Tab shortcode added
 * Structure - Coding structure modify and optimize
 * Added - Javascript accordion added 
