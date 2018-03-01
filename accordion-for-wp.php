@@ -17,8 +17,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define('AFWP_PLUGIN_NAME', 'afwp-accordion');
-define('AFWP_PLUGIN_VERSION', '1.1.3');
+if(!defined('AFWP_PLUGIN_NAME')){
+	define('AFWP_PLUGIN_NAME', 'afwp-accordion');
+}
+if(!defined('AFWP_PLUGIN_VERSION')){
+	define('AFWP_PLUGIN_VERSION', '1.1.3');
+}
 
 require plugin_dir_path( __FILE__ ) . 'includes/function-afwp-core.php';
 
