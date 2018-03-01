@@ -72,7 +72,7 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 								break;
 							}
 							?>
-							<li class="afwp-accordian-item-wrap">
+							<li class="afwp-accordion-item-wrap">
 								<input type="radio" id="afwp-widget-term-radio-<?php echo $term_detail->term_id; ?>"
 								       name="afwp-widget-term-<?php echo $taxonomy; ?>-radio-accordion"
 								       checked="checked"/>

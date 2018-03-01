@@ -80,7 +80,7 @@ class Accordion_For_WP_Public {
 		 */
 
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/afwp-accordion-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/css/afwp-accordion-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -102,7 +102,7 @@ class Accordion_For_WP_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/afwp-accordion-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/js/afwp-accordion-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

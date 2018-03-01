@@ -6,8 +6,8 @@ module.exports = function (grunt) {
 
 		// Setting folder templates.
 		dirs: {
-			js: 'assets/js',
-			css: 'assets/css'
+			js: 'public/assets/js',
+			css: 'public/assets/css'
 		},
 
 		// JavaScript linting with JSHint.

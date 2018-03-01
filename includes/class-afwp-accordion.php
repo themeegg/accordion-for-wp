@@ -150,7 +150,9 @@ class Accordion_For_WP {
 	 * @access   private
 	 */
 	private function add_shortcodes(){
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-afwp-accordion-shortcode.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/shortcodes/class-afwp-accordion-default.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/shortcodes/class-afwp-accordion-group.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/shortcodes/class-afwp-tab-default.php';
 	}
 
 	/**
@@ -159,9 +161,9 @@ class Accordion_For_WP {
 	 * @access   public
 	 */
 	public function add_widgets(){
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-afwp-accordion-widget.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-afwp-term-accordion-widget.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-afwp-nav-menu-accordion-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/widgets/class-afwp-accordion-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/widgets/class-afwp-term-accordion-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/widgets/class-afwp-nav-menu-accordion-widget.php';
 	}
 
 	/**

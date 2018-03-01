@@ -173,7 +173,7 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 				$url = admin_url( 'nav-menus.php' );
 			}
 			?>
-			<?php echo sprintf( esc_html__( 'No menus have been created yet. <a href="%s">Create some</a>.', 'accordion-for-wp' ), esc_attr( $url ) ); ?>
+			<?php echo sprintf( __( 'No menus have been created yet. <a href="%s">Create some</a>.', 'accordion-for-wp' ), esc_attr( $url ) ); ?>
 		</p>
 		<div class="nav-menu-widget-form-controls" <?php if ( empty( $menus ) ) {
 			echo ' style="display:none" ';
