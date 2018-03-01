@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class AFWP_TAB_For_WP_Post_Type {
 
 	public function __construct() {
-
+		
 		add_action( 'init', array( $this, 'register_custom_post_types' ) );
 		add_filter( 'manage_edit-afwp-tab-group_columns', array( $this, 'afwp_tab_shortcode_column' ), 10, 1 );
 		add_action( 'manage_afwp-tab-group_custom_column', array( $this, 'action_custom_columns_content' ), 10, 3 );

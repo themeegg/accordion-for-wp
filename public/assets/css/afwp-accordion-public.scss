@@ -35,76 +35,7 @@
             line-height:1.6em;
         }
     }
-    .menu-item{
-        padding:0px;
-        margin:0;
-        position: relative;
-        border-top:1px solid #fff;
-        a{
-            display: block;
-            color: rgb(255, 255, 255);
-            padding: 10px 0 10px 15px;
-            margin: 0;
-            background: rgb(22, 160, 133);
-            line-height: 1.4em;
-            cursor: pointer;
-            box-shadow: none;
-            &:hover{
-                color:#fff;
-                background:rgb(9, 160, 108);
-                text-decoration:none;
-                box-shadow: none;
-            }
-        }
-        &>ul, ul{
-            margin:0;
-            list-style:none;
-            padding-left:0 !important;
-        }
-        &>a{
-            padding-left:15px;
-        }
-        .menu-item{
-            &>a{
-                padding-left:30px;
-            }
-            .menu-item{
-                &>a{
-                    padding-left:45px;
-                }
-                .menu-item{
-                    &>a{
-                        padding-left:60px;
-                    }
-                    .menu-item{
-                        &>a{
-                            padding-left:75px;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    .current-menu-item{
-        &>a{
-            color:#fff;
-            background:rgb(9, 160, 108);
-        }
-    }
-    .menu-item-has-children{
-        position:relative;
-        &>ul{
-            display:none;
-            &>li{
-                &>a{
-                    padding-left:10px;
-                }
-            }
-        }
-        &>a{
-            padding-right:35px;
-        }
-    }
+
 
     .afwp-accordion-title{
         display: block;
@@ -361,6 +292,83 @@
                 padding: 0 8px;
 
             }
+        }
+    }
+}
+
+/*======================================================
+--------------- Accordion Menu ------------------------
+======================================================*/
+
+.widget_accordion_nav_menu{
+    .menu-item{
+        padding:0px;
+        margin:0;
+        position: relative;
+        border-top:1px solid #fff;
+        a{
+            display: block;
+            color: rgb(255, 255, 255);
+            padding: 10px 0 10px 15px;
+            margin: 0;
+            background: rgb(22, 160, 133);
+            line-height: 1.4em;
+            cursor: pointer;
+            box-shadow: none;
+            &:hover{
+                color:#fff;
+                background:rgb(9, 160, 108);
+                text-decoration:none;
+                box-shadow: none;
+            }
+        }
+        &>ul, ul{
+            margin:0;
+            list-style:none;
+            padding-left:0 !important;
+        }
+        &>a{
+            padding-left:15px;
+        }
+        .menu-item{
+            &>a{
+                padding-left:30px;
+            }
+            .menu-item{
+                &>a{
+                    padding-left:45px;
+                }
+                .menu-item{
+                    &>a{
+                        padding-left:60px;
+                    }
+                    .menu-item{
+                        &>a{
+                            padding-left:75px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .current-menu-item{
+        &>a{
+            color:#fff;
+            background:rgb(9, 160, 108);
+        }
+    }
+    .menu-item-has-children{
+        position:relative;
+        &>ul{
+            display:none;
+            &>li{
+                &>a{
+                    padding-left:10px;
+                }
+            }
+        }
+        &>a{
+            padding-right:35px;
         }
     }
 }

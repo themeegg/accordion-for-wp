@@ -49,7 +49,6 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 		// Get menu
 		$nav_menu = ! empty( $instance['nav_menu'] ) ? wp_get_nav_menu_object( $instance['nav_menu'] ) : false;
 
-		$show_accordion = ! empty( $instance['show_accordion'] ) ? 1 : 0;
 		$templates      = ! empty( $instance['templates'] ) ? $instance['templates'] : 'template-1';
 		$style          = ! empty( $instance['style'] ) ? $instance['style'] : 'vertical';
 
@@ -89,16 +88,12 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 		 * @param array $instance Array of settings for the current widget.
 		 */
 		$menu_args = apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $args, $instance );
-		//apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $args, $instance )
-		if ( $show_accordion ) {
+
 			echo '<div class="afwp-accordion-template afwp-widget afwp-' . $templates . '">';
 			$menu_args['container_class'] = 'afwp-accordion ' . $style;
 			$menu_args['menu_class']      = 'afwp-accordion-list';
 			wp_nav_menu( $menu_args );
 			echo '</div>';
-		} else {
-			wp_nav_menu( $menu_args );
-		}
 
 		echo $args['after_widget'];
 	}
@@ -122,10 +117,6 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 		}
 		if ( ! empty( $new_instance['nav_menu'] ) ) {
 			$instance['nav_menu'] = (int) $new_instance['nav_menu'];
-		}
-
-		if ( ! empty( $new_instance['show_accordion'] ) ) {
-			$instance['show_accordion'] = ! empty( $new_instance['show_accordion'] ) ? 1 : 0;
 		}
 
 		if ( ! empty( $new_instance['templates'] ) ) {
@@ -154,7 +145,6 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 		$title    = isset( $instance['title'] ) ? $instance['title'] : '';
 		$nav_menu = isset( $instance['nav_menu'] ) ? $instance['nav_menu'] : '';
 
-		$show_accordion = isset( $instance['show_accordion'] ) ? (bool) $instance['show_accordion'] : false;
 		$templates      = isset( $instance['templates'] ) ? $instance['templates'] : 'template-1';
 		$style          = isset( $instance['style'] ) ? $instance['style'] : 'vertical';
 
@@ -199,12 +189,7 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 					<?php endforeach; ?>
 				</select>
 			</p>
-			<p>
-				<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'show_accordion' ); ?>"
-				       name="<?php echo $this->get_field_name( 'show_accordion' ); ?>" <?php checked( $show_accordion ); ?> />
-				<label
-					for="<?php echo $this->get_field_id( 'show_accordion' ); ?>"><?php esc_html_e( 'Show as Accordion:', 'accordion-for-wp' ) ?></label>
-			</p>
+
 			<?php
 			$all_templates = afwp_accordion_templates();
 			?>
@@ -220,7 +205,8 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 				</select>
 			</p>
 			<?php
-			$all_style = afwp_accordion_styles();
+			//$all_style = afwp_accordion_styles();
+			$all_style=array('vertical'   => esc_html__( 'Vertical', 'accordion-for-wp' ));
 			?>
 			<p>
 				<label
