@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package    Accordion_For_WP
  * @subpackage Accordion_For_WP/public
  */
-class AFWP_Accordion_Shortcode_Group{
+class AFWP_Accordion_Shortcode_Group {
 
 	protected $atts;
 
@@ -77,7 +77,7 @@ class AFWP_Accordion_Shortcode_Group{
 
 	public function afwp_group_accordion( $atts, $content = "" ) {
 
-		if ( ! isset( $atts['id'] ) ){
+		if ( ! isset( $atts['id'] ) ) {
 			return;
 		}
 
@@ -101,12 +101,15 @@ class AFWP_Accordion_Shortcode_Group{
 				)
 			)
 		);
+		ob_start();
 
-		add_filter( 'afwp_accordion_args', array( $this, 'afwp_atts' ), 10, 1 );
-		add_filter( 'afwp_accordion_templates', array( $this, 'afwp_template' ), 10, 1 );
-		add_filter( 'afwp_accordion_styles', array( $this, 'afwp_style' ), 10, 1 );
-		$afwp_loader = new Accordion_For_WP_Loader();
-		$afwp_loader->afwp_template_part( 'public/partials/afwp-accordion-public-display.php' );
+		$this->template();
+
+		$output = ob_get_contents();
+
+		ob_get_clean();
+
+		return $output;
 
 	}
 
@@ -115,13 +118,16 @@ class AFWP_Accordion_Shortcode_Group{
 		return $this->atts;
 	}
 
-	public function template( $atts ) {
+	public function template() {
 
-		add_filter( 'afwp_accordion_args', array( $this, 'accordion_args' ), 10, 1 );
 
+		add_filter( 'afwp_accordion_args', array( $this, 'afwp_atts' ), 10, 1 );
+		add_filter( 'afwp_accordion_templates', array( $this, 'afwp_template' ), 10, 1 );
+		add_filter( 'afwp_accordion_styles', array( $this, 'afwp_style' ), 10, 1 );
 		$afwp_loader = new Accordion_For_WP_Loader();
-
 		$afwp_loader->afwp_template_part( 'public/partials/afwp-accordion-public-display.php' );
+		return ob_get_clean();
+
 
 	}
 

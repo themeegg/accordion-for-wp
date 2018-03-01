@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package    Accordion_For_WP
  * @subpackage Accordion_For_WP/public
  */
-class AFWP_Tab_Shortcode_Default{
+class AFWP_Tab_Shortcode_Default {
 
 	protected $atts;
 
@@ -50,7 +50,15 @@ class AFWP_Tab_Shortcode_Default{
 
 		$args = $this->filter_args( $atts );
 
+		ob_start();
+
 		$this->template( $args );
+
+		$output = ob_get_contents();
+
+		ob_get_clean();
+
+		return $output;
 
 	}
 
@@ -65,7 +73,9 @@ class AFWP_Tab_Shortcode_Default{
 
 		$afwp_loader = new Accordion_For_WP_Loader();
 
+
 		$afwp_loader->afwp_template_part( 'public/partials/afwp-tab-public-display.php' );
+
 
 	}
 

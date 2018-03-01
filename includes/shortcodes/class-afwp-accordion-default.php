@@ -58,7 +58,14 @@ class AFWP_Accordion_Shortcode_Default{
 
 		$this->template = isset($args['template']) ? $args['template'] : 'template-1';
 
+		ob_start();
+
 		$this->template();
+
+		$output = ob_get_contents();
+		ob_get_clean();
+		return $output;
+
 
 	}
 
@@ -88,6 +95,7 @@ class AFWP_Accordion_Shortcode_Default{
 		add_filter( 'afwp_accordion_styles', array( $this, 'afwp_styles' ), 10, 1 );
 		$afwp_loader = new Accordion_For_WP_Loader();
 		$afwp_loader->afwp_template_part( 'public/partials/afwp-accordion-public-display.php' );
+
 
 	}
 
