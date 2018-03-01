@@ -73,12 +73,8 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 							}
 							?>
 							<li class="afwp-accordion-item-wrap">
-								<input type="radio" id="afwp-widget-term-radio-<?php echo $term_detail->term_id; ?>"
-								       name="afwp-widget-term-<?php echo $taxonomy; ?>-radio-accordion"
-								       checked="checked"/>
-								<label
-									for="afwp-widget-term-radio-<?php echo $term_detail->term_id; ?>"><?php echo $term_detail->name; ?></label>
-								<div class="afwp-content">
+								<a class="afwp-accordion-title" href="#afwp_<?php echo $term_detail->slug.$term_detail->term_id; ?>"><?php echo $term_detail->name; ?></a>
+								<div class="afwp-content" id="afwp_<?php echo $term_detail->slug.$term_detail->term_id; ?>">
 									<p><?php echo $term_detail->description; ?></p>
 								</div>
 							</li>
