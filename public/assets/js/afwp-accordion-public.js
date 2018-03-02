@@ -61,8 +61,8 @@
 				content_wraper = tab_list.siblings('.afwp-tab-content-wraper');
 
 				$(this).toggleClass('current').closest('li').siblings('li').find('.afwp-post-link').removeClass('current');
-				content_wraper.find(tab_id).siblings('.afwp-tab-content').fadeOut().removeClass('current');
-				content_wraper.find(tab_id).fadeIn().addClass('current');
+				content_wraper.find(tab_id).siblings('.afwp-tab-content').removeClass('current');
+				content_wraper.find(tab_id).addClass('current');
 
 			});
 

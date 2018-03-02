@@ -1,11 +1,11 @@
 
 
-
 .afwp-accordion{
     .afwp-accordion-list{
         padding: 0;
         margin: 0 0 30px;
         list-style:none !important;
+        overflow: hidden;
     }
     .afwp-accordion-item-wrap{
         line-height:0;
@@ -13,7 +13,6 @@
             line-height:1.6em;
         }
     }
-
 
     .afwp-accordion-title{
         display: block;
@@ -422,10 +421,17 @@
 
 
 /*Vertical*/
+.afwp-tab{
+    overflow:hidden;
+    margin-bottom:30px;
+}
+
 .afwp-tab-list{
-    list-style: none;
     padding:0;
     margin:0;
+    padding: 5px;
+    list-style: none;
+    background: #50b5a1;
     &:after{
         content:"";
         display:block;
@@ -438,7 +444,10 @@
 }
 
 .afwp-tab-content{
+    color: #fff;
     display:none;
+    padding:10px;
+    background: #66bbb4;
     &.current{
         display:block;
     }

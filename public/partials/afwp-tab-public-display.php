@@ -26,20 +26,31 @@ $atts       = apply_filters( 'afwp_tab_args', $atts );
 $templates  = apply_filters( 'afwp_tab_templates', $templates );
 $style      = apply_filters( 'afwp_tab_styles', $style );
 $query      = new WP_Query( $atts );
+$active_tab = 1;
 if ( $query->have_posts() ):
 	?>
 	<div class="afwp-tab-template afwp-tab-shortcode afwp-<?php echo $templates; ?>">
 		<div class="afwp-tab <?php echo $style; ?>">
 			<ul class="afwp-tab-list">
-				<?php while ( $query->have_posts() ):$query->the_post(); ?>
+				<?php 
+				$current_tab = 0;
+				while ( $query->have_posts() ):$query->the_post(); 
+					$current_tab++;
+					$tab_class = ($current_tab==$active_tab) ? ' current ' : '';
+					?>
 					<li class="afwp-tab-item-wrap">
-						<a class="afwp-post-link" href="#post_tab_<?php echo get_the_ID(); ?>"><?php the_title(); ?></a>
+						<a class="afwp-post-link <?php echo esc_attr($tab_class); ?>" href="#post_tab_<?php echo get_the_ID(); ?>"><?php the_title(); ?></a>
 					</li>
 				<?php endwhile; ?>
 			</ul>
 			<div class="afwp-tab-content-wraper">
-				<?php while ( $query->have_posts() ):$query->the_post(); ?>
-					<div class="afwp-tab-content" id="post_tab_<?php echo get_the_ID(); ?>">
+				<?php 
+				$current_tab = 0;
+				while ( $query->have_posts() ):$query->the_post(); 
+					$current_tab++;
+					$tab_class = ($current_tab==$active_tab) ? ' current ' : '';
+					?>
+					<div class="afwp-tab-content <?php echo esc_attr($tab_class); ?>" id="post_tab_<?php echo get_the_ID(); ?>">
 						<?php the_excerpt(); ?>
 					</div>
 				<?php endwhile; ?>
