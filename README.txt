@@ -1,9 +1,9 @@
-=== Accordion for WordPress - Accordion, FAQ widgets and Shortcode ===
+=== Accordion for WordPress - Accordion, FAQ widgets, Shortcode, Tabs and many more ===
 Contributors: themeegg
 Tags: accordion, accordion, accordion widget, term accordion, accordion for wordpress, wordpress accordion, menu accordion, post accordion, page accordion, product accordion
 Requires at least: 4.0
 Tested up to: 4.9.4
-Stable tag: 1.1.3
+Stable tag: 1.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -79,9 +79,15 @@ Supprot URL : [http://themeegg.com/support-forum/](http://themeegg.com/support-f
 5. Front view of accordion widgets and shortcode
 
 == Changelog ==
+= 1.2.3  2018/03/01 =
+* Added - Tab shortcode added
+* Structure - Coding structure modify and optimize
+* Added - Javascript accordion added 
+* Removed - CSS accordion removed
+* Fixed - Shortcode issue fixed
+* Fixed - Menu widget issue fixed
 = 1.1.3  2018/2/23 =
 * Fixed - Admin Css/Js not enqueued
-
 = 1.1.2  2017/12/14 =
 * Added - New tempalte added
 
