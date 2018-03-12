@@ -28,7 +28,6 @@ $templates  	= apply_filters( 'afwp_accordion_templates', $templates );
 $style      	= apply_filters( 'afwp_accordion_styles', $style );
 $content_type   = apply_filters( 'afwp_accordion_content_type', $content_type );
 $content_type 	= 'content';
-
 $query      = new WP_Query( $args );
 if ( $query->have_posts() ):
 	?>
@@ -38,7 +37,10 @@ if ( $query->have_posts() ):
 				<?php while ( $query->have_posts() ):$query->the_post(); ?>
 					<?php $afwp_post_slug = get_post_field( 'post_name', get_the_ID() ); ?>
 					<li class="afwp-accordion-item-wrap">
-						<a class="afwp-accordion-title" href="#afwp_<?php echo $afwp_post_slug.get_the_ID(); ?>"><?php the_title(); ?></a>
+						<div class="afwp-accordion-title">
+							<span data-href="#afwp_<?php echo $afwp_post_slug.get_the_ID(); ?>"><?php the_title(); ?></span>
+							<i class="afwp-toggle-icon"></i>
+						</div>
 						<div class="afwp-content" id="afwp_<?php echo $afwp_post_slug.get_the_ID(); ?>">
 							<?php
 							if($content_type=='content'){

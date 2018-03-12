@@ -150,82 +150,96 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 
 		// Get menus
 		$menus = wp_get_nav_menus();
-
+		$general_tab_id = 'afwp_tab_general'.esc_attr($this->id);
+		$design_tab_id = 'afwp_tab_design'.esc_attr($this->id);
 		// If no menus exists, direct the user to go and create some.
 		?>
-		<p class="nav-menu-widget-no-menus-message" <?php if ( ! empty( $menus ) ) {
-			echo ' style="display:none" ';
-		} ?>>
-			<?php
-			if ( $wp_customize instanceof WP_Customize_Manager ) {
-				$url = 'javascript: wp.customize.panel( "nav_menus" ).focus();';
-			} else {
-				$url = admin_url( 'nav-menus.php' );
-			}
-			?>
-			<?php echo sprintf( __( 'No menus have been created yet. <a href="%s">Create some</a>.', 'accordion-for-wp' ), esc_attr( $url ) ); ?>
-		</p>
-		<div class="nav-menu-widget-form-controls" <?php if ( empty( $menus ) ) {
-			echo ' style="display:none" ';
-		} ?>>
-			<p>
-				<label
-					for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'accordion-for-wp' ) ?></label>
-				<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-				       name="<?php echo $this->get_field_name( 'title' ); ?>"
-				       value="<?php echo esc_attr( $title ); ?>"/>
-			</p>
-			<p>
-				<label
-					for="<?php echo $this->get_field_id( 'nav_menu' ); ?>"><?php esc_html_e( 'Select Menu:', 'accordion-for-wp' ); ?></label>
-				<select id="<?php echo $this->get_field_id( 'nav_menu' ); ?>"
-				        name="<?php echo $this->get_field_name( 'nav_menu' ); ?>">
-					<option value="0"><?php esc_html_e( '&mdash; Select &mdash;', 'accordion-for-wp' ); ?></option>
-					<?php foreach ( $menus as $menu ) : ?>
-						<option
-							value="<?php echo esc_attr( $menu->term_id ); ?>" <?php selected( $nav_menu, $menu->term_id ); ?>>
-							<?php echo esc_html( $menu->name ); ?>
-						</option>
-					<?php endforeach; ?>
-				</select>
-			</p>
+		<div class="afwp-tab-wraper">
+			<h5 class="afwp-tab-list nav-tab-wrapper">
+				<a href="#<?php echo esc_attr($general_tab_id); ?>" class="nav-tab nav-tab-active"><?php esc_html_e('General', 'accordion-for-wp'); ?></a>
+				<a href="#<?php echo esc_attr($design_tab_id); ?>" class="nav-tab"><?php esc_html_e('Design', 'accordion-for-wp'); ?></a>
+			</h5>
+			<div class="afwp-tab-content-wraper">
+				<div id="<?php echo esc_attr($general_tab_id); ?>" class="afwp-tab-content afwp-content-active">
+					<p class="nav-menu-widget-no-menus-message" <?php if ( ! empty( $menus ) ) {
+						echo ' style="display:none" ';
+					} ?>>
+						<?php
+						if ( $wp_customize instanceof WP_Customize_Manager ) {
+							$url = 'javascript: wp.customize.panel( "nav_menus" ).focus();';
+						} else {
+							$url = admin_url( 'nav-menus.php' );
+						}
+						?>
+						<?php echo sprintf( __( 'No menus have been created yet. <a href="%s">Create some</a>.', 'accordion-for-wp' ), esc_attr( $url ) ); ?>
+					</p>
+					<div class="nav-menu-widget-form-controls" <?php if ( empty( $menus ) ) {
+						echo ' style="display:none" ';
+					} ?>>
+						<p>
+							<label
+								for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'accordion-for-wp' ) ?></label>
+							<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
+							       name="<?php echo $this->get_field_name( 'title' ); ?>"
+							       value="<?php echo esc_attr( $title ); ?>"/>
+						</p>
+						<p>
+							<label
+								for="<?php echo $this->get_field_id( 'nav_menu' ); ?>"><?php esc_html_e( 'Select Menu:', 'accordion-for-wp' ); ?></label>
+							<select id="<?php echo $this->get_field_id( 'nav_menu' ); ?>"
+							        name="<?php echo $this->get_field_name( 'nav_menu' ); ?>">
+								<option value="0"><?php esc_html_e( '&mdash; Select &mdash;', 'accordion-for-wp' ); ?></option>
+								<?php foreach ( $menus as $menu ) : ?>
+									<option
+										value="<?php echo esc_attr( $menu->term_id ); ?>" <?php selected( $nav_menu, $menu->term_id ); ?>>
+										<?php echo esc_html( $menu->name ); ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
+						</p>
 
-			<?php
-			$all_templates = afwp_accordion_templates();
-			?>
-			<p>
-				<label
-					for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php esc_html_e( 'Template:', 'accordion-for-wp' ); ?></label>
-				<select class="widefat" id="<?php echo $this->get_field_id( 'templates' ); ?>"
-				        name="<?php echo $this->get_field_name( 'templates' ); ?>">
-					<?php foreach ( $all_templates as $template_key => $template_value ): ?>
-						<option <?php selected( $templates, $template_key, true ); ?>
-							value="<?php echo $template_key; ?>"><?php echo $template_value; ?></option>
-					<?php endforeach; ?>
-				</select>
-			</p>
-			<?php
-			//$all_style = afwp_accordion_styles();
-			$all_style=array('vertical'   => esc_html__( 'Vertical', 'accordion-for-wp' ));
-			?>
-			<p>
-				<label
-					for="<?php echo $this->get_field_id( 'style' ); ?>"><?php esc_html_e( 'Style:', 'accordion-for-wp' ); ?></label>
-				<select class="widefat" id="<?php echo $this->get_field_id( 'style' ); ?>"
-				        name="<?php echo $this->get_field_name( 'style' ); ?>">
-					<?php foreach ( $all_style as $style_key => $style_value ): ?>
-						<option <?php selected( $style, $style_key, true ); ?>
-							value="<?php echo $style_key; ?>"><?php echo $style_value; ?></option>
-					<?php endforeach; ?>
-				</select>
-			</p>
-			<?php if ( $wp_customize instanceof WP_Customize_Manager ) : ?>
-				<p class="edit-selected-nav-menu" style="<?php if ( ! $nav_menu ) {
-					echo 'display: none;';
-				} ?>">
-					<button type="button" class="button"><?php esc_html_e( 'Edit Menu', 'accordion-for-wp' ) ?></button>
-				</p>
-			<?php endif; ?>
+						
+					</div>
+				</div>
+				<div id="<?php echo esc_attr($design_tab_id); ?>" class="afwp-tab-content">
+					<?php
+						$all_templates = afwp_accordion_templates();
+						?>
+						<p>
+							<label
+								for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php esc_html_e( 'Template:', 'accordion-for-wp' ); ?></label>
+							<select class="widefat" id="<?php echo $this->get_field_id( 'templates' ); ?>"
+							        name="<?php echo $this->get_field_name( 'templates' ); ?>">
+								<?php foreach ( $all_templates as $template_key => $template_value ): ?>
+									<option <?php selected( $templates, $template_key, true ); ?>
+										value="<?php echo $template_key; ?>"><?php echo $template_value; ?></option>
+								<?php endforeach; ?>
+							</select>
+						</p>
+						<?php
+						//$all_style = afwp_accordion_styles();
+						$all_style=array('vertical'   => esc_html__( 'Vertical', 'accordion-for-wp' ));
+						?>
+						<p>
+							<label
+								for="<?php echo $this->get_field_id( 'style' ); ?>"><?php esc_html_e( 'Style:', 'accordion-for-wp' ); ?></label>
+							<select class="widefat" id="<?php echo $this->get_field_id( 'style' ); ?>"
+							        name="<?php echo $this->get_field_name( 'style' ); ?>">
+								<?php foreach ( $all_style as $style_key => $style_value ): ?>
+									<option <?php selected( $style, $style_key, true ); ?>
+										value="<?php echo $style_key; ?>"><?php echo $style_value; ?></option>
+								<?php endforeach; ?>
+							</select>
+						</p>
+						<?php if ( $wp_customize instanceof WP_Customize_Manager ) : ?>
+							<p class="edit-selected-nav-menu" style="<?php if ( ! $nav_menu ) {
+								echo 'display: none;';
+							} ?>">
+								<button type="button" class="button"><?php esc_html_e( 'Edit Menu', 'accordion-for-wp' ) ?></button>
+							</p>
+						<?php endif; ?>
+				</div>
+			</div>
 		</div>
 		<?php
 	}

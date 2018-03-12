@@ -14,10 +14,23 @@
         }
     }
 
+    .afwp-toggle-icon{
+        &:before{
+            line-height:35px;
+        }
+    }
+
     .afwp-accordion-title{
         display: block;
         font-weight: 700;
         cursor: pointer;
+        &.current{
+            .afwp-toggle-icon{
+                &:before{
+                    content:"-";
+                }
+            }
+        }
     }
 
     .afwp-content {
@@ -39,6 +52,16 @@
     }
 
     &.horizontal{
+        .afwp-toggle-icon{
+            width:100%;
+            height:30px;
+            border-left:none;
+            border-bottom:1px solid #dedede;
+            &:before{
+                padding: 0 9px;
+                line-height: 30px;
+            }
+        }
         overflow: hidden;
         height: auto;
         ul{
@@ -89,7 +112,10 @@
  */
 /*global*/
 .afwp-default{
-
+    .afwp-toggle-icon{
+        color:#fff;
+        display:none;
+    }
     .afwp-accordion-item-wrap {
         padding: 0;
         border: none;
@@ -127,6 +153,9 @@
  */
 /*Global */
 .afwp-template-1{
+    .afwp-toggle-icon{
+        color:#fff;
+    }
     .afwp-accordion-item-wrap {
         padding: 0;
         border: none;
@@ -146,32 +175,8 @@
         font-weight: 600;
         line-height: 1.4em;
         cursor: pointer;
-        &:after{
-            content: "+";
-            position: absolute;
-            right: 0;
-            top: 0;
-            display: block;
-            width: 1.5em;
-            height: 1.5em;
-            line-height: 1.5;
-            text-align: center;
-            font-size: 1.5em;
-            -webkit-transition: all .35s;
-            -moz-transition: all .35s;
-            -ms-transition: all .35s;
-            -o-transition: all .35s;
-            transition: all .35s;
-        }
         &.current, &:hover{
             background: rgb(9, 160, 108);
-            &:after{
-                -webkit-transform: rotate(315deg);
-                -moz-transform: rotate(315deg);
-                -ms-transform: rotate(315deg);
-                -o-transform: rotate(315deg);
-                transform: rotate(315deg);
-            }
         }
     }
 
@@ -194,14 +199,6 @@
 
         .afwp-accordion-title, .afwp-post-link{
             padding-top: 30px;
-            &:after{
-                width: 100%;
-                height: 30px;
-                font-size: 1.5em;
-                line-height: 30px;
-                text-align: center;
-                padding: 0 8px;
-            }
         }
     }
 }
@@ -226,20 +223,6 @@
         margin: 0;
         line-height: 1.4em;
         cursor: pointer;
-        &:after{
-            content: "+";
-            position: absolute;
-            right: 0;
-            top: 0;
-            display: block;
-            width: 2em;
-            height: 2em;
-            line-height: 2;
-            text-align: center;
-            font-size: 1.5em;
-            -webkit-transition: all .35s;
-            transition: all .35s;
-        }
     }
 
     .vertical{
@@ -260,15 +243,6 @@
         }
         .afwp-post-link, .afwp-accordion-title{
             padding-top: 30px;
-            &:after{
-                width: 100%;
-                height: 30px;
-                font-size: 1.5em;
-                line-height: 30px;
-                text-align: center;
-                padding: 0 8px;
-
-            }
         }
     }
 }

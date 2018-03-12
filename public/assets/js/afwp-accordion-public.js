@@ -47,7 +47,7 @@
 
 		Click: function(){
 
-			$('.afwp-accordion-template').on('click', '.afwp-toggle-icon', function(evt){
+			$('.widget_accordion_nav_menu').on('click', '.afwp-toggle-icon', function(evt){
 				afwp_accordion.Snipits.jsMenuAccordion( $(this) );
 			});
 

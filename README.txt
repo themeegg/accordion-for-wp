@@ -1,4 +1,4 @@
-=== Accordion for WordPress - Accordion, FAQ widgets, Shortcode, Tabs and many more ===
+=== Accordion for WordPress - Accordion, FAQ, Tabs Shortcode and Widgets ===
 Contributors: themeegg
 Tags: accordion, accordion, accordion widget, term accordion, accordion for wordpress, wordpress accordion, menu accordion, post accordion, page accordion, product accordion
 Requires at least: 4.0
