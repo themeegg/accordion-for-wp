@@ -29,10 +29,11 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 	 */
 	public function __construct() {
 		$widget_ops = array(
+			'classname'                   => 'afwp_accordion_nav_menu',
 			'description'                 => esc_html__( 'Add a custom accordion menu to your sidebar.', 'accordion-for-wp' ),
 			'customize_selective_refresh' => true,
 		);
-		parent::__construct( 'accordion_nav_menu', esc_html__( 'Accordion Menu', 'accordion-for-wp' ), $widget_ops );
+		parent::__construct( 'afwp_accordion_nav_menu', esc_html__( 'Accordion Menu', 'accordion-for-wp' ), $widget_ops );
 	}
 
 	/**
@@ -111,6 +112,7 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 	 * @return array Updated settings to save.
 	 */
 	public function update( $new_instance, $old_instance ) {
+
 		$instance = array();
 		if ( ! empty( $new_instance['title'] ) ) {
 			$instance['title'] = sanitize_text_field( $new_instance['title'] );
@@ -127,7 +129,12 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 			$instance['style'] = sanitize_text_field( $new_instance['style'] );
 		}
 
+		if ( ! empty( $new_instance['active_tab_type'] ) ) {
+			$instance['active_tab_type'] = isset($new_instance['active_tab_type']) ? esc_attr( $new_instance['active_tab_type'] ) : '';
+		}
+
 		return $instance;
+
 	}
 
 	/**
@@ -141,26 +148,39 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 	 * @global WP_Customize_Manager $wp_customize
 	 */
 	public function form( $instance ) {
-		global $wp_customize;
-		$title    = isset( $instance['title'] ) ? $instance['title'] : '';
-		$nav_menu = isset( $instance['nav_menu'] ) ? $instance['nav_menu'] : '';
 
-		$templates      = isset( $instance['templates'] ) ? $instance['templates'] : 'template-1';
-		$style          = isset( $instance['style'] ) ? $instance['style'] : 'vertical';
+		global $wp_customize;
+		$title    = isset( $instance['title'] ) ? sanitize_text_field($instance['title']) : '';
+		$nav_menu = isset( $instance['nav_menu'] ) ? esc_attr($instance['nav_menu']) : '';
+
+		$templates      = isset( $instance['templates'] ) ? esc_attr($instance['templates']) : 'template-1';
+		$style          = isset( $instance['style'] ) ? esc_attr($instance['style']) : 'vertical';
 
 		// Get menus
 		$menus = wp_get_nav_menus();
-		$general_tab_id = 'afwp_tab_general'.esc_attr($this->id);
-		$design_tab_id = 'afwp_tab_design'.esc_attr($this->id);
+
+		$active_tab_type = isset($instance['active_tab_type']) ? esc_attr( $instance['active_tab_type'] ) : 'general';
+		$list_all_tabs = array(
+			'general'	=>	array(
+				'id'	=> 'afwp_accordion_nav_menu_general'.esc_attr($this->number),
+				'label'	=> esc_html__('General', 'accordion-for-wp'),
+			),
+			'design'	=>	array(
+				'id'	=> 'afwp_accordion_nav_menu_design'.esc_attr($this->number),
+				'label'	=> esc_html__('Design', 'accordion-for-wp'),
+			),
+		);
+
 		// If no menus exists, direct the user to go and create some.
 		?>
 		<div class="afwp-tab-wraper">
 			<h5 class="afwp-tab-list nav-tab-wrapper">
-				<a href="#<?php echo esc_attr($general_tab_id); ?>" class="nav-tab nav-tab-active"><?php esc_html_e('General', 'accordion-for-wp'); ?></a>
-				<a href="#<?php echo esc_attr($design_tab_id); ?>" class="nav-tab"><?php esc_html_e('Design', 'accordion-for-wp'); ?></a>
+				<?php foreach($list_all_tabs as $tab_key=>$tab_details){ ?>
+					<label for="tab_<?php echo esc_attr($tab_details['id']); ?>" data-id="#<?php echo esc_attr($tab_details['id']); ?>" class="nav-tab <?php echo ($tab_key == $active_tab_type) ? 'nav-tab-active' : ''; ?>"><?php echo sanitize_text_field($tab_key); ?><input id="tab_<?php echo esc_attr($tab_details['id']); ?>" type="radio" name="<?php echo $this->get_field_name("active_tab_type"); ?>" value="<?php echo esc_attr($tab_key); ?>" <?php checked($active_tab_type, $tab_key); ?> class="afwp-hidden"/></label>
+				<?php } ?>
 			</h5>
 			<div class="afwp-tab-content-wraper">
-				<div id="<?php echo esc_attr($general_tab_id); ?>" class="afwp-tab-content afwp-content-active">
+				<div id="<?php echo esc_attr($list_all_tabs['general']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='general') ? 'afwp-content-active' : ''; ?>">
 					<p class="nav-menu-widget-no-menus-message" <?php if ( ! empty( $menus ) ) {
 						echo ' style="display:none" ';
 					} ?>>
@@ -201,7 +221,7 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 						
 					</div>
 				</div>
-				<div id="<?php echo esc_attr($design_tab_id); ?>" class="afwp-tab-content">
+				<div id="<?php echo esc_attr($list_all_tabs['design']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='design') ? 'afwp-content-active' : ''; ?>">
 					<?php
 						$all_templates = afwp_accordion_templates();
 						?>

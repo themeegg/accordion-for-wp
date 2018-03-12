@@ -2,10 +2,42 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
- .afwp-tab-content{
- 	display:none;
- }
 
-  .afwp-tab-content.afwp-content-active{
+.afwp-tab-content{
+ 	display:none;
+}
+
+.afwp-hidden{
+ display:none;
+}
+.afwp-hidden[type="radio"]{
+  display:none;
+}
+
+.afwp-tab-content.afwp-content-active{
  	display:block;
- }
+}
+
+.afwp-tab-content {
+  display: none;
+  border: 1px solid #dedede;
+  padding: 0 15px;
+  background: #fdfdfd;
+}
+
+.widget-content .afwp-tab-content{
+  margin: 0 -15px 15px;
+}
+
+div[id*=_afwp_] .widget-title h3{
+  color:#fff;
+  background-color:#006799;
+}
+
+div[id*=_afwp_] .widget-title h3:hover{
+  background-color:#00a0d2;
+}
+
+div[id*=_afwp_] .widget-title h3 *{
+  color:#ccc;
+}

@@ -51,16 +51,14 @@
 				widget.Change_Data($(this));
 			});
 			$(document).on('click', '.afwp-tab-list .nav-tab', function(evt){
-				evt.preventDefault();
-				if($(this).hasClass('nav-tab-active')){
-					return;
+				if(!$(this).hasClass('nav-tab-active')){
+					var tab_wraper, tab_id;
+					tab_id = $(this).data('id');
+					tab_wraper = $(this).closest('.afwp-tab-wraper');
+					$(this).addClass('nav-tab-active').siblings('.nav-tab').removeClass('nav-tab-active');
+					tab_wraper.find('.afwp-tab-content').removeClass('afwp-content-active');
+					tab_wraper.find(tab_id).addClass('afwp-content-active');
 				}
-				var tab_wraper, tab_id;
-				tab_id = $(this).attr('href');
-				tab_wraper = $(this).closest('.afwp-tab-wraper'); 
-				$(this).addClass('nav-tab-active').siblings('.nav-tab').removeClass('nav-tab-active');
-				tab_wraper.find('.afwp-tab-content').removeClass('afwp-content-active');
-				tab_wraper.find(tab_id).addClass('afwp-content-active');
 			});
 		},
 

@@ -112,6 +112,8 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 		$instance['templates'] = sanitize_text_field( $new_instance['templates'] );
 		$instance['style']     = sanitize_text_field( $new_instance['style'] );
 
+		$instance['active_tab_type'] = isset($new_instance['active_tab_type']) ? esc_attr( $new_instance['active_tab_type'] ) : 'general';
+
 		return $instance;
 	}
 
@@ -129,7 +131,8 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 			'taxonomy'   => '',
 			'no_of_term' => '5',
 			'templates'  => 'default',
-			'style'      => 'vertical'
+			'style'      => 'vertical',
+			'active_tab_type'	=>'general',
 		) );
 		$title      = sanitize_text_field( $instance['title'] );
 		$taxonomy   = sanitize_text_field( $instance['taxonomy'] );
@@ -138,74 +141,85 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 		$templates = sanitize_text_field( $instance['templates'] );
 		$style     = sanitize_text_field( $instance['style'] );
 
-		$general_tab_id = 'afwp_tab_term_general'.esc_attr($this->id);
-		$design_tab_id = 'afwp_tab_term_design'.esc_attr($this->id);
+		$active_tab_type = esc_attr( $instance['active_tab_type'] );
+		$list_all_tabs = array(
+			'general'	=>	array(
+				'id'	=> 'afwp_term_accordion_general'.esc_attr($this->number),
+				'label'	=> esc_html__('General', 'accordion-for-wp'),
+			),
+			'design'	=>	array(
+				'id'	=> 'afwp_term_accordion_design'.esc_attr($this->number),
+				'label'	=> esc_html__('Design', 'accordion-for-wp'),
+			),
+		);
 
 		?>
 		<div class="afwp-tab-wraper">
-		<h5 class="afwp-tab-list nav-tab-wrapper">
-			<a href="#<?php echo esc_attr($general_tab_id); ?>" class="nav-tab nav-tab-active"><?php esc_html_e('General', 'accordion-for-wp'); ?></a>
-			<a href="#<?php echo esc_attr($design_tab_id); ?>" class="nav-tab"><?php esc_html_e('Design', 'accordion-for-wp'); ?></a>
-		</h5>
-		<div class="afwp-tab-content-wraper">
-			<div id="<?php echo esc_attr($general_tab_id); ?>" class="afwp-tab-content afwp-content-active">
-				<p><label
-						for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'accordion-for-wp' ); ?></label>
-					<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-						   name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
-						   value="<?php echo esc_attr( $title ); ?>"/></p>
-				<p><label
-						for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><?php esc_html_e( 'Taxonomy:', 'accordion-for-wp' ); ?></label>
-					<?php
-					$all_object_taxonomies = get_taxonomies();
-					?>
-					<select class="widefat afwp-widget-taxonomy" data-accordion-value="taxonomy"
-							data-accordion-change-id="#<?php echo $this->get_field_id( 'term' ); ?>"
-							id="<?php echo $this->get_field_id( 'taxonomy' ); ?>"
-							name="<?php echo $this->get_field_name( 'taxonomy' ); ?>" type="text"
-							value="<?php echo esc_attr( $taxonomy ); ?>">
-						<?php foreach ( $all_object_taxonomies as $taxonomy_key => $taxonomy_value ): ?>
-							<?php
-							$taxonomy_details = get_taxonomy( $taxonomy_key );
-							?>
-							<option <?php echo ( $taxonomy_key == $taxonomy ) ? 'selected="selected"' : ''; ?>
-								value="<?php echo $taxonomy_key; ?>"><?php echo $taxonomy_details->label; ?></option>
-						<?php endforeach; ?>
-					</select></p>
+			<h5 class="afwp-tab-list nav-tab-wrapper">
+				<?php foreach($list_all_tabs as $tab_key=>$tab_details){ ?>
+					<label for="tab_<?php echo esc_attr($tab_details['id']); ?>" data-id="#<?php echo esc_attr($tab_details['id']); ?>" class="nav-tab <?php echo ($tab_key == $active_tab_type) ? 'nav-tab-active' : ''; ?>"><?php echo sanitize_text_field($tab_key); ?><input id="tab_<?php echo esc_attr($tab_details['id']); ?>" type="radio" name="<?php echo $this->get_field_name("active_tab_type"); ?>" value="<?php echo esc_attr($tab_key); ?>" <?php checked($active_tab_type, $tab_key); ?> class="afwp-hidden"/></label>
+				<?php } ?>
+			</h5>
+			<div class="afwp-tab-content-wraper">
+				<div id="<?php echo esc_attr($list_all_tabs['general']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='general') ? 'afwp-content-active' : ''; ?>">
+					<p><label
+							for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'accordion-for-wp' ); ?></label>
+						<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
+							   name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
+							   value="<?php echo esc_attr( $title ); ?>"/></p>
+					<p><label
+							for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><?php esc_html_e( 'Taxonomy:', 'accordion-for-wp' ); ?></label>
+						<?php
+						$all_object_taxonomies = get_taxonomies();
+						?>
+						<select class="widefat afwp-widget-taxonomy" data-accordion-value="taxonomy"
+								data-accordion-change-id="#<?php echo $this->get_field_id( 'term' ); ?>"
+								id="<?php echo $this->get_field_id( 'taxonomy' ); ?>"
+								name="<?php echo $this->get_field_name( 'taxonomy' ); ?>" type="text"
+								value="<?php echo esc_attr( $taxonomy ); ?>">
+							<?php foreach ( $all_object_taxonomies as $taxonomy_key => $taxonomy_value ): ?>
+								<?php
+								$taxonomy_details = get_taxonomy( $taxonomy_key );
+								?>
+								<option <?php echo ( $taxonomy_key == $taxonomy ) ? 'selected="selected"' : ''; ?>
+									value="<?php echo $taxonomy_key; ?>"><?php echo $taxonomy_details->label; ?></option>
+							<?php endforeach; ?>
+						</select></p>
 
-				<p><label
-						for="<?php echo $this->get_field_id( 'no_of_term' ); ?>"><?php esc_html_e( 'Show no of term:', 'accordion-for-wp' ); ?></label>
-					<input class="widefat" min="1" max="99" id="<?php echo $this->get_field_id( 'no_of_term' ); ?>"
-						   name="<?php echo $this->get_field_name( 'no_of_term' ); ?>" type="number"
-						   value="<?php echo $no_of_term; ?>"/></p>
-			</div>
-			<div id="<?php echo esc_attr($design_tab_id); ?>" class="afwp-tab-content">
-				<p><label
-						for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php esc_html_e( 'Template:', 'accordion-for-wp' ); ?></label>
-					<?php
-					$all_templates = afwp_accordion_templates();
-					?>
-					<select class="widefat" id="<?php echo $this->get_field_id( 'templates' ); ?>"
-							name="<?php echo $this->get_field_name( 'templates' ); ?>" type="text"
-							value="<?php echo esc_attr( $templates ); ?>">
-						<?php foreach ( $all_templates as $template_key => $template_value ): ?>
-							<option <?php selected( $templates, $template_key, true ); ?>
-								value="<?php echo $template_key; ?>"><?php echo $template_value; ?></option>
-						<?php endforeach; ?>
-					</select></p>
-				<p><label
-						for="<?php echo $this->get_field_id( 'style' ); ?>"><?php esc_html_e( 'Style:', 'accordion-for-wp' ); ?></label>
-					<?php
-					$all_style = afwp_accordion_styles();
-					?>
-					<select class="widefat" id="<?php echo $this->get_field_id( 'style' ); ?>"
-							name="<?php echo $this->get_field_name( 'style' ); ?>" type="text"
-							value="<?php echo esc_attr( $style ); ?>">
-						<?php foreach ( $all_style as $style_key => $style_value ): ?>
-							<option <?php selected( $style, $style_key, true ); ?>
-								value="<?php echo $style_key; ?>"><?php echo $style_value; ?></option>
-						<?php endforeach; ?>
-					</select></p>
+					<p><label
+							for="<?php echo $this->get_field_id( 'no_of_term' ); ?>"><?php esc_html_e( 'Show no of term:', 'accordion-for-wp' ); ?></label>
+						<input class="widefat" min="1" max="99" id="<?php echo $this->get_field_id( 'no_of_term' ); ?>"
+							   name="<?php echo $this->get_field_name( 'no_of_term' ); ?>" type="number"
+							   value="<?php echo $no_of_term; ?>"/></p>
+				</div>
+				<div id="<?php echo esc_attr($list_all_tabs['design']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='design') ? 'afwp-content-active' : ''; ?>">
+					<p><label
+							for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php esc_html_e( 'Template:', 'accordion-for-wp' ); ?></label>
+						<?php
+						$all_templates = afwp_accordion_templates();
+						?>
+						<select class="widefat" id="<?php echo $this->get_field_id( 'templates' ); ?>"
+								name="<?php echo $this->get_field_name( 'templates' ); ?>" type="text"
+								value="<?php echo esc_attr( $templates ); ?>">
+							<?php foreach ( $all_templates as $template_key => $template_value ): ?>
+								<option <?php selected( $templates, $template_key, true ); ?>
+									value="<?php echo $template_key; ?>"><?php echo $template_value; ?></option>
+							<?php endforeach; ?>
+						</select></p>
+					<p><label
+							for="<?php echo $this->get_field_id( 'style' ); ?>"><?php esc_html_e( 'Style:', 'accordion-for-wp' ); ?></label>
+						<?php
+						$all_style = afwp_accordion_styles();
+						?>
+						<select class="widefat" id="<?php echo $this->get_field_id( 'style' ); ?>"
+								name="<?php echo $this->get_field_name( 'style' ); ?>" type="text"
+								value="<?php echo esc_attr( $style ); ?>">
+							<?php foreach ( $all_style as $style_key => $style_value ): ?>
+								<option <?php selected( $style, $style_key, true ); ?>
+									value="<?php echo $style_key; ?>"><?php echo $style_value; ?></option>
+							<?php endforeach; ?>
+						</select></p>
+				</div>
 			</div>
 		</div>
 		<?php

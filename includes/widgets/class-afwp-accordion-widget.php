@@ -46,14 +46,14 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		$post_type  = ! empty( $instance['post_type'] ) ? $instance['post_type'] : '';
-		$taxonomy   = ! empty( $instance['taxonomy'] ) ? $instance['taxonomy'] : '';
-		$term       = ! empty( $instance['term'] ) ? $instance['term'] : '';
-		$no_of_post = ! empty( $instance['no_of_post'] ) ? $instance['no_of_post'] : '';
+		$post_type  = ! empty( $instance['post_type'] ) ? esc_attr($instance['post_type']) : '';
+		$taxonomy   = ! empty( $instance['taxonomy'] ) ? esc_attr($instance['taxonomy']) : '';
+		$term       = ! empty( $instance['term'] ) ? absint($instance['term']) : '';
+		$no_of_post = ! empty( $instance['no_of_post'] ) ? absint($instance['no_of_post']) : '';
 
-		$templates = ! empty( $instance['templates'] ) ? $instance['templates'] : '';
-		$style     = ! empty( $instance['style'] ) ? $instance['style'] : '';
-		$content_type     = ! empty( $instance['content_type'] ) ? $instance['content_type'] : 'excerpt';
+		$templates = ! empty( $instance['templates'] ) ? esc_attr($instance['templates']) : '';
+		$style     = ! empty( $instance['style'] ) ? esc_attr($instance['style']) : '';
+		$content_type     = ! empty( $instance['content_type'] ) ? esc_attr($instance['content_type']) : 'excerpt';
 
 		echo $args['before_widget'];
 		if ( ! empty( $title ) ) {
@@ -115,15 +115,19 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 	 * @return array Settings to save or bool false to cancel saving.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance               = $old_instance;
-		$instance['title']      = sanitize_text_field( $new_instance['title'] );
-		$instance['post_type']  = sanitize_text_field( $new_instance['post_type'] );
-		$instance['taxonomy']   = sanitize_text_field( $new_instance['taxonomy'] );
-		$instance['term']       = sanitize_text_field( $new_instance['term'] );
-		$instance['no_of_post'] = absint( $new_instance['no_of_post'] );
 
-		$instance['templates'] = sanitize_text_field( $new_instance['templates'] );
-		$instance['style']     = sanitize_text_field( $new_instance['style'] );
+		$instance               = $old_instance;
+		$instance['title']      = isset($new_instance['title']) ? sanitize_text_field( $new_instance['title'] ) : '';
+		$instance['post_type']  = isset($new_instance['post_type']) ? esc_attr( $new_instance['post_type'] ) : '';
+		$instance['taxonomy']   = isset($new_instance['taxonomy']) ? esc_attr( $new_instance['taxonomy'] ) : '';
+		$instance['term']       = isset($new_instance['term']) ? esc_attr( $new_instance['term'] ) : '';
+		$instance['no_of_post'] = isset($new_instance['no_of_post']) ? absint( $new_instance['no_of_post'] ) : '';
+		$instance['content_type'] = isset($new_instance['content_type']) ? esc_attr($new_instance['content_type']) : '';
+
+		$instance['templates'] = isset($new_instance['templates']) ? esc_attr( $new_instance['templates'] ) : '';
+		$instance['style']     = isset($new_instance['style']) ? esc_attr( $new_instance['style'] ) : '';
+
+		$instance['active_tab_type'] = isset($new_instance['active_tab_type']) ? esc_attr( $new_instance['active_tab_type'] ) : 'general';
 
 		return $instance;
 	}
@@ -137,41 +141,57 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 	 * @param array $instance Current settings.
 	 */
 	public function form( $instance ) {
+
 		$instance   = wp_parse_args( (array) $instance, array(
-			'title'      => '',
-			'post_type'  => '',
-			'taxonomy'   => '',
-			'term'       => '',
-			'no_of_post' => '5',
-			'templates'  => 'default',
-			'style'      => 'vertical',
+			'title'      		=> '',
+			'post_type'  		=> '',
+			'taxonomy'   		=> '',
+			'term'       		=> '',
+			'no_of_post' 		=> '5',
+			'templates'  		=> 'default',
+			'style'      		=> 'vertical',
+			'content_type'		=>'excerpt',
+			'active_tab_type'	=>'general',
 		) );
+
 		$title      = sanitize_text_field( $instance['title'] );
-		$post_type  = sanitize_text_field( $instance['post_type'] );
-		$taxonomy   = sanitize_text_field( $instance['taxonomy'] );
-		$term       = sanitize_text_field( $instance['term'] );
+		$post_type  = esc_attr( $instance['post_type'] );
+		$taxonomy   = esc_attr( $instance['taxonomy'] );
+		$term       = esc_attr( $instance['term'] );
 		$no_of_post = absint( $instance['no_of_post'] );
+		$content_type = esc_attr( $instance['content_type'] );
 
-		$templates = sanitize_text_field( $instance['templates'] );
-		$style     = sanitize_text_field( $instance['style'] );
+		$templates = esc_attr( $instance['templates'] );
+		$style     = esc_attr( $instance['style'] );
 
-		$general_tab_id = 'afwp_tab_post_general'.esc_attr($this->id);
-		$design_tab_id = 'afwp_tab_post_design'.esc_attr($this->id);
+		$active_tab_type = esc_attr( $instance['active_tab_type'] );
+		$list_all_tabs = array(
+			'general'	=>	array(
+				'id'	=> 'afwp_accordion_widget_general'.esc_attr($this->number),
+				'label'	=> esc_html__('General', 'accordion-for-wp'),
+			),
+			'design'	=>	array(
+				'id'	=> 'afwp_accordion_widget_design'.esc_attr($this->number),
+				'label'	=> esc_html__('Design', 'accordion-for-wp'),
+			),
+		);
+
 		?>
 		<div class="afwp-tab-wraper">
 			<h5 class="afwp-tab-list nav-tab-wrapper">
-				<a href="#<?php echo esc_attr($general_tab_id); ?>" class="nav-tab nav-tab-active"><?php esc_html_e('General', 'accordion-for-wp'); ?></a>
-				<a href="#<?php echo esc_attr($design_tab_id); ?>" class="nav-tab"><?php esc_html_e('Design', 'accordion-for-wp'); ?></a>
+				<?php foreach($list_all_tabs as $tab_key=>$tab_details){ ?>
+					<label for="tab_<?php echo esc_attr($tab_details['id']); ?>" data-id="#<?php echo esc_attr($tab_details['id']); ?>" class="nav-tab <?php echo ($tab_key == $active_tab_type) ? 'nav-tab-active' : ''; ?>"><?php echo sanitize_text_field($tab_key); ?><input id="tab_<?php echo esc_attr($tab_details['id']); ?>" type="radio" name="<?php echo $this->get_field_name("active_tab_type"); ?>" value="<?php echo esc_attr($tab_key); ?>" <?php checked($active_tab_type, $tab_key); ?> class="afwp-hidden"/></label>
+				<?php } ?>
 			</h5>
 			<div class="afwp-tab-content-wraper">
-				<div id="<?php echo esc_attr($general_tab_id); ?>" class="afwp-tab-content afwp-content-active">
-					<p><label
-							for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'accordion-for-wp' ); ?></label>
+				<div id="<?php echo esc_attr($list_all_tabs['general']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='general') ? 'afwp-content-active' : ''; ?>" >
+					<p>
+						<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'accordion-for-wp' ); ?></label>
 						<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
 							   name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
 							   value="<?php echo esc_attr( $title ); ?>"/></p>
-					<p><label
-							for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php esc_html_e( 'Post Type:', 'accordion-for-wp' ); ?></label>
+					<p>
+						<label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php esc_html_e( 'Post Type:', 'accordion-for-wp' ); ?></label>
 						<?php
 						$args           = array(
 							'public' => true,
@@ -214,7 +234,7 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 						) );
 						?>
 						<select class="widefat" id="<?php echo $this->get_field_id( 'term' ); ?>"
-								name="<?php echo $this->get_field_name( 'term' ); ?>" type="text"
+								name="<?php echo $this->get_field_name( 'term' ); ?>"
 								value="<?php echo esc_attr( $term ); ?>">
 							<option <?php echo ( $term ) ? '' : 'selected="selected"'; ?> value="">No Filter</option>
 							<?php if ( is_array( $all_terms ) ): ?>
@@ -230,10 +250,27 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 						<input class="widefat" min="1" max="99" id="<?php echo $this->get_field_id( 'no_of_post' ); ?>"
 							   name="<?php echo $this->get_field_name( 'no_of_post' ); ?>" type="number"
 							   value="<?php echo $no_of_post; ?>"/></p>
+					<?php
+					$content_types = array(
+						'excerpt'	=> esc_html__('Short Description', 'accordion-for-wp'),
+						'content'	=> esc_html__('Full Content','accordion-for-wp'),
+					);
+					?>
+					<p><label for="<?php echo $this->get_field_id( 'content_type' ); ?>"><?php esc_html_e( 'Content Type:', 'accordion-for-wp' ); ?></label>
+						<select class="widefat" id="<?php echo $this->get_field_id( 'content_type' ); ?>"
+								name="<?php echo $this->get_field_name( 'content_type' ); ?>"
+								value="<?php echo esc_attr( $content_type ); ?>">
+							<?php if ( is_array( $content_types ) ): ?>
+								<?php foreach ( $content_types as $content_key => $content_value ): ?>
+									<option <?php selected($content_key, $content_type); ?>
+										value="<?php echo esc_attr($content_key); ?>"><?php echo esc_attr($content_value); ?></option>
+								<?php endforeach; ?>
+							<?php endif; ?>
+						</select></p>
 				</div>
-				<div id="<?php echo esc_attr($design_tab_id); ?>" class="afwp-tab-content">
-					<p><label
-							for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php esc_html_e( 'Template:', 'accordion-for-wp' ); ?></label>
+				<div id="<?php echo esc_attr($list_all_tabs['design']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='design') ? 'afwp-content-active' : ''; ?> " >
+					<p>
+						<label for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php esc_html_e( 'Template:', 'accordion-for-wp' ); ?></label>
 						<?php $all_templates = afwp_accordion_templates(); ?>
 						<select class="widefat" id="<?php echo $this->get_field_id( 'templates' ); ?>"
 								name="<?php echo $this->get_field_name( 'templates' ); ?>">
@@ -241,9 +278,10 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 								<option <?php selected( $templates, $template_key, true ); ?>
 									value="<?php echo $template_key; ?>"><?php echo $template_value; ?></option>
 							<?php endforeach; ?>
-						</select></p>
-					<p><label
-							for="<?php echo $this->get_field_id( 'style' ); ?>"><?php esc_html_e( 'Style:', 'accordion-for-wp' ); ?></label>
+						</select>
+					</p>
+					<p>
+						<label for="<?php echo $this->get_field_id( 'style' ); ?>"><?php esc_html_e( 'Style:', 'accordion-for-wp' ); ?></label>
 						<?php
 						$all_style = afwp_accordion_styles();
 						?>
@@ -253,13 +291,13 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 								<option <?php selected( $style, $style_key, true ); ?>
 									value="<?php echo $style_key; ?>"><?php echo $style_value; ?></option>
 							<?php endforeach; ?>
-						</select></p>
+						</select>
+					</p>
 				</div>
 			</div>
 		</div>
 		<?php
 	}
-
 }
 
 register_widget( 'AFWP_Accordion_Widgets' );

@@ -42,7 +42,18 @@ class AFWP_TAB_For_WP_Post_Type {
 
 	public function afwp_admin_notices(){
 
-		if(!(isset($_GET['post_type']) && $_GET['post_type']=='afwp-tabs') ){
+		$tab_page = false;
+
+		if(isset($_GET['post_type']) && $_GET['post_type']=='afwp-tabs'){
+			$tab_page = true;
+		}
+
+		global $typenow;
+		if($typenow=='afwp-tabs'){
+			$tab_page = true;
+		}
+
+		if(!$tab_page){
 			return;
 		}
 
