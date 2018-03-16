@@ -83,7 +83,7 @@ class AFWP_Tab_Widgets extends WP_Widget {
 		$query = new WP_Query( $wp_args );
 		if ( $query->have_posts() ):
 			?>
-			<div class="afwp-tab-template afwp-widget afwp-<?php echo $templates; ?>">
+			<div class="afwp-tab-template afwp-widget afwp-tab-<?php echo $templates; ?>">
 				<div class="afwp-tab <?php echo esc_attr($style); ?>">
 					<ul class="afwp-tab-list">
 						<?php 

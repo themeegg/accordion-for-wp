@@ -19,12 +19,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 	<!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <?php
+
 $atts       = array();
 $templates  = "default";
 $style      = "vertical";
+
 $atts       = apply_filters( 'afwp_tab_args', $atts );
+
 $templates  = apply_filters( 'afwp_tab_templates', $templates );
 $style      = apply_filters( 'afwp_tab_styles', $style );
+
+$title_color = '';
+$title_background = '';
+
 $query      = new WP_Query( $atts );
 $active_tab = 1;
 if ( $query->have_posts() ):
@@ -39,7 +46,9 @@ if ( $query->have_posts() ):
 					$tab_class = ($current_tab==$active_tab) ? ' current ' : '';
 					?>
 					<li class="afwp-tab-item-wrap">
-						<a class="afwp-post-link <?php echo esc_attr($tab_class); ?>" href="#post_tab_<?php echo get_the_ID(); ?>"><?php the_title(); ?></a>
+						<div class="afwp-tab-title" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
+							<a class="afwp-post-link <?php echo esc_attr($tab_class); ?>" href="#post_tab_<?php echo get_the_ID(); ?>"><?php the_title(); ?></a>
+						</div>
 					</li>
 				<?php endwhile; ?>
 			</ul>

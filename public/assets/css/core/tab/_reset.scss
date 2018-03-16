@@ -21,9 +21,7 @@
             width:100%;
             clear:both;
         }
-        .afwp-tab-item-wrap{
-            float:left;
-        }
+        
     }
 
     .afwp-tab-content{
@@ -34,13 +32,13 @@
         }
     }
 
-    .afwp-post-link{
+    .afwp-tab-title{
         color:inherit;
         display: block;
         background:#dedede;
         padding:10px 1em;
         line-height:1.4em;
-        border-right:1px solid #f2f2f2;
+        
         margin:0;
         &:after{
             display:none;
@@ -57,18 +55,24 @@
             clear:both;
         }
         .afwp-tab-list{
-            width:30%;
+            width:40%;
             float:left;
         }
         .afwp-tab-content-wraper{
-            width:70%;
+            width:60%;
             float:left;
         }
     }
 
     .vertical{
+        .afwp-tab-title{
+            border-right:1px solid #f2f2f2;
+        }
+        .afwp-tab-item-wrap{
+            float:left;
+        }
         .afwp-tab-list{
-            width:40%;
+            width:100%;
         }
     }
     

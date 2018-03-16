@@ -74,12 +74,13 @@
 
 				evt.preventDefault();
 
-				var tab_list, tab_id, content_wraper;
-				tab_id = $(this).attr('href');
-				tab_list = $(this).closest('.afwp-tab-list');
+				var tab_list, tab_id, content_wraper, link_tag;
+				link_tag = $(this);
+				tab_id = link_tag.attr('href');
+				tab_list = link_tag.closest('.afwp-tab-list');
 				content_wraper = tab_list.siblings('.afwp-tab-content-wraper');
 
-				$(this).toggleClass('current').closest('li').siblings('li').find('.afwp-post-link').removeClass('current');
+				link_tag.toggleClass('current').closest('li').siblings('li').find('.afwp-post-link').removeClass('current');
 				content_wraper.find(tab_id).siblings('.afwp-tab-content').removeClass('current');
 				content_wraper.find(tab_id).addClass('current');
 
