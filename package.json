@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "node-bourbon": "^4.2.8",
+    "node-sass": "^4.7.2",
     "openssl": "^1.1.0"
   }
 }

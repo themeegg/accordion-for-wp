@@ -78,7 +78,8 @@ module.exports = function (grunt) {
 		watch: {
 			css: {
 				files: [
-					'<%= dirs.css %>/*.scss'
+					//'<%= dirs.css %>/*.scss',
+					'**/*.scss'
 				],
 				tasks: ['sass', 'cssmin']
 			},
@@ -199,6 +200,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-compress');
 
 	// Register tasks
+
 	grunt.registerTask('default', [
 		'jshint',
 		'uglify',

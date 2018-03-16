@@ -1,6 +1,5 @@
 <?php
-class MySettingsPage
-{
+class AFWP_Settings_Page{
     /**
      * Holds the values to be used in the fields callbacks
      */
@@ -9,31 +8,32 @@ class MySettingsPage
     /**
      * Start up
      */
-    public function __construct()
-    {
-        add_action( 'admin_menu', array( $this, 'add_plugin_page' ) );
-        add_action( 'admin_init', array( $this, 'page_init' ) );
+    public function __construct(){
+
+        add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
+        add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
+
     }
 
     /**
      * Add Submenu page
      */
-    public function add_plugin_page(){
+    public function afwp_admin_menu(){
         add_submenu_page(
             'edit.php?post_type=accordion-for-wp',
             esc_html__('Accordion WordPress Settings', 'accordion-for-wp'),
             esc_html__('Settings', 'accordion-for-wp'),
             'manage_options',
             'afwp-settings',
-            array( $this, 'create_admin_page' )
+            array( $this, 'afwp_add_submenu_page' )
         );
     }
 
     /**
      * Options page callback
      */
-    public function create_admin_page()
-    {
+    public function afwp_add_submenu_page(){
+
         // Set class property
         $this->options = get_option( 'my_option_name' );
         ?>
@@ -68,12 +68,13 @@ class MySettingsPage
             </div>
         </div>
         <?php
+
     }
 
     /**
      * Register and add settings
      */
-    public function page_init()
+    public function afwp_admin_init()
     {
         register_setting(
             'afwp_settings_group', // Option group
@@ -90,10 +91,13 @@ class MySettingsPage
 
         add_settings_field(
             'id_number', // ID
-            'ID Number', // Title
-            array( $this, 'id_number_callback' ), // Callback
+            esc_html__('ID Number', 'accordion-for-wp'), // Title
+            array( $this, 'afwp_checkbox_callback' ), // Callback
             'afwp_settings_general_tab', // Page
-            'afwp_settings_general_id' // Section
+            'afwp_settings_general_id', // Section
+            array(
+                ''
+            ) //Arguments
         );
 
         add_settings_field(
@@ -125,22 +129,27 @@ class MySettingsPage
     /**
      * Print the Section text
      */
-    public function print_section_info()
-    {
+    public function print_section_info(){
+
         ?>
         <p><?php esc_html_e('You can change general settings from here.', 'accordion-for-wp'); ?></p>
         <?php
+
     }
 
     /**
      * Get the settings option array and print one of its values
      */
-    public function id_number_callback()
-    {
+    public function afwp_checkbox_callback($args){
+
+        echo '</pre>';
+            print_r($args);
+        echo '</pre>';
         printf(
             '<input type="text" id="id_number" name="my_option_name[id_number]" value="%s" />',
             isset( $this->options['id_number'] ) ? esc_attr( $this->options['id_number']) : ''
         );
+
     }
 
     /**
@@ -156,4 +165,4 @@ class MySettingsPage
 }
 
 if( is_admin() )
-    $my_settings_page = new MySettingsPage();
+    $afwp_settings_page = new AFWP_Settings_Page();

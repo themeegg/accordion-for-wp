@@ -122,8 +122,8 @@ class AFWP_TAB_For_WP_Post_Type {
 		?>
 
 		<div class="form-field">
-			<label for="term_meta[acwp_term_template]"><?php esc_html_e( ' Tab template', 'accordion-for-wp' ); ?></label>
-			<select style="width:94%" name="term_meta[acwp_term_template]" id="term_meta[acwp_term_template]">
+			<label for="term_meta[afwp_term_template]"><?php esc_html_e( ' Tab template', 'accordion-for-wp' ); ?></label>
+			<select style="width:94%" name="term_meta[afwp_term_template]" id="term_meta[afwp_term_template]">
 				<?php
 				foreach ( afwp_tab_templates() as $template_index => $template_value ) {
 
@@ -155,23 +155,23 @@ class AFWP_TAB_For_WP_Post_Type {
 		// put the term ID into a variable
 		$t_id = $term->term_id;
 		// retrieve the existing value(s) for this meta field. This returns an array
-		$acwp_term_template1 = get_term_meta( $t_id );
+		$afwp_term_template1 = get_term_meta( $t_id );
 
 		?>
 		<tr class="form-field">
 			<th scope="row" valign="top"><label
-					for="term_meta[acwp_term_template]"><?php esc_html_e( ' Tab template', 'accordion-for-wp' ); ?></label>
+					for="term_meta[afwp_term_template]"><?php esc_html_e( ' Tab template', 'accordion-for-wp' ); ?></label>
 			</th>
 			<td>
-				<select style="width:94%" name="term_meta[acwp_term_template]" id="term_meta[acwp_term_template]">
+				<select style="width:94%" name="term_meta[afwp_term_template]" id="term_meta[afwp_term_template]">
 					<?php
-					$acwp_term_template = get_term_meta( $t_id, 'acwp_term_template', true );
+					$afwp_term_template = get_term_meta( $t_id, 'afwp_term_template', true );
 
 					foreach ( afwp_tab_templates() as $template_index => $template_value ) {
 						?>
 						<option value="<?php echo $template_index ?>"
 
-							<?php echo $acwp_term_template === $template_index ? 'selected= "selected"' : '' ?>
+							<?php echo $afwp_term_template === $template_index ? 'selected= "selected"' : '' ?>
 						><?php echo $template_value; ?></option>
 						<?php
 

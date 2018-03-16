@@ -99,6 +99,9 @@ class Accordion_For_WP_Admin {
 		 * class.
 		 */
 
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_style( 'fontawesome', plugin_dir_url( __FILE__ ) . '../public/assets/lib/css/font-awesome.min.css', array(), '4.7.0', 'all' );
+		wp_enqueue_style( 'fontawesome-iconpicker', plugin_dir_url( __FILE__ ) . 'lib/css/fontawesome-iconpicker.min.css', array(), '1.3.1', 'all' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/afwp-accordion-admin.css', array(), $this->version, 'all' );
 
 	}
@@ -121,6 +124,8 @@ class Accordion_For_WP_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		wp_enqueue_script( 'wp-color-picker' );
+		wp_enqueue_script( 'fontawesome-iconpicker', plugin_dir_url( __FILE__ ) . 'lib/js/fontawesome-iconpicker.min.js', array( 'jquery' ), '1.3.1', false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/afwp-accordion-admin.js', array( 'jquery' ), $this->version, false );
 
 	}

@@ -79,8 +79,9 @@ class Accordion_For_WP_Public {
 		 * class.
 		 */
 
-
+		wp_enqueue_style( 'fontawesome', plugin_dir_url( __FILE__ ) . 'assets/css/font-awesome.min.css', array(), '4.7.0', 'all' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/css/afwp-accordion-public.css', array(), $this->version, 'all' );
+
 
 	}
 

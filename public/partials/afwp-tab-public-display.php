@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <?php
 $atts       = array();
-$templates  = "template-1";
+$templates  = "default";
 $style      = "vertical";
 $atts       = apply_filters( 'afwp_tab_args', $atts );
 $templates  = apply_filters( 'afwp_tab_templates', $templates );
@@ -29,8 +29,8 @@ $query      = new WP_Query( $atts );
 $active_tab = 1;
 if ( $query->have_posts() ):
 	?>
-	<div class="afwp-tab-template afwp-tab-shortcode afwp-<?php echo $templates; ?>">
-		<div class="afwp-tab <?php echo $style; ?>">
+	<div class="afwp-tab-template afwp-tab-shortcode afwp-tab-<?php echo esc_attr($templates); ?>">
+		<div class="afwp-tab <?php echo esc_attr($style); ?>">
 			<ul class="afwp-tab-list">
 				<?php 
 				$current_tab = 0;
@@ -51,7 +51,7 @@ if ( $query->have_posts() ):
 					$tab_class = ($current_tab==$active_tab) ? ' current ' : '';
 					?>
 					<div class="afwp-tab-content <?php echo esc_attr($tab_class); ?>" id="post_tab_<?php echo get_the_ID(); ?>">
-						<?php the_excerpt(); ?>
+						<?php the_afwp_excerpt(); ?>
 					</div>
 				<?php endwhile; ?>
 			</div>

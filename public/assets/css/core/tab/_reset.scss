@@ -1,0 +1,87 @@
+/*====================================================
+------------- Tab Reset ----------------
+=====================================================*/
+
+.afwp-tab-template{
+
+    .afwp-tab{
+        overflow:hidden;
+        margin-bottom:30px;
+    }
+
+    .afwp-tab-list{
+        padding:0;
+        margin:0;
+        padding: 5px;
+        list-style: none;
+        background: #dedede;
+        &:after{
+            content:"";
+            display:block;
+            width:100%;
+            clear:both;
+        }
+        .afwp-tab-item-wrap{
+            float:left;
+        }
+    }
+
+    .afwp-tab-content{
+        display:none;
+        padding:10px;
+        &.current{
+            display:block;
+        }
+    }
+
+    .afwp-post-link{
+        color:inherit;
+        display: block;
+        background:#dedede;
+        padding:10px 1em;
+        line-height:1.4em;
+        border-right:1px solid #f2f2f2;
+        margin:0;
+        &:after{
+            display:none;
+        }
+        &.current, &:hover{
+            background:#f2f2f2;
+        }
+    }
+
+     .horizontal{
+         &:after{
+            content:"";
+            display: block;
+            clear:both;
+        }
+        .afwp-tab-list{
+            width:30%;
+            float:left;
+        }
+        .afwp-tab-content-wraper{
+            width:70%;
+            float:left;
+        }
+    }
+
+    .vertical{
+        .afwp-tab-list{
+            width:40%;
+        }
+    }
+    
+    &.default{
+        
+    }
+
+    &.template-1{
+    
+    }
+
+    &.theme-default{
+    
+    }
+
+}

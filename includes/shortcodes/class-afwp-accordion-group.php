@@ -18,9 +18,17 @@ class AFWP_Accordion_Shortcode_Group {
 
 	protected $atts;
 
-	protected $style;
+	protected $content_type;
 
+	protected $style;
 	protected $template;
+
+	protected $dropdown_icon;
+	protected $active_dp_icon;
+	protected $title_color;
+	protected $title_background;
+	protected $content_color;
+	protected $content_background;
 
 	/**
 	 * @param no param
@@ -34,30 +42,11 @@ class AFWP_Accordion_Shortcode_Group {
 		add_shortcode( 'afwp_group_accordion', array( $this, 'afwp_group_accordion' ) );
 	}
 
-	public function afwp_atts() {
+	
 
-		return $this->atts;
 
-	}
 
-	public function afwp_template() {
 
-		if ( ! empty( $this->template ) ) {
-			return $this->template;
-		}
-
-		return 'template-1';
-	}
-
-	public function afwp_style() {
-
-		if ( ! empty( $this->style ) ) {
-			return $this->style;
-		}
-
-		return 'vertical';
-
-	}
 
 	/**
 	 * @param $atts is shortcode attribute
@@ -67,9 +56,9 @@ class AFWP_Accordion_Shortcode_Group {
 	public function filter_args( $atts ) {
 
 		/*WP Query Args*/
-		$args = array();
+		$default_args = array();
 
-		$this->atts = wp_parse_args( $atts, $args );
+		$this->atts = wp_parse_args( $atts, $default_args );
 
 		return $this->atts;
 
@@ -85,10 +74,9 @@ class AFWP_Accordion_Shortcode_Group {
 
 		$post_limit = isset( $atts['limit'] ) ? $atts['limit'] : - 1;
 
-		$this->template = get_term_meta( $taxonomy_id, 'acwp_term_template', true );
+		$this->template = get_term_meta( $taxonomy_id, 'afwp_term_template', true );
 
 		$this->style = get_term_meta( $taxonomy_id, 'acwp_term_style', true );
-
 
 		$this->atts = array(
 			'posts_per_page' => $post_limit,
@@ -113,21 +101,42 @@ class AFWP_Accordion_Shortcode_Group {
 
 	}
 
+	public function afwp_accordion_args( $atts ) { return $this->atts; }
 
-	public function accordion_args( $atts ) {
-		return $this->atts;
+	public function afwp_accordion_content_type( $atts ) { return $this->content_type; }
+
+	public function afwp_accordion_styles() {
+		if ( ! empty( $this->style ) ) {
+			return $this->style;
+		}
+		return 'vertical';
+	}
+	public function afwp_accordion_templates() {
+		if ( ! empty( $this->template ) ) {
+			return $this->template;
+		}
+		return 'default';
 	}
 
+	public function afwp_dropdown_icon( $atts ) { return $this->dropdown_icon; }
+	public function afwp_active_dp_icon( $atts ) { return $this->active_dp_icon; }
+
+	
 	public function template() {
 
+		add_filter( 'afwp_accordion_args', array( $this, 'afwp_accordion_args' ) );
 
-		add_filter( 'afwp_accordion_args', array( $this, 'afwp_atts' ), 10, 1 );
-		add_filter( 'afwp_accordion_templates', array( $this, 'afwp_template' ), 10, 1 );
-		add_filter( 'afwp_accordion_styles', array( $this, 'afwp_style' ), 10, 1 );
+		add_filter( 'afwp_accordion_content_type', array( $this, 'afwp_accordion_content_type' ) );
+
+		add_filter( 'afwp_accordion_styles', array( $this, 'afwp_accordion_styles' ) );
+		add_filter( 'afwp_accordion_templates', array( $this, 'afwp_accordion_templates' ) );
+
+		add_filter( 'afwp_dropdown_icon', array( $this, 'afwp_dropdown_icon' ) );
+		add_filter( 'afwp_active_dp_icon', array( $this, 'afwp_active_dp_icon' ) );
+		
+
 		$afwp_loader = new Accordion_For_WP_Loader();
 		$afwp_loader->afwp_template_part( 'public/partials/afwp-accordion-public-display.php' );
-		return ob_get_clean();
-
 
 	}
 

@@ -7,6 +7,13 @@
  	display:none;
 }
 
+#poststuff .afwp-tab-content h2{
+
+  padding:20px 12px 8px 0;
+  font-size:1.6em;
+
+}
+
 .afwp-hidden{
  display:none;
 }
@@ -40,4 +47,15 @@ div[id*=_afwp_] .widget-title h3:hover{
 
 div[id*=_afwp_] .widget-title h3 *{
   color:#ccc;
+}
+
+
+/*icon picker*/
+.popover-title input[type="search"]{
+  width:100%;
+}
+.iconpicker-popover.popover{
+  width:auto;
+  position: static;
+  border: 1px solid #dedede;
 }

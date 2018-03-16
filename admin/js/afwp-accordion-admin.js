@@ -4,11 +4,32 @@
 
 		Snipits: {
 
+			Color_Picker: function(){
+
+				var wp_args = {
+					change: function(evt, ui){
+						$(evt.target).val(ui.color.toString()).trigger('change');
+					}
+				};
+
+				$('.afwp_color_picker').wpColorPicker(wp_args);
+				$('.afwp_icon_picker').iconpicker();
+				$(document).on('widget-updated widget-added', function(e, widget){
+                	widget.find('.afwp_color_picker').wpColorPicker(wp_args);
+                	widget.find('.afwp_icon_picker').iconpicker();
+            	}); 
+
+            	$(document).on('iconpickerSelected', '.afwp_icon_picker', function(event){
+  					$(this).trigger('change');
+				});
+
+			},
+
 			Accordion_Widget: {
 
 				Ajax_Data: function(accordion_data, append_to){
 					var accordion_ajax_url = window.location.origin+ajaxurl;
-					jQuery.post(accordion_ajax_url,{
+					$.post(accordion_ajax_url,{
 							'action': 'afwp_accordion_widget',
 							'data':   accordion_data
 						},
@@ -64,6 +85,7 @@
 
 		Ready: function(){
 			var _this=afwp_accordion;
+			_this.Snipits.Color_Picker();
 			_this.MouseEvents();
 		},
 

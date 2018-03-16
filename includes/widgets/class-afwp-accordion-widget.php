@@ -28,7 +28,7 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 			'description'                 => esc_html__( 'Widget for Accordion', 'accordion-for-wp' ),
 			'customize_selective_refresh' => true,
 		);
-		$control_ops = array( 'width' => 300, 'height' => 350 );
+		$control_ops = array( 'width' => 350, 'height' => 350 );
 		parent::__construct( 'afwp_accordion_widget', esc_html__( 'Accordion Post Widget', 'accordion-for-wp' ), $widget_ops, $control_ops );
 	}
 
@@ -51,8 +51,16 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 		$term       = ! empty( $instance['term'] ) ? absint($instance['term']) : '';
 		$no_of_post = ! empty( $instance['no_of_post'] ) ? absint($instance['no_of_post']) : '';
 
-		$templates = ! empty( $instance['templates'] ) ? esc_attr($instance['templates']) : '';
-		$style     = ! empty( $instance['style'] ) ? esc_attr($instance['style']) : '';
+		$dropdown_icon		= isset($instance['dropdown_icon']) ? esc_attr( $instance['dropdown_icon'] ) : 'fa-toggle-off';
+		$active_dp_icon		= isset($instance['active_dp_icon']) ? esc_attr( $instance['active_dp_icon'] ) : 'fa-toggle-on';
+		$title_color		= isset($instance['title_color']) ? sanitize_hex_color( $instance['title_color'] ) : '';
+		$title_background	= isset($instance['title_background']) ? sanitize_hex_color( $instance['title_background'] ) : '';
+		$content_color		= isset($instance['content_color']) ? sanitize_hex_color( $instance['content_color'] ) : '';
+		$content_background	= isset($instance['content_background']) ? sanitize_hex_color( $instance['content_background'] ) : '';
+
+		$templates      	= empty( $instance['templates'] ) ? 'default' : esc_attr($instance['templates']);
+		$style          	= empty( $instance['style'] ) ? 'vertical' : esc_attr($instance['style']);
+
 		$content_type     = ! empty( $instance['content_type'] ) ? esc_attr($instance['content_type']) : 'excerpt';
 
 		echo $args['before_widget'];
@@ -74,23 +82,32 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 		if ( $query->have_posts() ):
 			?>
 			<div class="afwp-accordion-template afwp-widget afwp-<?php echo $templates; ?>">
-				<div class="afwp-accordion <?php echo $style; ?>">
+				<div class="afwp-accordion <?php echo esc_attr($style); ?>">
 					<ul class="afwp-accordion-list">
 						<?php while ( $query->have_posts() ):$query->the_post(); ?>
 							<?php $afwp_post_slug = get_post_field( 'post_name', get_the_ID() ); ?>
 							<li class="afwp-accordion-item-wrap">
-								<div class="afwp-accordion-title">
+								<div class="afwp-accordion-title" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
 									<span data-href="#afwp_<?php echo $afwp_post_slug.get_the_ID(); ?>"><?php the_title(); ?></span>
-									<i class="afwp-toggle-icon"></i>
+									<?php if(!empty($dropdown_icon)): ?>
+										<i 
+										class="afwp-toggle-icon fa <?php echo esc_attr($dropdown_icon); ?>" 
+										data-dropdown-icon="<?php echo esc_attr($dropdown_icon); ?>" 
+										data-active-dp-icon="<?php echo esc_attr($active_dp_icon); ?>" 
+										style="color:<?php echo sanitize_hex_color($title_color); ?>;"
+										></i>
+									<?php endif; ?>
 								</div>
-								<div class="afwp-content" id="afwp_<?php echo $afwp_post_slug.get_the_ID(); ?>">
-									<?php
-									if($content_type=='content'){
-										the_content();
-									}else{
-										the_excerpt();
-									}
-									?>
+								<div class="afwp-content" id="afwp_<?php echo $afwp_post_slug.get_the_ID(); ?>" style="background:<?php echo sanitize_hex_color($content_background); ?>; color:<?php echo sanitize_hex_color($content_color); ?>;">
+									<div class="afwp-content-wraper">
+										<?php
+										if($content_type=='content'){
+											the_content();
+										}else{
+											the_excerpt();
+										}
+										?>
+									</div>
 								</div>
 							</li>
 						<?php endwhile; ?>
@@ -124,12 +141,20 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 		$instance['no_of_post'] = isset($new_instance['no_of_post']) ? absint( $new_instance['no_of_post'] ) : '';
 		$instance['content_type'] = isset($new_instance['content_type']) ? esc_attr($new_instance['content_type']) : '';
 
-		$instance['templates'] = isset($new_instance['templates']) ? esc_attr( $new_instance['templates'] ) : '';
+		$instance['dropdown_icon']     = isset($new_instance['dropdown_icon']) ? esc_attr( $new_instance['dropdown_icon'] ) : '';
+		$instance['active_dp_icon']     = isset($new_instance['active_dp_icon']) ? esc_attr( $new_instance['active_dp_icon'] ) : '';
+		$instance['title_color']     = isset($new_instance['title_color']) ? esc_attr( $new_instance['title_color'] ) : '';
+		$instance['title_background']     = isset($new_instance['title_background']) ? esc_attr( $new_instance['title_background'] ) : '';
+		$instance['content_color']     = isset($new_instance['content_color']) ? esc_attr( $new_instance['content_color'] ) : '';
+		$instance['content_background']     = isset($new_instance['content_background']) ? esc_attr( $new_instance['content_background'] ) : '';
+
 		$instance['style']     = isset($new_instance['style']) ? esc_attr( $new_instance['style'] ) : '';
+		$instance['templates'] = isset($new_instance['templates']) ? esc_attr( $new_instance['templates'] ) : '';
 
 		$instance['active_tab_type'] = isset($new_instance['active_tab_type']) ? esc_attr( $new_instance['active_tab_type'] ) : 'general';
 
 		return $instance;
+
 	}
 
 	/**
@@ -148,27 +173,48 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 			'taxonomy'   		=> '',
 			'term'       		=> '',
 			'no_of_post' 		=> '5',
+			'content_type'		=>'excerpt',
+
 			'templates'  		=> 'default',
 			'style'      		=> 'vertical',
-			'content_type'		=>'excerpt',
+
+			'dropdown_icon'		=> 'fa-toggle-off',
+			'active_dp_icon'	=> 'fa-toggle-on',
+			'title_color'  		=> '',
+			'title_background'  => '',
+			'content_color'  	=> '',
+			'content_background'=> '',
+
 			'active_tab_type'	=>'general',
 		) );
 
-		$title      = sanitize_text_field( $instance['title'] );
-		$post_type  = esc_attr( $instance['post_type'] );
-		$taxonomy   = esc_attr( $instance['taxonomy'] );
-		$term       = esc_attr( $instance['term'] );
-		$no_of_post = absint( $instance['no_of_post'] );
-		$content_type = esc_attr( $instance['content_type'] );
+		$title	= isset($instance['title']) ? sanitize_text_field( $instance['title'] ) : '';
+		$post_type	= isset($instance['post_type']) ? esc_attr( $instance['post_type'] ) : '';
+		$taxonomy	= isset($instance['taxonomy']) ? esc_attr( $instance['taxonomy'] ) : '';
+		$term	= isset($instance['term']) ? esc_attr( $instance['term'] ) : '';
+		$no_of_post	= isset($instance['no_of_post']) ? absint( $instance['no_of_post'] ) : '';
+		$content_type	= isset($instance['content_type']) ? esc_attr( $instance['content_type'] ) : '';
 
-		$templates = esc_attr( $instance['templates'] );
-		$style     = esc_attr( $instance['style'] );
+		$templates	= isset($instance['templates']) ? esc_attr( $instance['templates'] ) : '';
+		$style	= isset($instance['style']) ? esc_attr( $instance['style'] ) : '';
 
-		$active_tab_type = esc_attr( $instance['active_tab_type'] );
+		$dropdown_icon	= isset($instance['dropdown_icon']) ? esc_attr( $instance['dropdown_icon'] ) : 'fa-toggle-off';
+		$active_dp_icon	= isset($instance['active_dp_icon']) ? esc_attr( $instance['active_dp_icon'] ) : 'fa-toggle-on';
+		$title_color		= isset($instance['title_color']) ? esc_attr( $instance['title_color'] ) : '';
+		$title_background	= isset($instance['title_background']) ? esc_attr( $instance['title_background'] ) : '';
+		$content_color		= isset($instance['content_color']) ? esc_attr( $instance['content_color'] ) : '';
+		$content_background	= isset($instance['content_background']) ? esc_attr( $instance['content_background'] ) : '';
+
+		$active_tab_type		= isset($instance['active_tab_type']) ? esc_attr( $instance['active_tab_type'] ) : 'general';
+
 		$list_all_tabs = array(
 			'general'	=>	array(
 				'id'	=> 'afwp_accordion_widget_general'.esc_attr($this->number),
 				'label'	=> esc_html__('General', 'accordion-for-wp'),
+			),
+			'layout'	=>	array(
+				'id'	=> 'afwp_accordion_widget_layout'.esc_attr($this->number),
+				'label'	=> esc_html__('Layout', 'accordion-for-wp'),
 			),
 			'design'	=>	array(
 				'id'	=> 'afwp_accordion_widget_design'.esc_attr($this->number),
@@ -180,7 +226,7 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 		<div class="afwp-tab-wraper">
 			<h5 class="afwp-tab-list nav-tab-wrapper">
 				<?php foreach($list_all_tabs as $tab_key=>$tab_details){ ?>
-					<label for="tab_<?php echo esc_attr($tab_details['id']); ?>" data-id="#<?php echo esc_attr($tab_details['id']); ?>" class="nav-tab <?php echo ($tab_key == $active_tab_type) ? 'nav-tab-active' : ''; ?>"><?php echo sanitize_text_field($tab_key); ?><input id="tab_<?php echo esc_attr($tab_details['id']); ?>" type="radio" name="<?php echo $this->get_field_name("active_tab_type"); ?>" value="<?php echo esc_attr($tab_key); ?>" <?php checked($active_tab_type, $tab_key); ?> class="afwp-hidden"/></label>
+					<label for="tab_<?php echo esc_attr($tab_details['id']); ?>" data-id="#<?php echo esc_attr($tab_details['id']); ?>" class="nav-tab <?php echo ($tab_key == $active_tab_type) ? 'nav-tab-active' : ''; ?>"><?php echo sanitize_text_field($tab_details['label']); ?><input id="tab_<?php echo esc_attr($tab_details['id']); ?>" type="radio" name="<?php echo $this->get_field_name("active_tab_type"); ?>" value="<?php echo esc_attr($tab_key); ?>" <?php checked($active_tab_type, $tab_key); ?> class="afwp-hidden"/></label>
 				<?php } ?>
 			</h5>
 			<div class="afwp-tab-content-wraper">
@@ -268,7 +314,7 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 							<?php endif; ?>
 						</select></p>
 				</div>
-				<div id="<?php echo esc_attr($list_all_tabs['design']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='design') ? 'afwp-content-active' : ''; ?> " >
+				<div id="<?php echo esc_attr($list_all_tabs['layout']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='layout') ? 'afwp-content-active' : ''; ?> " >
 					<p>
 						<label for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php esc_html_e( 'Template:', 'accordion-for-wp' ); ?></label>
 						<?php $all_templates = afwp_accordion_templates(); ?>
@@ -293,6 +339,43 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 							<?php endforeach; ?>
 						</select>
 					</p>
+				</div>
+				<div id="<?php echo esc_attr($list_all_tabs['design']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='design') ? 'afwp-content-active' : ''; ?> " >
+					<p>
+						<label for="<?php echo $this->get_field_id( 'dropdown_icon' ); ?>"><?php esc_html_e( 'Dropdown Icon:', 'accordion-for-wp' ); ?></label>
+						<input class="widefat afwp_icon_picker" id="<?php echo $this->get_field_id( 'dropdown_icon' ); ?>"
+							   name="<?php echo $this->get_field_name( 'dropdown_icon' ); ?>" type="text"
+							   value="<?php echo esc_attr( $dropdown_icon ); ?>"/></p>
+					<p>
+					<p>
+						<label for="<?php echo $this->get_field_id( 'active_dp_icon' ); ?>"><?php esc_html_e( 'Active Dropdown Icon:', 'accordion-for-wp' ); ?></label>
+						<input class="widefat afwp_icon_picker" id="<?php echo $this->get_field_id( 'active_dp_icon' ); ?>"
+							   name="<?php echo $this->get_field_name( 'active_dp_icon' ); ?>" type="text"
+							   value="<?php echo esc_attr( $active_dp_icon ); ?>"/></p>
+					<p>
+					<p>
+						<label for="<?php echo $this->get_field_id( 'title_color' ); ?>"><?php esc_html_e( 'Title Color:', 'accordion-for-wp' ); ?></label>
+						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'title_color' ); ?>" name="<?php echo $this->get_field_name( 'title_color' ); ?>" type="text"
+							   value="<?php echo esc_attr( $title_color ); ?>"/></p>
+					<p>
+					<p>
+						<label for="<?php echo $this->get_field_id( 'title_background' ); ?>"><?php esc_html_e( 'Title Background:', 'accordion-for-wp' ); ?></label>
+						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'title_background' ); ?>"
+							   name="<?php echo $this->get_field_name( 'title_background' ); ?>" type="text"
+							   value="<?php echo esc_attr( $title_background ); ?>"/></p>
+					<p>
+					<p>
+						<label for="<?php echo $this->get_field_id( 'content_color' ); ?>"><?php esc_html_e( 'Content Color:', 'accordion-for-wp' ); ?></label>
+						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'content_color' ); ?>"
+							   name="<?php echo $this->get_field_name( 'content_color' ); ?>" type="text"
+							   value="<?php echo esc_attr( $content_color ); ?>"/></p>
+					<p>
+					<p>
+						<label for="<?php echo $this->get_field_id( 'content_background' ); ?>"><?php esc_html_e( 'Content Background:', 'accordion-for-wp' ); ?></label>
+						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'content_background' ); ?>"
+							   name="<?php echo $this->get_field_name( 'content_background' ); ?>" type="text"
+							   value="<?php echo esc_attr( $content_background ); ?>"/></p>
+					<p>
 				</div>
 			</div>
 		</div>
