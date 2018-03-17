@@ -270,36 +270,36 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 						<input class="widefat afwp_icon_picker" id="<?php echo $this->get_field_id( 'dropdown_icon' ); ?>"
 							   name="<?php echo $this->get_field_name( 'dropdown_icon' ); ?>" type="text"
 							   value="<?php echo esc_attr( $dropdown_icon ); ?>"/></p>
-					<p>
+					
 					<p>
 						<label for="<?php echo $this->get_field_id( 'active_dp_icon' ); ?>"><?php esc_html_e( 'Active Dropdown Icon:', 'accordion-for-wp' ); ?></label>
 						<input class="widefat afwp_icon_picker" id="<?php echo $this->get_field_id( 'active_dp_icon' ); ?>"
 							   name="<?php echo $this->get_field_name( 'active_dp_icon' ); ?>" type="text"
 							   value="<?php echo esc_attr( $active_dp_icon ); ?>"/></p>
-					<p>
+					
 					<p>
 						<label for="<?php echo $this->get_field_id( 'title_color' ); ?>"><?php esc_html_e( 'Title Color:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'title_color' ); ?>" name="<?php echo $this->get_field_name( 'title_color' ); ?>" type="text"
 							   value="<?php echo esc_attr( $title_color ); ?>"/></p>
-					<p>
+					
 					<p>
 						<label for="<?php echo $this->get_field_id( 'title_background' ); ?>"><?php esc_html_e( 'Title Background:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'title_background' ); ?>"
 							   name="<?php echo $this->get_field_name( 'title_background' ); ?>" type="text"
 							   value="<?php echo esc_attr( $title_background ); ?>"/></p>
-					<p>
+					
 					<p>
 						<label for="<?php echo $this->get_field_id( 'content_color' ); ?>"><?php esc_html_e( 'Content Color:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'content_color' ); ?>"
 							   name="<?php echo $this->get_field_name( 'content_color' ); ?>" type="text"
 							   value="<?php echo esc_attr( $content_color ); ?>"/></p>
-					<p>
+					
 					<p>
 						<label for="<?php echo $this->get_field_id( 'content_background' ); ?>"><?php esc_html_e( 'Content Background:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'content_background' ); ?>"
 							   name="<?php echo $this->get_field_name( 'content_background' ); ?>" type="text"
 							   value="<?php echo esc_attr( $content_background ); ?>"/></p>
-					<p>
+					
 				</div>
 			</div>
 		</div>

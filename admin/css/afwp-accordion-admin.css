@@ -7,6 +7,10 @@
  	display:none;
 }
 
+.wp-picker-container {
+    display: inline-block;
+}
+
 #poststuff .afwp-tab-content h2{
 
   padding:20px 12px 8px 0;

@@ -235,7 +235,8 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 						<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'accordion-for-wp' ); ?></label>
 						<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
 							   name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
-							   value="<?php echo esc_attr( $title ); ?>"/></p>
+							   value="<?php echo esc_attr( $title ); ?>"/>
+					</p>
 					<p>
 						<label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php esc_html_e( 'Post Type:', 'accordion-for-wp' ); ?></label>
 						<?php
@@ -253,7 +254,8 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 								<option <?php echo ( $post_type_key == $post_type ) ? 'selected="selected"' : ''; ?>
 									value="<?php echo $post_type_key; ?>"><?php echo $post_type_value->label; ?></option>
 							<?php endforeach; ?>
-						</select></p>
+						</select>
+					</p>
 
 					<p><label
 							for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><?php esc_html_e( 'Taxonomy:', 'accordion-for-wp' ); ?></label>
@@ -270,8 +272,8 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 								<option <?php echo ( $taxonomy_key == $taxonomy ) ? 'selected="selected"' : ''; ?>
 									value="<?php echo $taxonomy_key; ?>"><?php echo $taxonomy_value->label; ?></option>
 							<?php endforeach; ?>
-						</select></p>
-
+						</select>
+					</p>
 					<p><label for="<?php echo $this->get_field_id( 'term' ); ?>"><?php esc_html_e( 'Term:', 'accordion-for-wp' ); ?></label>
 						<?php
 						$all_terms = get_terms( array(
@@ -289,8 +291,8 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 										value="<?php echo $term_value->slug; ?>"><?php echo $term_value->name; ?></option>
 								<?php endforeach; ?>
 							<?php endif; ?>
-						</select></p>
-
+						</select>
+					</p>
 					<p><label
 							for="<?php echo $this->get_field_id( 'no_of_post' ); ?>"><?php esc_html_e( 'Show no of post:', 'accordion-for-wp' ); ?></label>
 						<input class="widefat" min="1" max="99" id="<?php echo $this->get_field_id( 'no_of_post' ); ?>"
@@ -312,7 +314,8 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 										value="<?php echo esc_attr($content_key); ?>"><?php echo esc_attr($content_value); ?></option>
 								<?php endforeach; ?>
 							<?php endif; ?>
-						</select></p>
+						</select>
+					</p>
 				</div>
 				<div id="<?php echo esc_attr($list_all_tabs['layout']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='layout') ? 'afwp-content-active' : ''; ?> " >
 					<p>
@@ -345,37 +348,37 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 						<label for="<?php echo $this->get_field_id( 'dropdown_icon' ); ?>"><?php esc_html_e( 'Dropdown Icon:', 'accordion-for-wp' ); ?></label>
 						<input class="widefat afwp_icon_picker" id="<?php echo $this->get_field_id( 'dropdown_icon' ); ?>"
 							   name="<?php echo $this->get_field_name( 'dropdown_icon' ); ?>" type="text"
-							   value="<?php echo esc_attr( $dropdown_icon ); ?>"/></p>
-					<p>
+							   value="<?php echo esc_attr( $dropdown_icon ); ?>"/>
+					</p>
 					<p>
 						<label for="<?php echo $this->get_field_id( 'active_dp_icon' ); ?>"><?php esc_html_e( 'Active Dropdown Icon:', 'accordion-for-wp' ); ?></label>
 						<input class="widefat afwp_icon_picker" id="<?php echo $this->get_field_id( 'active_dp_icon' ); ?>"
 							   name="<?php echo $this->get_field_name( 'active_dp_icon' ); ?>" type="text"
-							   value="<?php echo esc_attr( $active_dp_icon ); ?>"/></p>
-					<p>
+							   value="<?php echo esc_attr( $active_dp_icon ); ?>"/>
+					</p>
 					<p>
 						<label for="<?php echo $this->get_field_id( 'title_color' ); ?>"><?php esc_html_e( 'Title Color:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'title_color' ); ?>" name="<?php echo $this->get_field_name( 'title_color' ); ?>" type="text"
-							   value="<?php echo esc_attr( $title_color ); ?>"/></p>
-					<p>
+							   value="<?php echo esc_attr( $title_color ); ?>"/>
+					</p>
 					<p>
 						<label for="<?php echo $this->get_field_id( 'title_background' ); ?>"><?php esc_html_e( 'Title Background:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'title_background' ); ?>"
 							   name="<?php echo $this->get_field_name( 'title_background' ); ?>" type="text"
-							   value="<?php echo esc_attr( $title_background ); ?>"/></p>
-					<p>
+							   value="<?php echo esc_attr( $title_background ); ?>"/>
+					</p>
 					<p>
 						<label for="<?php echo $this->get_field_id( 'content_color' ); ?>"><?php esc_html_e( 'Content Color:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'content_color' ); ?>"
 							   name="<?php echo $this->get_field_name( 'content_color' ); ?>" type="text"
-							   value="<?php echo esc_attr( $content_color ); ?>"/></p>
-					<p>
+							   value="<?php echo esc_attr( $content_color ); ?>"/>
+					</p>
 					<p>
 						<label for="<?php echo $this->get_field_id( 'content_background' ); ?>"><?php esc_html_e( 'Content Background:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'content_background' ); ?>"
 							   name="<?php echo $this->get_field_name( 'content_background' ); ?>" type="text"
-							   value="<?php echo esc_attr( $content_background ); ?>"/></p>
-					<p>
+							   value="<?php echo esc_attr( $content_background ); ?>"/>
+					</p>
 				</div>
 			</div>
 		</div>

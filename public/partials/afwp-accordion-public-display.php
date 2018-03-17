@@ -55,7 +55,7 @@ if ( $query->have_posts() ):
 						<div class="afwp-accordion-title" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
 							<span data-href="#afwp_<?php echo $afwp_post_slug.get_the_ID(); ?>"><?php the_title(); ?></span>
 							<?php if(!empty($dropdown_icon)): ?>
-								<i 
+								<i
 									class="afwp-toggle-icon fa <?php echo esc_attr($dropdown_icon); ?>" 
 									data-dropdown-icon="<?php echo esc_attr($dropdown_icon); ?>" 
 									data-active-dp-icon="<?php echo esc_attr($active_dp_icon); ?>" 
