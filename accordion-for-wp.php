@@ -21,7 +21,7 @@ if(!defined('AFWP_PLUGIN_NAME')){
 	define('AFWP_PLUGIN_NAME', 'afwp-accordion');
 }
 if(!defined('AFWP_PLUGIN_VERSION')){
-	define('AFWP_PLUGIN_VERSION', '1.2.0');
+	define('AFWP_PLUGIN_VERSION', '1.3.0');
 }
 
 require plugin_dir_path( __FILE__ ) . 'includes/function-afwp-core.php';
