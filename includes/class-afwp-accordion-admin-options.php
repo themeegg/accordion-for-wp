@@ -29,6 +29,7 @@ class Accordion_For_WP_Admin_Options {
 	public function __construct() {
 
 		$this->register_custom_post_type();
+		$this->register_option_page();
 
 	}
 
@@ -39,6 +40,9 @@ class Accordion_For_WP_Admin_Options {
 
 	}
 
+	public function register_option_page(){
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/optionpage/class-afwp-settings-page.php';
+	}
 
 }
 

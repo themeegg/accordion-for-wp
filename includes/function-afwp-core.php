@@ -150,3 +150,44 @@ if(!function_exists('afwp_sanitize_tab_styles')){
 	}
 
 }
+
+
+if(!function_exists('get_afwp_excerpt')){
+
+	function get_afwp_excerpt($readmore='default') {
+		switch ($readmore) {
+			case 'default':
+				return get_the_excerpt();
+				break;
+			case 'button':
+				return get_the_excerpt();
+				break;
+			default:
+				return get_the_excerpt();
+				break;
+		}
+		return get_the_excerpt();
+	}
+
+}
+
+
+if(!function_exists('the_afwp_excerpt')){
+
+	function the_afwp_excerpt($readmore='default') {
+
+		switch ($readmore) {
+			case 'default':
+				echo get_afwp_excerpt();
+				break;
+			case 'button':
+				echo get_afwp_excerpt();
+				break;
+			default:
+				echo get_afwp_excerpt();
+				break;
+		}
+
+	}
+
+}
