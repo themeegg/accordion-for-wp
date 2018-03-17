@@ -97,7 +97,7 @@ Supprot URL : [http://themeegg.com/support-forum/](http://themeegg.com/support-f
 * Fixed - Admin Css/Js not enqueued
 
 = 1.1.2  2017/12/14 =
-* Added - New tempalte added
+* Added - New template added
 
 = 1.1.1  2017/11/14 =
 * Fixed - Issue fixed
