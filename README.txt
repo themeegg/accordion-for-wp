@@ -29,6 +29,8 @@ Plugin documentations : [http://docs.themeegg.com/docs/accordion-for-wp/](http:/
 
 Supprot URL : [http://themeegg.com/support-forum/](http://themeegg.com/support-forum/)
 
+Plugin Demo : [https://demo.themeegg.com/plugins/accordion-for-wp/](https://demo.themeegg.com/plugins/accordion-for-wp/)
+
 ### Features:
 * Post type accordion
 * Category accordion
