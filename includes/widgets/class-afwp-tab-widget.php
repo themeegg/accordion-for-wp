@@ -95,7 +95,7 @@ class AFWP_Tab_Widgets extends WP_Widget {
 							?>
 							<li class="afwp-tab-item-wrap">
 								<div class="afwp-tab-title" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
-									<a class="afwp-post-link <?php echo esc_attr($tab_class); ?>" href="#post_tab_<?php echo get_the_ID(); ?>"><?php the_title(); ?></a>
+									<a class="afwp-post-link <?php echo esc_attr($tab_class); ?>" href="#post_tab_<?php echo get_the_ID(); ?>" style="color:inherit;"><?php the_title(); ?></a>
 									<?php if(!empty($dropdown_icon)): ?>
 										<i 
 										class="afwp-toggle-icon fa <?php echo esc_attr($dropdown_icon); ?>" 
@@ -115,7 +115,7 @@ class AFWP_Tab_Widgets extends WP_Widget {
 							$current_tab++;
 							$tab_class = ($current_tab==$active_tab) ? ' current ' : '';
 							?>
-							<div class="afwp-tab-content <?php echo esc_attr($tab_class); ?>" id="post_tab_<?php echo get_the_ID(); ?>">
+							<div class="afwp-tab-content <?php echo esc_attr($tab_class); ?>" id="post_tab_<?php echo get_the_ID(); ?>" style="background:<?php echo sanitize_hex_color($content_background); ?>; color:<?php echo sanitize_hex_color($content_color); ?>;">
 								<div class="afwp-content-wraper">
 									<?php 
 									if($content_type=='content'){

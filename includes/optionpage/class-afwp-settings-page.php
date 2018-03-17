@@ -10,8 +10,8 @@ class AFWP_Settings_Page{
      */
     public function __construct(){
 
-        add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
-        add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
+        //add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
+        //add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
 
     }
 
