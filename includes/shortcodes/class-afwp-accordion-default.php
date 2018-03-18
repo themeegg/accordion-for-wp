@@ -53,6 +53,8 @@ class AFWP_Accordion_Shortcode_Default{
 		/*WP Query Args with attrs*/
 		$args = array(
 
+			'afwp_content_type'=>'excerpt',
+
 			'afwp_style'=>'vertical',
 			'afwp_template'=>'default',
 
@@ -79,6 +81,7 @@ class AFWP_Accordion_Shortcode_Default{
 
 		$this->style = isset($args['afwp_style']) ? esc_attr($args['afwp_style']) : 'vertical';
 		$this->template = isset($args['afwp_template']) ? $args['afwp_template'] : 'default';
+		$this->content_type = isset($args['afwp_content_type']) ? esc_attr($args['afwp_content_type']) : 'excerpt';
 
 		$this->dropdown_icon = isset($args['afwp_dropdown_icon']) ? esc_attr($args['afwp_dropdown_icon']) : 'fa-toggle-off';
 		$this->active_dp_icon = isset($args['afwp_active_dp_icon']) ? esc_attr($args['afwp_active_dp_icon']) : 'fa-toggle-on';
@@ -105,6 +108,7 @@ class AFWP_Accordion_Shortcode_Default{
 
 	public function afwp_accordion_styles(){  return $this->style; }
 	public function afwp_accordion_templates(){ return $this->template; }
+	public function afwp_content_type(){ return $this->content_type; }
 
 	public function afwp_dropdown_icon(){  return $this->dropdown_icon; }
 	public function afwp_active_dp_icon(){ return $this->active_dp_icon; }
@@ -119,6 +123,7 @@ class AFWP_Accordion_Shortcode_Default{
 
 		add_filter( 'afwp_accordion_templates', array( $this, 'afwp_accordion_templates' ));
 		add_filter( 'afwp_accordion_styles', array( $this, 'afwp_accordion_styles' ));
+		add_filter( 'afwp_accordion_content_type', array( $this, 'afwp_content_type' ));
 
 		add_filter( 'afwp_dropdown_icon', array( $this, 'afwp_dropdown_icon' ));
 		add_filter( 'afwp_active_dp_icon', array( $this, 'afwp_active_dp_icon' ));
