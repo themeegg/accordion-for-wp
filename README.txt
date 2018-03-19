@@ -83,6 +83,7 @@ Plugin Demo : [https://demo.themeegg.com/plugins/accordion-for-wp/](https://demo
 == Changelog ==
 = 1.3.1  2018/03/19 =
 * Added - Accordion content part added
+* Added - Accordion Group Shortcode settings added
 * Fixed - Font Awesome Icon issue fixed
 
 = 1.3.0  2018/03/17 =
