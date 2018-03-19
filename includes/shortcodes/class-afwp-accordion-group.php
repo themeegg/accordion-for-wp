@@ -71,12 +71,19 @@ class AFWP_Accordion_Shortcode_Group {
 		}
 
 		$taxonomy_id = absint( $atts['id'] );
-
 		$post_limit = isset( $atts['limit'] ) ? $atts['limit'] : - 1;
 
-		$this->template = get_term_meta( $taxonomy_id, 'afwp_term_template', true );
+		$this->content_type = isset( $atts['afwp_content_type'] ) ? $atts['afwp_content_type'] : 'excerpt';
 
+		$this->template = get_term_meta( $taxonomy_id, 'afwp_term_template', true );
 		$this->style = get_term_meta( $taxonomy_id, 'acwp_term_style', true );
+
+		$this->dropdown_icon = isset( $atts['afwp_dropdown_icon'] ) ? $atts['afwp_dropdown_icon'] : 'fa-toggle-off';
+		$this->active_dp_icon = isset( $atts['afwp_active_dp_icon'] ) ? $atts['afwp_active_dp_icon'] : 'fa-toggle-on';
+		$this->title_color = isset( $atts['afwp_title_color'] ) ? $atts['afwp_title_color'] : '';
+		$this->title_background = isset( $atts['afwp_title_background'] ) ? $atts['afwp_title_background'] : '';
+		$this->content_color = isset( $atts['afwp_content_color'] ) ? $atts['afwp_content_color'] : '';
+		$this->content_background = isset( $atts['afwp_content_background'] ) ? $atts['afwp_content_background'] : '';
 
 		$this->atts = array(
 			'posts_per_page' => $post_limit,
