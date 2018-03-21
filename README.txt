@@ -3,7 +3,7 @@ Contributors: themeegg
 Tags: accordion, tab, accordion widget, tab widget widget, term accordion, term tab, accordion for wordpress, wordpress accordion, wordpress tab, wp accordion, wp tab, menu accordion, post accordion, post tab, page accordion, page tabs, product accordion, product tabs, vertical tab, vertical accordion, horizontal tab, horizontal accordion, tab shortcode, accordion shortcode
 Requires at least: 4.0
 Tested up to: 4.9.4
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
