@@ -290,29 +290,35 @@ class AFWP_Nav_Menu_Accordion_Widget extends WP_Widget {
 						<?php endif; ?>
 				</div>
 				<div id="<?php echo esc_attr($list_all_tabs['design']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='design') ? 'afwp-content-active' : ''; ?> " >
-					<p>
+					<div class="afwp_widget_field">
 						<label for="<?php echo $this->get_field_id( 'dropdown_icon' ); ?>"><?php esc_html_e( 'Dropdown Icon:', 'accordion-for-wp' ); ?></label>
-						<input class="widefat afwp_icon_picker" id="<?php echo $this->get_field_id( 'dropdown_icon' ); ?>"
+						<div class="afwp_widget_icon_wrap">
+							<input class="widefat afwp_icon_picker" id="<?php echo $this->get_field_id( 'dropdown_icon' ); ?>"
 							   name="<?php echo $this->get_field_name( 'dropdown_icon' ); ?>" type="text"
-							   value="<?php echo esc_attr( $dropdown_icon ); ?>"/></p>
-					<p>
-					<p>
+							   value="<?php echo esc_attr( $dropdown_icon ); ?>"/>
+							<label class="afwp_icon fa <?php echo esc_attr( $dropdown_icon ); ?>" for="<?php echo $this->get_field_id( 'dropdown_icon' ); ?>"></label>
+						</div>
+					</div>
+					<div class="afwp_widget_field">
 						<label for="<?php echo $this->get_field_id( 'active_dp_icon' ); ?>"><?php esc_html_e( 'Active Dropdown Icon:', 'accordion-for-wp' ); ?></label>
-						<input class="widefat afwp_icon_picker" id="<?php echo $this->get_field_id( 'active_dp_icon' ); ?>"
+						<div class="afwp_widget_icon_wrap">
+							<input class="widefat afwp_icon_picker" id="<?php echo $this->get_field_id( 'active_dp_icon' ); ?>"
 							   name="<?php echo $this->get_field_name( 'active_dp_icon' ); ?>" type="text"
-							   value="<?php echo esc_attr( $active_dp_icon ); ?>"/></p>
-					<p>
-					<p>
+							   value="<?php echo esc_attr( $active_dp_icon ); ?>"/>
+							<label class="afwp_icon fa <?php echo esc_attr( $active_dp_icon ); ?>" for="<?php echo $this->get_field_id( 'active_dp_icon' ); ?>"></label>
+						</div>
+					</div>
+					<div class="afwp_widget_field">
 						<label for="<?php echo $this->get_field_id( 'title_color' ); ?>"><?php esc_html_e( 'Title Color:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'title_color' ); ?>" name="<?php echo $this->get_field_name( 'title_color' ); ?>" type="text"
-							   value="<?php echo esc_attr( $title_color ); ?>"/></p>
-					<p>
-					<p>
+							   value="<?php echo esc_attr( $title_color ); ?>"/>
+					</div>
+					<div class="afwp_widget_field">
 						<label for="<?php echo $this->get_field_id( 'title_background' ); ?>"><?php esc_html_e( 'Title Background:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'title_background' ); ?>"
 							   name="<?php echo $this->get_field_name( 'title_background' ); ?>" type="text"
-							   value="<?php echo esc_attr( $title_background ); ?>"/></p>
-					<p>
+							   value="<?php echo esc_attr( $title_background ); ?>"/>
+					</div>
 				</div>
 			</div>
 		</div>

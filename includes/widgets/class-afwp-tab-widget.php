@@ -51,11 +51,13 @@ class AFWP_Tab_Widgets extends WP_Widget {
 		$term       = ! empty( $instance['term'] ) ? absint($instance['term']) : '';
 		$no_of_post = ! empty( $instance['no_of_post'] ) ? absint($instance['no_of_post']) : '';
 
-		$dropdown_icon		= isset($instance['dropdown_icon']) ? esc_attr( $instance['dropdown_icon'] ) : 'fa-toggle-off';
+		$tab_icon		= isset($instance['tab_icon']) ? esc_attr( $instance['tab_icon'] ) : 'fa-desktop';
 		$title_color		= isset($instance['title_color']) ? sanitize_hex_color( $instance['title_color'] ) : '';
 		$title_background	= isset($instance['title_background']) ? sanitize_hex_color( $instance['title_background'] ) : '';
+		$title_wraper_bg	= isset($instance['title_wraper_bg']) ? sanitize_hex_color( $instance['title_wraper_bg'] ) : '';
 		$content_color		= isset($instance['content_color']) ? sanitize_hex_color( $instance['content_color'] ) : '';
 		$content_background	= isset($instance['content_background']) ? sanitize_hex_color( $instance['content_background'] ) : '';
+		$content_wraper_bg	= isset($instance['content_wraper_bg']) ? sanitize_hex_color( $instance['content_wraper_bg'] ) : '';
 
 		$templates      	= empty( $instance['templates'] ) ? 'default' : esc_attr($instance['templates']);
 		$style          	= empty( $instance['style'] ) ? 'vertical' : esc_attr($instance['style']);
@@ -84,7 +86,7 @@ class AFWP_Tab_Widgets extends WP_Widget {
 			?>
 			<div class="afwp-tab-template afwp-widget afwp-tab-<?php echo $templates; ?>">
 				<div class="afwp-tab <?php echo esc_attr($style); ?>">
-					<ul class="afwp-tab-list">
+					<ul class="afwp-tab-list" style="background:<?php echo sanitize_hex_color($title_wraper_bg); ?>;">
 						<?php 
 						$current_tab = 0; 
 						while ( $query->have_posts() ):$query->the_post(); 
@@ -93,20 +95,20 @@ class AFWP_Tab_Widgets extends WP_Widget {
 							$tab_class = ($current_tab==$active_tab) ? ' current ' : '';
 							?>
 							<li class="afwp-tab-item-wrap">
-								<div class="afwp-tab-title" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
-									<?php if(!empty($dropdown_icon)): ?>
+								<div class="afwp-tab-title <?php echo esc_attr($tab_class); ?>" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
+									<?php if(!empty($tab_icon)): ?>
 										<i
-										class="afwp-tab-icon fa <?php echo esc_attr($dropdown_icon); ?>" 
+										class="afwp-tab-icon fa <?php echo esc_attr($tab_icon); ?>" 
 										style="color:<?php echo sanitize_hex_color($title_color); ?>;"
 										></i> <?php 
 								endif; 
-									?><a class="afwp-post-link <?php echo esc_attr($tab_class); ?>" href="#post_tab_<?php echo get_the_ID(); ?>" style="color:inherit;"><?php the_title(); ?></a>
+									?><a class="afwp-post-link" href="#post_tab_<?php echo get_the_ID(); ?>" style="color:inherit;"><?php the_title(); ?></a>
 									
 								</div>
 							</li>
 						<?php endwhile; ?>
 					</ul>
-					<div class="afwp-tab-content-wraper">
+					<div class="afwp-tab-content-wraper" style="background: <?php echo sanitize_hex_color($content_wraper_bg); ?>;">
 						<?php 
 						$current_tab = 0;
 						while ( $query->have_posts() ):$query->the_post(); 
@@ -155,11 +157,13 @@ class AFWP_Tab_Widgets extends WP_Widget {
 		$instance['no_of_post'] = isset($new_instance['no_of_post']) ? absint( $new_instance['no_of_post'] ) : '';
 		$instance['content_type'] = isset($new_instance['content_type']) ? esc_attr($new_instance['content_type']) : '';
 
-		$instance['dropdown_icon']     = isset($new_instance['dropdown_icon']) ? esc_attr( $new_instance['dropdown_icon'] ) : '';
+		$instance['tab_icon']     = isset($new_instance['tab_icon']) ? esc_attr( $new_instance['tab_icon'] ) : '';
 		$instance['title_color']     = isset($new_instance['title_color']) ? esc_attr( $new_instance['title_color'] ) : '';
 		$instance['title_background']     = isset($new_instance['title_background']) ? esc_attr( $new_instance['title_background'] ) : '';
+		$instance['title_wraper_bg']     = isset($new_instance['title_wraper_bg']) ? esc_attr( $new_instance['title_wraper_bg'] ) : '';
 		$instance['content_color']     = isset($new_instance['content_color']) ? esc_attr( $new_instance['content_color'] ) : '';
 		$instance['content_background']     = isset($new_instance['content_background']) ? esc_attr( $new_instance['content_background'] ) : '';
+		$instance['content_wraper_bg']     = isset($new_instance['content_wraper_bg']) ? esc_attr( $new_instance['content_wraper_bg'] ) : '';
 
 		$instance['style']     = isset($new_instance['style']) ? esc_attr( $new_instance['style'] ) : '';
 		$instance['templates'] = isset($new_instance['templates']) ? esc_attr( $new_instance['templates'] ) : '';
@@ -191,11 +195,13 @@ class AFWP_Tab_Widgets extends WP_Widget {
 			'templates'  		=> 'default',
 			'style'      		=> 'vertical',
 
-			'dropdown_icon'		=> 'fa-toggle-off',
+			'tab_icon'			=> 'fa-desktop',
 			'title_color'  		=> '',
 			'title_background'  => '',
+			'title_wraper_bg'  	=> '',
 			'content_color'  	=> '',
 			'content_background'=> '',
+			'content_wraper_bg'	=> '',
 
 			'active_tab_type'	=>'general',
 		) );
@@ -210,11 +216,13 @@ class AFWP_Tab_Widgets extends WP_Widget {
 		$templates	= isset($instance['templates']) ? esc_attr( $instance['templates'] ) : '';
 		$style	= isset($instance['style']) ? esc_attr( $instance['style'] ) : '';
 
-		$dropdown_icon	= isset($instance['dropdown_icon']) ? esc_attr( $instance['dropdown_icon'] ) : 'fa-toggle-off';
+		$tab_icon	= isset($instance['tab_icon']) ? esc_attr( $instance['tab_icon'] ) : 'fa-desktop';
 		$title_color		= isset($instance['title_color']) ? esc_attr( $instance['title_color'] ) : '';
 		$title_background	= isset($instance['title_background']) ? esc_attr( $instance['title_background'] ) : '';
+		$title_wraper_bg	= isset($instance['title_wraper_bg']) ? esc_attr( $instance['title_wraper_bg'] ) : '';
 		$content_color		= isset($instance['content_color']) ? esc_attr( $instance['content_color'] ) : '';
 		$content_background	= isset($instance['content_background']) ? esc_attr( $instance['content_background'] ) : '';
+		$content_wraper_bg	= isset($instance['content_wraper_bg']) ? esc_attr( $instance['content_wraper_bg'] ) : '';
 
 		$active_tab_type		= isset($instance['active_tab_type']) ? esc_attr( $instance['active_tab_type'] ) : 'general';
 
@@ -356,35 +364,53 @@ class AFWP_Tab_Widgets extends WP_Widget {
 					</p>
 				</div>
 				<div id="<?php echo esc_attr($list_all_tabs['design']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='design') ? 'afwp-content-active' : ''; ?> " >
-					<p>
-						<label for="<?php echo $this->get_field_id( 'dropdown_icon' ); ?>"><?php esc_html_e( 'Dropdown Icon:', 'accordion-for-wp' ); ?></label>
-						<input class="widefat afwp_icon_picker" id="<?php echo $this->get_field_id( 'dropdown_icon' ); ?>"
-							   name="<?php echo $this->get_field_name( 'dropdown_icon' ); ?>" type="text"
-							   value="<?php echo esc_attr( $dropdown_icon ); ?>"/>
-					<p>
-					<p>
+					<div class="afwp_widget_field">
+						<label for="<?php echo $this->get_field_id( 'tab_icon' ); ?>"><?php esc_html_e( 'Tab Icon:', 'accordion-for-wp' ); ?></label>
+						<div class="afwp_widget_icon_wrap">
+							<input 
+								class="widefat afwp_icon_picker" 
+								id="<?php echo $this->get_field_id( 'tab_icon' ); ?>"
+							   	name="<?php echo $this->get_field_name( 'tab_icon' ); ?>" 
+							   	type="text"
+							   value="<?php echo esc_attr( $tab_icon ); ?>"/>
+							   <label class="afwp_icon fa <?php echo esc_attr( $tab_icon ); ?>" for="<?php echo $this->get_field_id( 'tab_icon' ); ?>"></label>
+						</div>
+					</div>
+					<div class="afwp_widget_field">
 						<label for="<?php echo $this->get_field_id( 'title_color' ); ?>"><?php esc_html_e( 'Title Color:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'title_color' ); ?>" name="<?php echo $this->get_field_name( 'title_color' ); ?>" type="text"
 							   value="<?php echo esc_attr( $title_color ); ?>"/>
-					</p>
-					<p>
+					</div>
+					<div class="afwp_widget_field">
 						<label for="<?php echo $this->get_field_id( 'title_background' ); ?>"><?php esc_html_e( 'Title Background:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'title_background' ); ?>"
 							   name="<?php echo $this->get_field_name( 'title_background' ); ?>" type="text"
 							   value="<?php echo esc_attr( $title_background ); ?>"/>
-					<p>
-					<p>
+					</div>
+					<div class="afwp_widget_field">
+						<label for="<?php echo $this->get_field_id( 'title_wraper_bg' ); ?>"><?php esc_html_e( 'Title Wraper Background:', 'accordion-for-wp' ); ?></label>
+						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'title_wraper_bg' ); ?>"
+							   name="<?php echo $this->get_field_name( 'title_wraper_bg' ); ?>" type="text"
+							   value="<?php echo esc_attr( $title_wraper_bg ); ?>"/>
+					</div>
+					<div class="afwp_widget_field">
 						<label for="<?php echo $this->get_field_id( 'content_color' ); ?>"><?php esc_html_e( 'Content Color:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'content_color' ); ?>"
 							   name="<?php echo $this->get_field_name( 'content_color' ); ?>" type="text"
 							   value="<?php echo esc_attr( $content_color ); ?>"/>
-					<p>
-					<p>
+					</div>
+					<div class="afwp_widget_field">
 						<label for="<?php echo $this->get_field_id( 'content_background' ); ?>"><?php esc_html_e( 'Content Background:', 'accordion-for-wp' ); ?></label>
 						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'content_background' ); ?>"
 							   name="<?php echo $this->get_field_name( 'content_background' ); ?>" type="text"
 							   value="<?php echo esc_attr( $content_background ); ?>"/>
-					<p>
+					</div>
+					<div class="afwp_widget_field">
+						<label for="<?php echo $this->get_field_id( 'content_wraper_bg' ); ?>"><?php esc_html_e( 'Content Wraper Background:', 'accordion-for-wp' ); ?></label>
+						<input class="afwp_color_picker" id="<?php echo $this->get_field_id( 'content_wraper_bg' ); ?>"
+							   name="<?php echo $this->get_field_name( 'content_wraper_bg' ); ?>" type="text"
+							   value="<?php echo esc_attr( $content_wraper_bg ); ?>"/>
+					</div>
 				</div>
 			</div>
 		</div>

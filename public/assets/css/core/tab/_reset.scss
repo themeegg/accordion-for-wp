@@ -13,14 +13,12 @@
         padding:0;
         margin:0;
         list-style: none;
-        background: #dedede;
         &:after{
             content:"";
             display:block;
             width:100%;
             clear:both;
         }
-        
     }
 
     .afwp-tab-content{
@@ -73,6 +71,9 @@
     }
 
     .vertical{
+        .afwp-tab-item-wrap{
+            margin:0 3px 3px 0;
+        }
         .afwp-tab-title{
             border-right:1px solid #f2f2f2;
         }
@@ -84,16 +85,4 @@
         }
     }
     
-    &.default{
-        
-    }
-
-    &.template-1{
-    
-    }
-
-    &.theme-default{
-    
-    }
-
 }

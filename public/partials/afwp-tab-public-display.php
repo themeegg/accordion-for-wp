@@ -46,8 +46,8 @@ if ( $query->have_posts() ):
 					$tab_class = ($current_tab==$active_tab) ? ' current ' : '';
 					?>
 					<li class="afwp-tab-item-wrap">
-						<div class="afwp-tab-title" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
-							<a class="afwp-post-link <?php echo esc_attr($tab_class); ?>" href="#post_tab_<?php echo get_the_ID(); ?>"><?php the_title(); ?></a>
+						<div class="afwp-tab-title <?php echo esc_attr($tab_class); ?>" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
+							<a class="afwp-post-link" href="#post_tab_<?php echo get_the_ID(); ?>"><?php the_title(); ?></a>
 						</div>
 					</li>
 				<?php endwhile; ?>

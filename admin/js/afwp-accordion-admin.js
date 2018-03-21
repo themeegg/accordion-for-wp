@@ -4,23 +4,49 @@
 
 		Snipits: {
 
-			Color_Picker: function(){
+			
 
-				var wp_args = {
+			Color_Icon_Picker: function(){
+				var colorpicker, icon_picker;
+				colorpicker = {
 					change: function(evt, ui){
 						$(evt.target).val(ui.color.toString()).trigger('change');
 					}
 				};
+				icon_picker = {
+					hideOnSelect: true
+				};
 
-				$('.afwp_color_picker').wpColorPicker(wp_args);
-				$('.afwp_icon_picker').iconpicker();
+				$('.widget-liquid-right .afwp_color_picker').wpColorPicker(colorpicker);
+				$('.afwp_icon_picker').iconpicker(icon_picker);
 				$(document).on('widget-updated widget-added', function(e, widget){
-                	widget.find('.afwp_color_picker').wpColorPicker(wp_args);
-                	widget.find('.afwp_icon_picker').iconpicker();
+                	widget.find('.afwp_color_picker').wpColorPicker(colorpicker);
+                	widget.find('.afwp_icon_picker').iconpicker(icon_picker);
+
             	}); 
 
             	$(document).on('iconpickerSelected', '.afwp_icon_picker', function(event){
   					$(this).trigger('change');
+				});
+
+				$(document).on('change', '.afwp_icon_picker', function(){
+
+					var previous_class, current_class, has_attr, afwp_icon;
+					current_class	= this.value;
+					afwp_icon = $(this).siblings('.afwp_icon');
+					has_attr = $(this).attr('data-previous');
+					if(has_attr!="undefined"){
+						previous_class	= $(this).attr('data-previous');
+					}else{
+						previous_class	= this.defaultValue;
+					}
+					$(this).attr('data-previous', current_class);
+					afwp_icon.removeClass(previous_class).removeClass(function(idx, cls){
+						return (cls.match(/\bfa-\S+/g) || []).join(' ');
+					});
+					console.log(current_class);
+					afwp_icon.addClass(current_class);
+
 				});
 
 			},
@@ -85,7 +111,7 @@
 
 		Ready: function(){
 			var _this=afwp_accordion;
-			_this.Snipits.Color_Picker();
+			_this.Snipits.Color_Icon_Picker();
 			_this.MouseEvents();
 		},
 

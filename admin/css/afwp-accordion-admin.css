@@ -7,12 +7,39 @@
  	display:none;
 }
 
+.afwp_widget_field{
+  margin: 1em 0;
+  clear: both;
+}
+
+.afwp_widget_icon_wrap{
+  position:relative;
+}
+
+.afwp_widget_icon_wrap .widefat{
+  padding-right:40px;
+}
+
+.afwp_widget_icon_wrap .afwp_icon{
+  top: -2px;
+  right: 0;
+  width: 35px;
+  height: 30px;
+  color: #fff;
+  display: block;
+  line-height: 30px;
+  text-align: center;
+  position: absolute;
+  background: #006799;
+  border-radius: 3px;
+}
+
 .wp-picker-container {
-    display: inline-block;
+    display: block;
+    padding-top: 5px;
 }
 
 #poststuff .afwp-tab-content h2{
-
   padding:20px 12px 8px 0;
   font-size:1.6em;
 
