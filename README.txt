@@ -81,6 +81,13 @@ Plugin Demo : [https://demo.themeegg.com/plugins/accordion-for-wp/](https://demo
 5. Front view of accordion widgets and shortcode
 
 == Changelog ==
+= 1.3.2  2018/03/22 =
+* Added - Add Tab widget Layout
+* Added - Icon option added on widget
+* Added - Color Option Added on Widget
+* Improvement - Listing icon issue fixed on click
+* Fixed - Tab widget color issue fixed
+
 = 1.3.1  2018/03/19 =
 * Added - Accordion content part added
 * Added - Accordion Group Shortcode settings added
