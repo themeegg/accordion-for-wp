@@ -61,10 +61,9 @@ class AFWP_Tab_Widgets extends WP_Widget {
 
 		$templates      	= empty( $instance['templates'] ) ? 'default' : esc_attr($instance['templates']);
 		$style          	= empty( $instance['style'] ) ? 'vertical' : esc_attr($instance['style']);
+		$active_item       	= isset( $instance['active_item'] ) ? absint($instance['active_item']) : 1;
 
 		$content_type     = ! empty( $instance['content_type'] ) ? esc_attr($instance['content_type']) : 'excerpt';
-
-		$active_tab = 1;
 
 		echo $args['before_widget'];
 		if ( ! empty( $title ) ) {
@@ -92,7 +91,7 @@ class AFWP_Tab_Widgets extends WP_Widget {
 						while ( $query->have_posts() ):$query->the_post(); 
 							$current_tab++;
 							$afwp_post_slug = get_post_field( 'post_name', get_the_ID() ); 
-							$tab_class = ($current_tab==$active_tab) ? ' current ' : '';
+							$tab_class = ($current_tab==$active_item) ? ' current ' : '';
 							?>
 							<li class="afwp-tab-item-wrap">
 								<div class="afwp-tab-title <?php echo esc_attr($tab_class); ?>" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
@@ -113,7 +112,7 @@ class AFWP_Tab_Widgets extends WP_Widget {
 						$current_tab = 0;
 						while ( $query->have_posts() ):$query->the_post(); 
 							$current_tab++;
-							$tab_class = ($current_tab==$active_tab) ? ' current ' : '';
+							$tab_class = ($current_tab==$active_item) ? ' current ' : '';
 							?>
 							<div class="afwp-tab-content <?php echo esc_attr($tab_class); ?>" id="post_tab_<?php echo get_the_ID(); ?>" style="background:<?php echo sanitize_hex_color($content_background); ?>; color:<?php echo sanitize_hex_color($content_color); ?>;">
 								<div class="afwp-content-wraper">
@@ -167,6 +166,7 @@ class AFWP_Tab_Widgets extends WP_Widget {
 
 		$instance['style']     = isset($new_instance['style']) ? esc_attr( $new_instance['style'] ) : '';
 		$instance['templates'] = isset($new_instance['templates']) ? esc_attr( $new_instance['templates'] ) : '';
+		$instance['active_item'] = isset($new_instance['active_item']) ? absint( $new_instance['active_item'] ) : '';
 
 		$instance['active_tab_type'] = isset($new_instance['active_tab_type']) ? esc_attr( $new_instance['active_tab_type'] ) : 'general';
 
@@ -194,6 +194,7 @@ class AFWP_Tab_Widgets extends WP_Widget {
 
 			'templates'  		=> 'default',
 			'style'      		=> 'vertical',
+			'active_item' 		=> 1,
 
 			'tab_icon'			=> 'fa-desktop',
 			'title_color'  		=> '',
@@ -215,6 +216,7 @@ class AFWP_Tab_Widgets extends WP_Widget {
 
 		$templates	= isset($instance['templates']) ? esc_attr( $instance['templates'] ) : '';
 		$style	= isset($instance['style']) ? esc_attr( $instance['style'] ) : '';
+		$active_item	= isset($instance['active_item']) ? esc_attr( $instance['active_item'] ) : '';
 
 		$tab_icon	= isset($instance['tab_icon']) ? esc_attr( $instance['tab_icon'] ) : 'fa-desktop';
 		$title_color		= isset($instance['title_color']) ? esc_attr( $instance['title_color'] ) : '';
@@ -338,6 +340,13 @@ class AFWP_Tab_Widgets extends WP_Widget {
 					</p>
 				</div>
 				<div id="<?php echo esc_attr($list_all_tabs['layout']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='layout') ? 'afwp-content-active' : ''; ?> " >
+					<p>
+						<label for="<?php echo $this->get_field_id( 'active_item' ); ?>"><?php esc_html_e( 'Active Tab Item:', 'accordion-for-wp' ); ?></label>
+						<input class="widefat" id="<?php echo $this->get_field_id( 'active_item' ); ?>"
+						   name="<?php echo $this->get_field_name( 'active_item' ); ?>" type="number"
+						   value="<?php echo absint( $active_item ); ?>"/>
+						<span><?php esc_html_e('Please set active item on load(zero for collapse all)', 'accordion-for-wp'); ?></span>
+					</p>
 					<p>
 						<label for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php esc_html_e( 'Template:', 'accordion-for-wp' ); ?></label>
 						<?php $all_templates = afwp_accordion_templates(); ?>

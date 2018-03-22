@@ -51,6 +51,7 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 
 		$templates      	= empty( $instance['templates'] ) ? 'default' : esc_attr($instance['templates']);
 		$style          	= empty( $instance['style'] ) ? 'vertical' : esc_attr($instance['style']);
+		$active_item       	= isset( $instance['active_item'] ) ? absint($instance['active_item']) : 1;
 
 		$dropdown_icon		= isset($instance['dropdown_icon']) ? esc_attr( $instance['dropdown_icon'] ) : 'fa-toggle-off';
 		$active_dp_icon		= isset($instance['active_dp_icon']) ? esc_attr( $instance['active_dp_icon'] ) : 'fa-toggle-on';
@@ -73,25 +74,31 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 			<div class="afwp-accordion-template afwp-widget afwp-<?php echo $templates; ?>">
 				<div class="afwp-accordion <?php echo $style; ?>">
 					<ul class="afwp-accordion-list">
-						<?php foreach ( $all_terms as $key => $term_detail ): ?>
-							<?php
-							if ( $key >= $no_of_term ) {
+						<?php 
+						$current_item = 0; 
+						$active_icon = $dropdown_icon;
+						foreach ( $all_terms as $key => $term_detail ):
+							$current_item++; 
+							$active_class 	= ($current_item==$active_item) ? 'current' : '';
+							$active_icon 	= ($current_item==$active_item) ? $active_dp_icon : $dropdown_icon;
+							$active_style 	= ($current_item==$active_item) ? 'display:block;' : '';
+							if( $key >= $no_of_term ) {
 								break;
 							}
 							?>
 							<li class="afwp-accordion-item-wrap">
-								<div class="afwp-accordion-title" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
+								<div class="afwp-accordion-title <?php echo esc_attr($active_class); ?>" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
 									<span data-href="#afwp_<?php echo $term_detail->slug.$term_detail->term_id; ?>"><?php echo $term_detail->name; ?></span>
 									<?php if(!empty($dropdown_icon)): ?>
 										<i 
-										class="afwp-toggle-icon fa <?php echo esc_attr($dropdown_icon); ?>" 
+										class="afwp-toggle-icon fa <?php echo esc_attr($active_icon); ?>" 
 										data-dropdown-icon="<?php echo esc_attr($dropdown_icon); ?>" 
 										data-active-dp-icon="<?php echo esc_attr($active_dp_icon); ?>" 
 										style="color:<?php echo sanitize_hex_color($title_color); ?>;"
 										></i>
 									<?php endif; ?>
 								</div>
-								<div class="afwp-content" id="afwp_<?php echo $term_detail->slug.$term_detail->term_id; ?>" style="background:<?php echo sanitize_hex_color($content_background); ?>; color:<?php echo sanitize_hex_color($content_color); ?>;">
+								<div class="afwp-content <?php echo esc_attr($active_class); ?>" id="afwp_<?php echo $term_detail->slug.$term_detail->term_id; ?>" style="background:<?php echo sanitize_hex_color($content_background); ?>; color:<?php echo sanitize_hex_color($content_color); ?>; <?php echo esc_attr($active_style); ?>">
 									<div class="afwp-content-wraper">
 										<p><?php echo $term_detail->description; ?></p>
 									</div>
@@ -127,6 +134,7 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 
 		$instance['templates'] = sanitize_text_field( $new_instance['templates'] );
 		$instance['style']     = sanitize_text_field( $new_instance['style'] );
+		$instance['active_item'] = isset($new_instance['active_item']) ? absint( $new_instance['active_item'] ) : '';
 
 		$instance['dropdown_icon']     = isset($new_instance['dropdown_icon']) ? esc_attr( $new_instance['dropdown_icon'] ) : 'fa-toggle-off';
 		$instance['active_dp_icon']     = isset($new_instance['active_dp_icon']) ? esc_attr( $new_instance['active_dp_icon'] ) : 'fa-toggle-on';
@@ -156,6 +164,7 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 
 			'templates'  => 'default',
 			'style'      => 'vertical',
+			'active_item' => 1,
 
 			'dropdown_icon'		=> 'fa-toggle-off',
 			'active_dp_icon'	=> 'fa-toggle-on',
@@ -173,6 +182,7 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 
 		$templates = sanitize_text_field( $instance['templates'] );
 		$style     = sanitize_text_field( $instance['style'] );
+		$active_item	= isset($instance['active_item']) ? esc_attr( $instance['active_item'] ) : '';
 
 		$dropdown_icon	= isset($instance['dropdown_icon']) ? esc_attr( $instance['dropdown_icon'] ) : 'fa-toggle-off';
 		$active_dp_icon	= isset($instance['active_dp_icon']) ? esc_attr( $instance['active_dp_icon'] ) : 'fa-toggle-on';
@@ -240,6 +250,13 @@ class AFWP_Term_Accordion_Widgets extends WP_Widget {
 							</p>
 				</div>
 				<div id="<?php echo esc_attr($list_all_tabs['layout']['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type=='layout') ? 'afwp-content-active' : ''; ?>">
+					<p>
+						<label for="<?php echo $this->get_field_id( 'active_item' ); ?>"><?php esc_html_e( 'Active Accordion Item:', 'accordion-for-wp' ); ?></label>
+						<input class="widefat" id="<?php echo $this->get_field_id( 'active_item' ); ?>"
+						   name="<?php echo $this->get_field_name( 'active_item' ); ?>" type="number"
+						   value="<?php echo absint( $active_item ); ?>"/>
+						<span><?php esc_html_e('Please set active item on load(zero for collapse all)', 'accordion-for-wp'); ?></span>
+					</p>
 					<p><label
 							for="<?php echo $this->get_field_id( 'templates' ); ?>"><?php esc_html_e( 'Template:', 'accordion-for-wp' ); ?></label>
 						<?php
