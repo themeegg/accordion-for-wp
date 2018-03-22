@@ -85,6 +85,7 @@ Plugin Demo : [https://demo.themeegg.com/plugins/accordion-for-wp/](https://demo
 * Added - Add Tab widget Layout
 * Added - Icon option added on widget
 * Added - Color Option Added on Widget
+* Added - Group Tab Shortcode added
 * Improvement - Listing icon issue fixed on click
 * Fixed - Tab widget color issue fixed
 
