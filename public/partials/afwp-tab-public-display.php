@@ -40,7 +40,7 @@ $templates  	= apply_filters( 'afwp_tab_templates', $afwp_templates );
 $style      	= apply_filters( 'afwp_tab_styles', $afwp_style );
 $active_item    = absint(apply_filters( 'afwp_tab_activeitem', $afwp_active_item ) );
 
-$tab_icon	= apply_filters( 'afwp_tab_icon', $afwp_tab_icon);
+$tab_icon		= apply_filters( 'afwp_tab_icon', $afwp_tab_icon);
 $title_color	= apply_filters( 'afwp_title_color', $afwp_title_color);
 $title_background	= apply_filters( 'afwp_title_background', $afwp_title_background);
 $content_color	= apply_filters( 'afwp_content_color', $afwp_content_color);
