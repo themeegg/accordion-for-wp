@@ -152,7 +152,9 @@ class Accordion_For_WP {
 	private function add_shortcodes(){
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/shortcodes/class-afwp-accordion-default.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/shortcodes/class-afwp-accordion-group.php';
+
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/shortcodes/class-afwp-tab-default.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/shortcodes/class-afwp-tab-group.php';
 	}
 
 	/**

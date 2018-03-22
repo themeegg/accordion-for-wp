@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package    Accordion_For_WP
  * @subpackage Accordion_For_WP/public
  */
-class AFWP_Tab_Shortcode_Default {
+class AFWP_Tab_Shortcode_Group {
 
 	protected $atts;
 
@@ -23,8 +23,9 @@ class AFWP_Tab_Shortcode_Default {
 	protected $style;
 	protected $template;
 	protected $active_item;
-	
+
 	protected $tab_icon;
+	protected $active_dp_icon;
 	protected $title_color;
 	protected $title_background;
 	protected $content_color;
@@ -39,8 +40,9 @@ class AFWP_Tab_Shortcode_Default {
 
 		defined( 'WPINC' ) or exit;
 
-		add_shortcode( 'afwp_tab', array( $this, 'afwp_tab' ) );
+		add_shortcode( 'afwp_group_tab', array( $this, 'afwp_group_tab' ) );
 	}
+
 
 	/**
 	 * @param $atts is shortcode attribute
@@ -49,7 +51,7 @@ class AFWP_Tab_Shortcode_Default {
 	 */
 	public function filter_args( $atts ) {
 
-		/*WP Query Args with attrs*/
+		/*WP Query Args*/
 		$default_args = array(
 
 			'afwp_content_type'		=> 'excerpt',
@@ -58,7 +60,7 @@ class AFWP_Tab_Shortcode_Default {
 			'afwp_active_item'		=> 1,
 			'afwp_template'			=> 'default',
 
-			'afwp_tab_icon'			=> '',
+			'afwp_tab_icon'	=> '',
 			'afwp_title_color'		=> '',
 			'afwp_title_background'	=> '',
 			'afwp_content_color'	=> '',
@@ -72,24 +74,44 @@ class AFWP_Tab_Shortcode_Default {
 
 		return $this->atts;
 
-
 	}
 
-	public function afwp_tab( $atts, $content = "" ) {
+	public function afwp_group_tab( $atts, $content = "" ) {
 
 		$args = $this->filter_args( $atts );
 
-		$this->content_type = isset($args['afwp_content_type']) ? esc_attr($args['afwp_content_type']) : 'excerpt';
+		if ( ! isset( $args['id'] ) ) {
+			return;
+		}
 
-		$this->style = isset($args['afwp_style']) ? esc_attr($args['afwp_style']) : 'vertical';
-		$this->template = isset($args['afwp_template']) ? $args['afwp_template'] : 'default';
+
+		$taxonomy_id = absint( $args['id'] );
+		$post_limit = isset( $args['limit'] ) ? $args['limit'] : - 1;
+
+		$this->content_type = isset( $args['afwp_content_type'] ) ? $args['afwp_content_type'] : 'excerpt';
+
+		$this->template = get_term_meta( $taxonomy_id, 'afwp_term_template', true );
+		$this->style = get_term_meta( $taxonomy_id, 'acwp_term_style', true );
 		$this->active_item = isset($args['afwp_active_item']) ? absint($args['afwp_active_item']) : 1;
 
-		$this->tab_icon = isset($args['afwp_tab_icon']) ? esc_attr($args['afwp_tab_icon']) : '';
-		$this->title_color = isset($args['afwp_title_color']) ? esc_attr($args['afwp_title_color']) : '';
-		$this->title_background = isset($args['afwp_title_background']) ? esc_attr($args['afwp_title_background']) : '';
-		$this->content_color = isset($args['afwp_content_color']) ? esc_attr($args['afwp_content_color']) : '';
-		$this->content_background = isset($args['afwp_content_background']) ? esc_attr($args['afwp_content_background']) : '';
+		$this->tab_icon = isset( $args['afwp_tab_icon'] ) ? $args['afwp_tab_icon'] : '';
+		$this->title_color = isset( $args['afwp_title_color'] ) ? $args['afwp_title_color'] : '';
+		$this->title_background = isset( $args['afwp_title_background'] ) ? $args['afwp_title_background'] : '';
+		$this->content_color = isset( $args['afwp_content_color'] ) ? $args['afwp_content_color'] : '';
+		$this->content_background = isset( $args['afwp_content_background'] ) ? $args['afwp_content_background'] : '';
+
+		$query_args = array(
+			'posts_per_page' => $post_limit,
+			'post_type'      => 'afwp-tabs',
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'afwp-tab-group',
+					'field'    => 'term_id',
+					'terms'    => $taxonomy_id,
+				)
+			)
+		);
+		$this->atts = wp_parse_args($query_args, $args);
 
 		ob_start();
 
@@ -116,27 +138,29 @@ class AFWP_Tab_Shortcode_Default {
 	public function afwp_content_color(){  return $this->content_color; }
 	public function afwp_content_background(){ return $this->content_background; }
 
+	
 	public function template() {
 
-		add_filter( 'afwp_tab_args', array( $this, 'afwp_tab_args' ));
-		add_filter( 'afwp_tab_content_type', array( $this, 'afwp_content_type' ));
+		add_filter( 'afwp_tab_args', array( $this, 'afwp_tab_args' ) );
 
-		add_filter( 'afwp_tab_templates', array( $this, 'afwp_tab_templates' ));
-		add_filter( 'afwp_tab_styles', array( $this, 'afwp_tab_styles' ));
+		add_filter( 'afwp_tab_content_type', array( $this, 'afwp_content_type' ) );
+
+		add_filter( 'afwp_tab_styles', array( $this, 'afwp_tab_styles' ) );
+		add_filter( 'afwp_tab_templates', array( $this, 'afwp_tab_templates' ) );
 		add_filter( 'afwp_tab_activeitem', array( $this, 'afwp_active_item' ));
 
-		add_filter( 'afwp_tab_icon', array( $this, 'afwp_tab_icon' ));
+		add_filter( 'afwp_tab_icon', array( $this, 'afwp_tab_icon' ) );
 		add_filter( 'afwp_title_color', array( $this, 'afwp_title_color' ));
 		add_filter( 'afwp_title_background', array( $this, 'afwp_title_background' ));
 		add_filter( 'afwp_content_color', array( $this, 'afwp_content_color' ));
 		add_filter( 'afwp_content_background', array( $this, 'afwp_content_background' ) );
+		
 
 		$afwp_loader = new Accordion_For_WP_Loader();
-
 		$afwp_loader->afwp_template_part( 'public/partials/afwp-tab-public-display.php' );
 
 	}
 
 }
 
-new AFWP_Tab_Shortcode_Default();
+new AFWP_Tab_Shortcode_Group();
