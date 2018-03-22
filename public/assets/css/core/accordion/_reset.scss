@@ -21,14 +21,17 @@
         }
     }
 
+    .afwp-content-wraper {
+        padding: 10px;
+    }
+
     .afwp-accordion-title{
         display: block;
         font-weight: 700;
         cursor: pointer;
     }
 
-    .afwp-content {
-        padding: 10px;
+    .afwp-content{
         display:none;
         overflow: hidden;
     }
@@ -75,13 +78,16 @@
             float: left;
         }
         .afwp-content{
-            padding: 10px;
             display:none;
             width: 0px;
             border-left: 0;
             &.current{
                 display: inline-block; /* Makes its work in FF */
             }
+        }
+        .afwp-accordion-title,
+        .afwp-content{
+            transition:height 1s ease-out;
         }
     }
 }
