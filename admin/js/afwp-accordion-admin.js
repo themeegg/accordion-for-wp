@@ -25,6 +25,11 @@
 
             	}); 
 
+            	$(document).on('widget-added', function(e, widget){
+                	widget.find('.afwp-widget-post-type').trigger('change');
+
+            	}); 
+
             	$(document).on('iconpickerSelected', '.afwp_icon_picker', function(event){
   					$(this).trigger('change');
 				});

@@ -168,6 +168,7 @@ class Accordion_For_WP {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/widgets/class-afwp-nav-menu-accordion-widget.php';
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/widgets/class-afwp-tab-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/widgets/class-afwp-tab-widget.php';
 	}
 
 	/**

@@ -10,7 +10,7 @@ class AFWP_Shortcode_Generator{
      */
     public function __construct(){
 
-        add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
+        //add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
 
     }
 

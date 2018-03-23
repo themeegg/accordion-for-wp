@@ -10,8 +10,8 @@ class AFWP_Settings_Page{
      */
     public function __construct(){
 
-        add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
-        add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
+        //add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
+        //add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
 
     }
 
@@ -82,31 +82,13 @@ class AFWP_Settings_Page{
                         <?php 
                             $themeegg_themes = array(
                                 array(
-                                    'name'=> esc_html__('EggNews - Magazine Theme'),
-                                    'theme_url'=> 'https://themeegg.com/downloads/eggnews/',
-                                    'demo_url'=> 'https://demo.themeegg.com/themes/eggnews/',
-                                    'docs_url'=> 'https://docs.themeegg.com/docs/eggnews/',
-                                    'forum_url'=> 'https://themeegg.com/support-forum/forum/eggnews-wordpress-theme/',
-                                    'thumbnail_url'=>'https://demo.themeegg.com/themes/eggnews/wp-content/themes/eggnews/screenshot.png',
-                                    'rate_url'=> 'https://wordpress.org/support/theme/eggnews/reviews/?filter=5',
-                                ),
-                                array(
-                                    'name'=> esc_html__('Miteri - Blog Theme'),
-                                    'theme_url'=> 'https://themeegg.com/downloads/miteri/',
-                                    'demo_url'=> 'https://demo.themeegg.com/themes/miteri/',
-                                    'docs_url'=> 'https://docs.themeegg.com/docs/miteri/',
-                                    'forum_url'=> 'https://themeegg.com/support-forum/forum/miteri-wordpress-theme/',
-                                    'thumbnail_url'=>'https://demo.themeegg.com/themes/miteri/wp-content/themes/miteri/screenshot.png',
-                                    'rate_url'=> 'https://wordpress.org/support/theme/miteri/reviews/?filter=5',
-                                ),
-                                array(
-                                    'name'=> esc_html__('Education Master - Educational Theme'),
-                                    'theme_url'=> 'https://themeegg.com/downloads/education-master/',
-                                    'demo_url'=> 'https://demo.themeegg.com/themes/education-master/',
-                                    'docs_url'=> 'https://docs.themeegg.com/docs/education-master/',
-                                    'forum_url'=> 'https://themeegg.com/support-forum/forum/education-master-wordpress-theme/',
-                                    'thumbnail_url'=>'https://demo.themeegg.com/themes/education-master/wp-content/themes/education-master/screenshot.png',
-                                    'rate_url'=> 'https://wordpress.org/support/theme/education-master/reviews/?filter=5',
+                                    'name'=> esc_html__('Accordion For WordPress - Plugin'),
+                                    'theme_url'=> 'https://themeegg.com/downloads/accordion-for-wp/',
+                                    'demo_url'=> 'https://demo.themeegg.com/plugins/accordion-for-wp/',
+                                    'docs_url'=> 'https://docs.themeegg.com/docs/accordion-for-wp/',
+                                    'forum_url'=> 'https://themeegg.com/support-forum/forum/accordion-for-wordpress-plugin/',
+                                    'thumbnail_url'=>'https://ps.w.org/accordion-for-wp/assets/icon-128x128.png?rev=1717682',
+                                    'rate_url'=> 'https://wordpress.org/support/plugin/accordion-for-wp/reviews/?filter=5',
                                 ),
                             );
                             foreach ($themeegg_themes as $single_theme) {
