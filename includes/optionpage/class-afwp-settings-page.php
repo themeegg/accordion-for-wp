@@ -10,8 +10,8 @@ class AFWP_Settings_Page{
      */
     public function __construct(){
 
-        //add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
-        //add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
+        add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
+        add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
 
     }
 
@@ -22,7 +22,7 @@ class AFWP_Settings_Page{
         add_submenu_page(
             'edit.php?post_type=accordion-for-wp',
             esc_html__('Accordion WordPress Settings', 'accordion-for-wp'),
-            esc_html__('Settings', 'accordion-for-wp'),
+            esc_html__('Global Settings', 'accordion-for-wp'),
             'manage_options',
             'afwp-settings',
             array( $this, 'afwp_add_submenu_page' )
@@ -35,33 +35,103 @@ class AFWP_Settings_Page{
     public function afwp_add_submenu_page(){
 
         // Set class property
-        $this->options = get_option( 'my_option_name' );
+        $this->options = get_option( 'afwp_global_settings' );
         ?>
         <div class="wrap">
             <h1><?php esc_html_e('Accordion for WordPress Settings  ', 'accordion-for-wp'); ?></h1>
             <div id="poststuff">
                 <div id="post-body" class="metabox-holder columns-2">
                     <div id="post-body-content" style="position: relative;">
-                        <div class="afwp-tab-wraper">
+                        <form class="afwp-tab-wraper" method="post" action="options.php">
+                            <?php
+                                $active_tab_type = isset($this->options['active_tab_type']) ? esc_attr($this->options['active_tab_type']) : 'general';
+                                $list_all_tabs = array(
+                                    'general'   =>  array(
+                                        'id'    => 'afwp_settings_general',
+                                        'label' => esc_html__('General', 'accordion-for-wp'),
+                                    ),
+                                    'layout'    =>  array(
+                                        'id'    => 'afwp_settings_layout',
+                                        'label' => esc_html__('Layout', 'accordion-for-wp'),
+                                    ),
+                                    'design'    =>  array(
+                                        'id'    => 'afwp_settings_design',
+                                        'label' => esc_html__('Design', 'accordion-for-wp'),
+                                    ),
+                                );
+                            ?>
                             <h5 class="afwp-tab-list nav-tab-wrapper">
-                                <label for="tab_afwp_accordion_nav_menu_general2" data-id="#afwp_accordion_nav_menu_general2" class="nav-tab nav-tab-active">general<input id="tab_afwp_accordion_nav_menu_general2" type="radio" name="widget-afwp_accordion_nav_menu[2][active_tab_type]" value="general" checked="checked" class="afwp-hidden"></label>
-                                <label for="tab_afwp_accordion_nav_menu_design2" data-id="#afwp_accordion_nav_menu_design2" class="nav-tab ">design<input id="tab_afwp_accordion_nav_menu_design2" type="radio" name="widget-afwp_accordion_nav_menu[2][active_tab_type]" value="design" class="afwp-hidden"></label>
+                                <?php foreach($list_all_tabs as $tab_key=>$tab_details){ ?>
+                                    <label for="tab_<?php echo esc_attr($tab_details['id']); ?>" data-id="#<?php echo esc_attr($tab_details['id']); ?>" class="nav-tab <?php echo ($tab_key == $active_tab_type) ? 'nav-tab-active' : ''; ?>"><?php echo sanitize_text_field($tab_details['label']); ?><input id="tab_<?php echo esc_attr($tab_details['id']); ?>" type="radio" name="afwp_global_settings[active_tab_type]" value="<?php echo esc_attr($tab_key); ?>" <?php checked($active_tab_type, $tab_key); ?> class="afwp-hidden"/></label>
+                                <?php } ?>
                                 <label for="submit" class="button-primary" style="padding: 5px 10px; height:auto; margin-left: .5em; border:none;">Save Changes</label>
                             </h5>
-                            <form class="afwp-tab-content-wraper" method="post" action="options.php">
-                                <?php settings_fields( 'afwp_settings_group' ); ?>
-                                <div id="afwp_accordion_nav_menu_general2" class="afwp-tab-content afwp-content-active">
-                                    <?php do_settings_sections( 'afwp_settings_general_tab' ); ?>
-                                </div>
-                                <div id="afwp_accordion_nav_menu_design2" class="afwp-tab-content ">
-                                    <p>Design Tab</p>
-                                </div>
+                            <div class="afwp-tab-content-wraper" >
+                                <?php settings_fields( 'afwp_global_setting_group' ); ?>
+                                <?php foreach($list_all_tabs as $tab_key=>$tab_details){ ?>
+                                    <div id="<?php echo esc_attr($list_all_tabs[$tab_key]['id']); ?>" class="afwp-tab-content <?php echo ($active_tab_type==$tab_key) ? 'afwp-content-active' : ''; ?>">
+                                        <?php do_settings_sections( 'afwp_settings_'.$tab_key.'_tab' ); ?>
+                                    </div>
+                                <?php } ?>
                                 <?php submit_button(); ?>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div><!-- /post-body-content -->
                     <div id="postbox-container-1" class="postbox-container">
-                        <h2>Hello This is Sidebar</h2>
+                        <h2 class="afwp-top-title"><?php esc_html_e('Our Free Plugins', 'accordion-for-wp'); ?></h2>
+                        <?php 
+                            $themeegg_themes = array(
+                                array(
+                                    'name'=> esc_html__('EggNews - Magazine Theme'),
+                                    'theme_url'=> 'https://themeegg.com/downloads/eggnews/',
+                                    'demo_url'=> 'https://demo.themeegg.com/themes/eggnews/',
+                                    'docs_url'=> 'https://docs.themeegg.com/docs/eggnews/',
+                                    'forum_url'=> 'https://themeegg.com/support-forum/forum/eggnews-wordpress-theme/',
+                                    'thumbnail_url'=>'https://demo.themeegg.com/themes/eggnews/wp-content/themes/eggnews/screenshot.png',
+                                    'rate_url'=> 'https://wordpress.org/support/theme/eggnews/reviews/?filter=5',
+                                ),
+                                array(
+                                    'name'=> esc_html__('Miteri - Blog Theme'),
+                                    'theme_url'=> 'https://themeegg.com/downloads/miteri/',
+                                    'demo_url'=> 'https://demo.themeegg.com/themes/miteri/',
+                                    'docs_url'=> 'https://docs.themeegg.com/docs/miteri/',
+                                    'forum_url'=> 'https://themeegg.com/support-forum/forum/miteri-wordpress-theme/',
+                                    'thumbnail_url'=>'https://demo.themeegg.com/themes/miteri/wp-content/themes/miteri/screenshot.png',
+                                    'rate_url'=> 'https://wordpress.org/support/theme/miteri/reviews/?filter=5',
+                                ),
+                                array(
+                                    'name'=> esc_html__('Education Master - Educational Theme'),
+                                    'theme_url'=> 'https://themeegg.com/downloads/education-master/',
+                                    'demo_url'=> 'https://demo.themeegg.com/themes/education-master/',
+                                    'docs_url'=> 'https://docs.themeegg.com/docs/education-master/',
+                                    'forum_url'=> 'https://themeegg.com/support-forum/forum/education-master-wordpress-theme/',
+                                    'thumbnail_url'=>'https://demo.themeegg.com/themes/education-master/wp-content/themes/education-master/screenshot.png',
+                                    'rate_url'=> 'https://wordpress.org/support/theme/education-master/reviews/?filter=5',
+                                ),
+                            );
+                            foreach ($themeegg_themes as $single_theme) {
+                                ?>
+                                <div id="submitdiv" class="postbox afwp-postbox">
+                                    <h2 class="hndle ui-sortable-handle"><span><?php echo esc_attr($single_theme['name']); ?></span></h2>
+                                    <div class="inside">
+                                        <div class="submitbox">
+                                            <div class="afwp-minor-publishing">
+                                                <a href="<?php echo esc_attr($single_theme['theme_url']); ?>" title="<?php echo esc_attr($single_theme['name']); ?>" target="_blank">
+                                                    <img src="<?php echo esc_attr($single_theme['thumbnail_url']); ?>" alt="<?php echo  esc_attr($single_theme['name']); ?>"/>
+                                                </a>
+                                            </div>
+                                            <div class="afwp-bottom-actions">
+                                                <a href="<?php echo esc_attr($single_theme['demo_url']); ?>" target="_blank" class="btn button-primary"><?php echo esc_html_e('Demo', 'accordion-for-wp'); ?></a>
+                                                <a href="<?php echo  esc_attr($single_theme['docs_url']); ?>" target="_blank" class="btn button-primary"><?php echo esc_html_e('Docs', 'accordion-for-wp'); ?></a>
+                                                <a href="<?php echo  esc_attr($single_theme['forum_url']); ?>" target="_blank" class="btn button-primary"><?php echo esc_html_e('Support', 'accordion-for-wp'); ?></a>
+                                                <a href="<?php echo  esc_attr($single_theme['rate_url']); ?>" target="_blank" class="btn button-primary"><?php echo esc_html_e('Rating', 'accordion-for-wp'); ?></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        ?>
                     </div>
                 </div><!-- /post-body -->
                 <br class="clear">
@@ -77,9 +147,9 @@ class AFWP_Settings_Page{
     public function afwp_admin_init()
     {
         register_setting(
-            'afwp_settings_group', // Option group
-            'my_option_name', // Option name
-            array( $this, 'sanitize' ) // Sanitize
+            'afwp_global_setting_group', // Option group
+            'afwp_global_settings', // Option name
+            array( $this, 'global_settings_sanitize' ) // Sanitize
         );
 
         add_settings_section(
@@ -114,9 +184,13 @@ class AFWP_Settings_Page{
      *
      * @param array $input Contains all settings fields as array keys
      */
-    public function sanitize( $input )
+    public function global_settings_sanitize( $input )
     {
         $new_input = array();
+
+        if( isset( $input['active_tab_type'] ) )
+            $new_input['active_tab_type'] = sanitize_text_field( $input['active_tab_type'] );
+
         if( isset( $input['id_number'] ) )
             $new_input['id_number'] = absint( $input['id_number'] );
 
@@ -124,6 +198,17 @@ class AFWP_Settings_Page{
             $new_input['title'] = sanitize_text_field( $input['title'] );
 
         return $new_input;
+    }
+
+    /**
+     * Print the Section text
+     */
+    public function print_tab_title_info(){
+
+        ?>
+        <p><?php esc_html_e('You can change general settings from here.', 'accordion-for-wp'); ?></p>
+        <?php
+
     }
 
     /**
@@ -142,11 +227,8 @@ class AFWP_Settings_Page{
      */
     public function afwp_checkbox_callback($args){
 
-        echo '</pre>';
-            print_r($args);
-        echo '</pre>';
         printf(
-            '<input type="text" id="id_number" name="my_option_name[id_number]" value="%s" />',
+            '<input type="text" id="id_number" name="afwp_global_settings[id_number]" value="%s" />',
             isset( $this->options['id_number'] ) ? esc_attr( $this->options['id_number']) : ''
         );
 
@@ -158,7 +240,7 @@ class AFWP_Settings_Page{
     public function title_callback()
     {
         printf(
-            '<input type="text" id="title" name="my_option_name[title]" value="%s" />',
+            '<input type="text" id="title" name="afwp_global_settings[title]" value="%s" />',
             isset( $this->options['title'] ) ? esc_attr( $this->options['title']) : ''
         );
     }
