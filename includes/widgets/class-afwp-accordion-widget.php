@@ -48,7 +48,7 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 
 		$post_type  = ! empty( $instance['post_type'] ) ? esc_attr($instance['post_type']) : '';
 		$taxonomy   = ! empty( $instance['taxonomy'] ) ? esc_attr($instance['taxonomy']) : '';
-		$term       = ! empty( $instance['term'] ) ? absint($instance['term']) : '';
+		$term       = ! empty( $instance['term'] ) ? esc_attr($instance['term']) : '';
 		$no_of_post = ! empty( $instance['no_of_post'] ) ? absint($instance['no_of_post']) : '';
 
 		$dropdown_icon		= isset($instance['dropdown_icon']) ? esc_attr( $instance['dropdown_icon'] ) : 'fa-toggle-off';
@@ -72,11 +72,13 @@ class AFWP_Accordion_Widgets extends WP_Widget {
 			'post_type'      => $post_type,
 			'posts_per_page' => $no_of_post,
 		);
-		if ( $taxonomy && $term ) {
+		if ( $taxonomy && $term ){
 			$wp_args['tax_query'] = array(
-				'taxonomy' => $taxonomy,
-				'field'    => 'slug',
-				'terms'    => $term,
+				array(
+					'taxonomy' => $taxonomy,
+					'field'    => 'slug',
+					'terms'    => $term,
+				)
 			);
 		}
 		$query = new WP_Query( $wp_args );

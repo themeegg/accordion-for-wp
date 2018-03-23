@@ -10,8 +10,8 @@ class AFWP_Settings_Page{
      */
     public function __construct(){
 
-        //add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
-        //add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
+        add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
+        add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
 
     }
 
@@ -87,7 +87,7 @@ class AFWP_Settings_Page{
                                     'demo_url'=> 'https://demo.themeegg.com/plugins/accordion-for-wp/',
                                     'docs_url'=> 'https://docs.themeegg.com/docs/accordion-for-wp/',
                                     'forum_url'=> 'https://themeegg.com/support-forum/forum/accordion-for-wordpress-plugin/',
-                                    'thumbnail_url'=>'https://ps.w.org/accordion-for-wp/assets/icon-128x128.png?rev=1717682',
+                                    'thumbnail_url'=>'https://ps.w.org/accordion-for-wp/assets/banner-772x250.png?rev=1717682',
                                     'rate_url'=> 'https://wordpress.org/support/plugin/accordion-for-wp/reviews/?filter=5',
                                 ),
                             );

@@ -48,7 +48,7 @@ class AFWP_Tab_Widgets extends WP_Widget {
 
 		$post_type  = ! empty( $instance['post_type'] ) ? esc_attr($instance['post_type']) : '';
 		$taxonomy   = ! empty( $instance['taxonomy'] ) ? esc_attr($instance['taxonomy']) : '';
-		$term       = ! empty( $instance['term'] ) ? absint($instance['term']) : '';
+		$term       = ! empty( $instance['term'] ) ? esc_attr($instance['term']) : '';
 		$no_of_post = ! empty( $instance['no_of_post'] ) ? absint($instance['no_of_post']) : '';
 
 		$tab_icon		= isset($instance['tab_icon']) ? esc_attr( $instance['tab_icon'] ) : 'fa-desktop';
@@ -75,9 +75,11 @@ class AFWP_Tab_Widgets extends WP_Widget {
 		);
 		if ( $taxonomy && $term ) {
 			$wp_args['tax_query'] = array(
-				'taxonomy' => $taxonomy,
-				'field'    => 'slug',
-				'terms'    => $term,
+				array(
+					'taxonomy' => $taxonomy,
+					'field'    => 'slug',
+					'terms'    => $term,
+				)
 			);
 		}
 		$query = new WP_Query( $wp_args );

@@ -22,6 +22,10 @@
         }
     }
 
+    .afwp-tab-item-wrap{
+            margin:0 3px 3px 0;
+        }
+
     .afwp-tab-content{
         display:none;
         padding:10px;
@@ -37,8 +41,8 @@
         cursor:pointer;
         display: block;
         position:relative;
-        background:#dedede;
         line-height:1.4em;
+        border: 1px solid #e1e1e1;
         .afwp-tab-icon{
             padding:10px;
             margin-right:-15px;
@@ -52,7 +56,7 @@
             display:none;
         }
         &.current, &:hover{
-            background:#f2f2f2;
+            background: #e1e1e1;
 
         }
     }
@@ -74,9 +78,7 @@
     }
 
     .vertical{
-        .afwp-tab-item-wrap{
-            margin:0 3px 3px 0;
-        }
+        
         .afwp-tab-title{
             border-right:1px solid #f2f2f2;
         }
