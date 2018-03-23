@@ -26,7 +26,7 @@ $afwp_style      	= afwp_accordion_styles();
 $afwp_active_item	= 1;
 $afwp_content_type 	= afwp_sanitize_accordion_content_type();
 
-$afwp_tab_icon = 'fa-toggle-off';
+$afwp_tab_icon = '';
 $afwp_title_color = '';
 $afwp_title_background = '';
 $afwp_content_color = '';
@@ -47,7 +47,6 @@ $content_color	= apply_filters( 'afwp_content_color', $afwp_content_color);
 $content_background	= apply_filters( 'afwp_content_background', $afwp_content_background);
 
 $query      = new WP_Query( $args );
-$active_tab = 1;
 if ( $query->have_posts() ):
 	?>
 	<div class="afwp-tab-template afwp-tab-shortcode afwp-tab-<?php echo esc_attr($templates); ?>">
@@ -57,7 +56,7 @@ if ( $query->have_posts() ):
 				$current_item = 0;
 				while ( $query->have_posts() ):$query->the_post(); 
 					$current_item++;
-					$tab_class = ($current_item==$active_tab) ? ' current ' : '';
+					$tab_class = ($current_item==$active_item) ? ' current ' : '';
 					?>
 					<li class="afwp-tab-item-wrap">
 						<div class="afwp-tab-title <?php echo esc_attr($tab_class); ?>" style="background:<?php echo sanitize_hex_color($title_background); ?>; color:<?php echo sanitize_hex_color($title_color); ?>;">
@@ -77,10 +76,16 @@ if ( $query->have_posts() ):
 				$current_item = 0;
 				while ( $query->have_posts() ):$query->the_post(); 
 					$current_item++;
-					$tab_class = ($current_item==$active_tab) ? ' current ' : '';
+					$tab_class = ($current_item==$active_item) ? ' current ' : '';
 					?>
 					<div class="afwp-tab-content <?php echo esc_attr($tab_class); ?>" id="post_tab_<?php echo get_the_ID(); ?>">
-						<?php the_afwp_excerpt(); ?>
+						<?php
+							if($content_type=='content'){
+								the_content();
+							}else{
+								the_excerpt();
+							}
+						?>
 					</div>
 				<?php endwhile; ?>
 			</div>
