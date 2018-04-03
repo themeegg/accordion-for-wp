@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Accordion for WordPress - Accordion, FAQ, Tabs Shortcode and Widgets
  * Plugin URI:        http://themeegg.com/plugins/accordion-for-wp/
- * Description:       Accordion for wordpress widgets and shortcode plugin with multiple templates.
+ * Description:       Accordion, Tab and FAQ features for WordPress. This plugin provide multiple templates, shortcodes, widgets, multiple layout options with color customization features. Also shortcode generator for beginner and template override features for developer.
  * Version:           1.3.4
  * Author:            ThemeEgg
  * Author URI:        http://themeegg.com/
