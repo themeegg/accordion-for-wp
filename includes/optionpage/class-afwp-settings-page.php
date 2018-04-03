@@ -10,8 +10,8 @@ class AFWP_Settings_Page{
      */
     public function __construct(){
 
-        add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
-        add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
+        //add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
+        //add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
 
     }
 
@@ -82,16 +82,27 @@ class AFWP_Settings_Page{
                         <?php 
                             $themeegg_themes = array(
                                 array(
-                                    'name'=> esc_html__('Accordion For WordPress - Plugin'),
+                                    'name'=> esc_html__('Accordion For WordPress - Plugin', 'accordion-for-wp'),
                                     'theme_url'=> 'https://themeegg.com/downloads/accordion-for-wp/',
                                     'demo_url'=> 'https://demo.themeegg.com/plugins/accordion-for-wp/',
                                     'docs_url'=> 'https://docs.themeegg.com/docs/accordion-for-wp/',
                                     'forum_url'=> 'https://themeegg.com/support-forum/forum/accordion-for-wordpress-plugin/',
                                     'thumbnail_url'=>'https://ps.w.org/accordion-for-wp/assets/banner-772x250.png?rev=1717682',
                                     'rate_url'=> 'https://wordpress.org/support/plugin/accordion-for-wp/reviews/?filter=5',
+                                    'download_url'=> 'https://wordpress.org/plugins/accordion-for-wp/',
+                                ),
+                                array(
+                                    'name'=> esc_html__('Twitter API Master - Plugin', 'accordion-for-wp'),
+                                    'theme_url'=> 'https://themeegg.com/downloads/teg-twitter-api/',
+                                    'demo_url'=> 'https://themeegg.com/downloads/teg-twitter-api/',
+                                    'docs_url'=> 'https://docs.themeegg.com/docs/teg-twitter-api/',
+                                    'forum_url'=> 'https://themeegg.com/support-forum/forum/twitter-api-master-plugin/',
+                                    'thumbnail_url'=>'https://ps.w.org/teg-twitter-api/assets/banner-772x250.png?rev=1717682',
+                                    'rate_url'=> 'https://wordpress.org/support/plugin/teg-twitter-api/reviews/?filter=5',
+                                    'download_url'=> 'https://wordpress.org/plugins/teg-twitter-api/',
                                 ),
                             );
-                            foreach ($themeegg_themes as $single_theme) {
+                            foreach ($themeegg_themes as $single_theme){
                                 ?>
                                 <div id="submitdiv" class="postbox afwp-postbox">
                                     <h2 class="hndle ui-sortable-handle"><span><?php echo esc_attr($single_theme['name']); ?></span></h2>
@@ -107,6 +118,7 @@ class AFWP_Settings_Page{
                                                 <a href="<?php echo  esc_attr($single_theme['docs_url']); ?>" target="_blank" class="btn button-primary"><?php echo esc_html_e('Docs', 'accordion-for-wp'); ?></a>
                                                 <a href="<?php echo  esc_attr($single_theme['forum_url']); ?>" target="_blank" class="btn button-primary"><?php echo esc_html_e('Support', 'accordion-for-wp'); ?></a>
                                                 <a href="<?php echo  esc_attr($single_theme['rate_url']); ?>" target="_blank" class="btn button-primary"><?php echo esc_html_e('Rating', 'accordion-for-wp'); ?></a>
+                                                <a href="<?php echo  esc_attr($single_theme['download_url']); ?>" target="_blank" class="btn button-primary"><?php echo esc_html_e('Download', 'accordion-for-wp'); ?></a>
                                             </div>
                                         </div>
                                     </div>

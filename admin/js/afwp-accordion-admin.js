@@ -4,7 +4,38 @@
 
 		Snipits: {
 
-			
+			Shortcode_Generator(formData){
+				var formValues = {};
+				for(var i=0; i<formData.length; i++){
+					formValues[formData[i].name] = formData[i].value;
+				}
+				var shortcodes = '[';
+				shortcodes += formValues.afwp_tab_or_accordion;
+				switch(formValues.afwp_tab_or_accordion){
+					case "afwp_tab":
+						delete formValues.afwp_active_dp_icon;
+						$('#afwp_active_dp_icon').closest('.afwp-field-container').css('display', 'none');
+						break;
+					case "afwp_accordion":
+						$('#afwp_active_dp_icon').closest('.afwp-field-container').css('display', 'table-row');
+						break;
+					default:
+						break;
+
+				}
+
+				delete formValues.afwp_tab_or_accordion;
+
+				for(var key in formValues){
+					if(formValues[key]){
+						shortcodes += ' '+key+'="' + formValues[key] + '"';
+					}
+				}
+				shortcodes += ']';
+				
+				console.log(formValues);
+				$('.afwp_generated_shortcode').html(shortcodes);
+			},
 
 			Color_Icon_Picker: function(){
 				var colorpicker, icon_picker;
@@ -17,7 +48,7 @@
 					hideOnSelect: true
 				};
 
-				$('.widget-liquid-right .afwp_color_picker').wpColorPicker(colorpicker);
+				$('.widget-liquid-right .afwp_color_picker, .afwp_generater_wraper .afwp_color_picker').wpColorPicker(colorpicker);
 				$('.afwp_icon_picker').iconpicker(icon_picker);
 				$(document).on('widget-updated widget-added', function(e, widget){
                 	widget.find('.afwp_color_picker').wpColorPicker(colorpicker);
@@ -111,6 +142,14 @@
 					tab_wraper.find('.afwp-tab-content').removeClass('afwp-content-active');
 					tab_wraper.find(tab_id).addClass('afwp-content-active');
 				}
+			});
+			$('#afwp_generate_button').on('click', function(){
+				var formData = $(this).closest('form').serializeArray();
+				afwp_accordion.Snipits.Shortcode_Generator(formData);
+			});
+
+			$('#afwp_shortcode_generator_form').on('change', function(){
+				$('#afwp_generate_button').trigger('click');
 			});
 		},
 

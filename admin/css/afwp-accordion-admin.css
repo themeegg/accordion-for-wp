@@ -11,7 +11,9 @@
   max-width:100%; 
   height:auto;
 }
-
+.afwp-bottom-actions .btn{
+  margin: 3px 1px;
+}
 #poststuff .afwp-top-title{
   color: #fff;
   font-size: 1.5em;
@@ -87,19 +89,9 @@
   margin: 0 -15px 15px;
 }
 
-div[id*=_afwp_] .widget-title h3{
-  color:#fff;
-  background-color:#006799;
+div[id*=_afwp_] .widget-title{
+  border-left:3px solid #006799;
 }
-
-div[id*=_afwp_] .widget-title h3:hover{
-  background-color:#00a0d2;
-}
-
-div[id*=_afwp_] .widget-title h3 *{
-  color:#ccc;
-}
-
 
 /*icon picker*/
 .popover-title input[type="search"]{

@@ -49,7 +49,10 @@
     }
 
     &.horizontal{
+        overflow: hidden;
+        height: auto;
         .afwp-toggle-icon{
+            left:0;
             width:100%;
             height:30px;
             border-left:none;
@@ -59,8 +62,6 @@
                 line-height: 30px;
             }
         }
-        overflow: hidden;
-        height: auto;
         ul{
             li{
                 float: left;
@@ -69,13 +70,22 @@
             }
         }
         .afwp-accordion-title{
-            word-wrap: break-word;
-            letter-spacing: 10px;
-            text-align: center;
             height: auto;
-            padding: 10px 0 10px 8px;
-            width: 30px;
+            padding:0;
             float: left;
+            width:initial;
+            overflow:hidden;
+            span{
+                width:35px;
+                display:block;
+                padding:10px 5px;
+                writing-mode: tb-rl;
+                -webkit-writing-mode: tb-rl;
+                -moz-writing-mode: tb-rl;
+                -ms-writing-mode: tb-rl;
+                -o-writing-mode: tb-rl;
+                -ms-writing-mode: tb-rl;
+            }
         }
         .afwp-content{
             display:none;
