@@ -15,7 +15,7 @@ Accordion for wordpress plugins helps you to make accordion for any post type, t
 
 ### Some demo shortcode of this plugin:
 
-*   "[afwp_accordion post_type="post" posts_per_page="3"][/afwp_accordion]" is demo shortcode.
+*   <pre>[afwp_accordion post_type="post" posts_per_page="3"]</pre> is demo shortcode.
 *   "post_type" set post type posts value to this shortcodes.
 *   "posts_per_page" set no of post show from this shortcode.
 *   "category" is also attribute of shortcode
