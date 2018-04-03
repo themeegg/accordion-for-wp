@@ -15,6 +15,7 @@ class AFWP_Settings_Page{
 
     }
 
+
     /**
      * Add Submenu page
      */
