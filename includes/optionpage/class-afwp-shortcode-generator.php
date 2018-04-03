@@ -304,7 +304,7 @@ class AFWP_Shortcode_Generator{
                                     </div>
                                 <?php } ?>
                                 <hr/>
-                                <input type="button" id="afwp_generate_button" class="button button-primary" value="<?php esc_html_e('Generate Shortcode'); ?>" />
+                                <input type="button" id="afwp_generate_button" class="button button-primary" value="<?php esc_html_e('Generate Shortcode', 'accordion-for-wp'); ?>" />
                                 <hr/>
                             </div>
                                 

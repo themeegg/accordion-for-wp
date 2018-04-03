@@ -3,9 +3,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Accordion for WordPress - Accordion, FAQ, Tabs "
-"Shortcode and Widgets 1.3.0\n"
+"Shortcode and Widgets 1.3.4\n"
 "Report-Msgid-Bugs-To: themeeggofficial@gmail.com\n"
-"POT-Creation-Date: 2018-03-17 10:58:34+00:00\n"
+"POT-Creation-Date: 2018-04-03 10:01:45+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,8 +40,9 @@ msgid "Excerpt"
 msgstr ""
 
 #: includes/function-afwp-core.php:72
-#: includes/widgets/class-afwp-accordion-widget.php:302
-#: includes/widgets/class-afwp-tab-widget.php:318
+#: includes/optionpage/class-afwp-shortcode-generator.php:94
+#: includes/widgets/class-afwp-accordion-widget.php:318
+#: includes/widgets/class-afwp-tab-widget.php:328
 msgid "Full Content"
 msgstr ""
 
@@ -50,23 +51,262 @@ msgid "Accordion WordPress Settings"
 msgstr ""
 
 #: includes/optionpage/class-afwp-settings-page.php:25
-msgid "Settings"
+msgid "Global Settings"
 msgstr ""
 
 #: includes/optionpage/class-afwp-settings-page.php:41
 msgid "Accordion for WordPress Settings  "
 msgstr ""
 
-#: includes/optionpage/class-afwp-settings-page.php:87
+#: includes/optionpage/class-afwp-settings-page.php:51
+#: includes/optionpage/class-afwp-shortcode-generator.php:103
+#: includes/widgets/class-afwp-accordion-widget.php:227
+#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:192
+#: includes/widgets/class-afwp-tab-widget.php:236
+#: includes/widgets/class-afwp-term-accordion-widget.php:198
+#: includes/widgets/class-afwp-term-tab-widget.php:202
+msgid "General"
+msgstr ""
+
+#: includes/optionpage/class-afwp-settings-page.php:55
+#: includes/optionpage/class-afwp-shortcode-generator.php:164
+#: includes/widgets/class-afwp-accordion-widget.php:231
+#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:196
+#: includes/widgets/class-afwp-tab-widget.php:240
+#: includes/widgets/class-afwp-term-accordion-widget.php:202
+#: includes/widgets/class-afwp-term-tab-widget.php:206
+msgid "Layout"
+msgstr ""
+
+#: includes/optionpage/class-afwp-settings-page.php:59
+#: includes/optionpage/class-afwp-shortcode-generator.php:190
+#: includes/widgets/class-afwp-accordion-widget.php:235
+#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:200
+#: includes/widgets/class-afwp-tab-widget.php:244
+#: includes/widgets/class-afwp-term-accordion-widget.php:206
+#: includes/widgets/class-afwp-term-tab-widget.php:210
+msgid "Design"
+msgstr ""
+
+#: includes/optionpage/class-afwp-settings-page.php:81
+msgid "Our Free Plugins"
+msgstr ""
+
+#: includes/optionpage/class-afwp-settings-page.php:85
+msgid "Accordion For WordPress - Plugin"
+msgstr ""
+
+#: includes/optionpage/class-afwp-settings-page.php:95
+msgid "Twitter API Master - Plugin"
+msgstr ""
+
+#: includes/optionpage/class-afwp-settings-page.php:117
+#: includes/optionpage/class-afwp-shortcode-generator.php:362
+msgid "Demo"
+msgstr ""
+
+#: includes/optionpage/class-afwp-settings-page.php:118
+#: includes/optionpage/class-afwp-shortcode-generator.php:363
+msgid "Docs"
+msgstr ""
+
+#: includes/optionpage/class-afwp-settings-page.php:119
+#: includes/optionpage/class-afwp-shortcode-generator.php:364
+msgid "Support"
+msgstr ""
+
+#: includes/optionpage/class-afwp-settings-page.php:120
+#: includes/optionpage/class-afwp-shortcode-generator.php:365
+msgid "Rating"
+msgstr ""
+
+#: includes/optionpage/class-afwp-settings-page.php:121
+#: includes/optionpage/class-afwp-shortcode-generator.php:366
+msgid "Download"
+msgstr ""
+
+#: includes/optionpage/class-afwp-settings-page.php:151
 msgid "General Settings"
 msgstr ""
 
-#: includes/optionpage/class-afwp-settings-page.php:94
+#: includes/optionpage/class-afwp-settings-page.php:158
 msgid "ID Number"
 msgstr ""
 
-#: includes/optionpage/class-afwp-settings-page.php:135
+#: includes/optionpage/class-afwp-settings-page.php:203
+#: includes/optionpage/class-afwp-settings-page.php:214
 msgid "You can change general settings from here."
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:29
+msgid "Add Accordion"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:42
+msgid "Accordion WordPress Shortcode Generator"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:43
+msgid "Shortcode Generator"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:58
+msgid "Generate accordion shortcode from here."
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:63
+msgid ""
+"Change your settings from here and generate shortcode than just copy this "
+"shortcode and paste it to text editor."
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:72
+msgid "Tabs"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:73
+msgid "Accordion"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:76
+msgid "Descending"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:77
+msgid "Ascending"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:80
+msgid "Date"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:81
+msgid "Title"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:82
+msgid "ID"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:83
+msgid "Author"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:84
+msgid "Modified"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:85
+msgid "Random"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:86
+msgid "Comment Count"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:89
+msgid "Readable"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:90
+msgid "Editable"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:93
+#: includes/widgets/class-afwp-accordion-widget.php:317
+#: includes/widgets/class-afwp-tab-widget.php:327
+msgid "Short Description"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:108
+msgid "Type"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:116
+msgid "Post Type"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:123
+msgid "Posts per page"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:129
+msgid "Order"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:136
+msgid "Order By"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:143
+msgid "Permission"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:150
+msgid "Offset"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:156
+#: includes/widgets/class-afwp-accordion-widget.php:321
+#: includes/widgets/class-afwp-tab-widget.php:331
+msgid "Content Type:"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:168
+msgid "Active Item"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:174
+msgid "Template"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:181
+msgid "Style"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:194
+msgid "Title Icon"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:200
+msgid "Active Title Icon"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:206
+msgid "Title Color"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:212
+msgid "Title Background"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:218
+msgid "Title Content Color"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:224
+msgid "Content Background"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:236
+#: includes/optionpage/class-afwp-shortcode-generator.php:307
+msgid "Generate Shortcode"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:316
+msgid "Our Free Themes"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:320
+msgid "EggNews - Magazine Theme"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:330
+msgid "Miteri - Blog Theme"
+msgstr ""
+
+#: includes/optionpage/class-afwp-shortcode-generator.php:340
+msgid "Education Master - Educational Theme"
 msgstr ""
 
 #: includes/posttype/class-afwp-accordion-post-type.php:66
@@ -268,116 +508,103 @@ msgstr ""
 msgid "Accordion Post Widget"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:213
-#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:192
-#: includes/widgets/class-afwp-tab-widget.php:229
-#: includes/widgets/class-afwp-term-accordion-widget.php:188
-msgid "General"
-msgstr ""
-
-#: includes/widgets/class-afwp-accordion-widget.php:217
-#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:196
-#: includes/widgets/class-afwp-tab-widget.php:233
-#: includes/widgets/class-afwp-term-accordion-widget.php:192
-msgid "Layout"
-msgstr ""
-
-#: includes/widgets/class-afwp-accordion-widget.php:221
-#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:200
-#: includes/widgets/class-afwp-tab-widget.php:237
-#: includes/widgets/class-afwp-term-accordion-widget.php:196
-msgid "Design"
-msgstr ""
-
-#: includes/widgets/class-afwp-accordion-widget.php:235
+#: includes/widgets/class-afwp-accordion-widget.php:249
 #: includes/widgets/class-afwp-nav-menu-accordion-widget.php:231
-#: includes/widgets/class-afwp-tab-widget.php:251
-#: includes/widgets/class-afwp-term-accordion-widget.php:210
+#: includes/widgets/class-afwp-tab-widget.php:258
+#: includes/widgets/class-afwp-term-accordion-widget.php:220
+#: includes/widgets/class-afwp-term-tab-widget.php:224
 msgid "Title:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:240
-#: includes/widgets/class-afwp-tab-widget.php:256
+#: includes/widgets/class-afwp-accordion-widget.php:255
+#: includes/widgets/class-afwp-tab-widget.php:264
 msgid "Post Type:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:259
-#: includes/widgets/class-afwp-tab-widget.php:275
-#: includes/widgets/class-afwp-term-accordion-widget.php:215
+#: includes/widgets/class-afwp-accordion-widget.php:275
+#: includes/widgets/class-afwp-tab-widget.php:284
+#: includes/widgets/class-afwp-term-accordion-widget.php:226
+#: includes/widgets/class-afwp-term-tab-widget.php:230
 msgid "Taxonomy:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:275
-#: includes/widgets/class-afwp-tab-widget.php:291
+#: includes/widgets/class-afwp-accordion-widget.php:291
+#: includes/widgets/class-afwp-tab-widget.php:300
 msgid "Term:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:295
-#: includes/widgets/class-afwp-tab-widget.php:311
+#: includes/widgets/class-afwp-accordion-widget.php:311
+#: includes/widgets/class-afwp-tab-widget.php:320
 msgid "Show no of post:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:301
-#: includes/widgets/class-afwp-tab-widget.php:317
-msgid "Short Description"
+#: includes/widgets/class-afwp-accordion-widget.php:336
+#: includes/widgets/class-afwp-term-accordion-widget.php:254
+msgid "Active Accordion Item:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:305
-#: includes/widgets/class-afwp-tab-widget.php:321
-msgid "Content Type:"
+#: includes/widgets/class-afwp-accordion-widget.php:340
+#: includes/widgets/class-afwp-tab-widget.php:350
+#: includes/widgets/class-afwp-term-accordion-widget.php:258
+#: includes/widgets/class-afwp-term-tab-widget.php:262
+msgid "Please set active item on load(zero for collapse all)"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:319
+#: includes/widgets/class-afwp-accordion-widget.php:343
 #: includes/widgets/class-afwp-nav-menu-accordion-widget.php:260
-#: includes/widgets/class-afwp-tab-widget.php:335
-#: includes/widgets/class-afwp-term-accordion-widget.php:241
+#: includes/widgets/class-afwp-tab-widget.php:353
+#: includes/widgets/class-afwp-term-accordion-widget.php:261
+#: includes/widgets/class-afwp-term-tab-widget.php:265
 msgid "Template:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:330
+#: includes/widgets/class-afwp-accordion-widget.php:354
 #: includes/widgets/class-afwp-nav-menu-accordion-widget.php:275
-#: includes/widgets/class-afwp-tab-widget.php:346
-#: includes/widgets/class-afwp-term-accordion-widget.php:254
+#: includes/widgets/class-afwp-tab-widget.php:364
+#: includes/widgets/class-afwp-term-accordion-widget.php:275
+#: includes/widgets/class-afwp-term-tab-widget.php:279
 msgid "Style:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:345
+#: includes/widgets/class-afwp-accordion-widget.php:370
 #: includes/widgets/class-afwp-nav-menu-accordion-widget.php:294
-#: includes/widgets/class-afwp-tab-widget.php:361
-#: includes/widgets/class-afwp-term-accordion-widget.php:269
+#: includes/widgets/class-afwp-term-accordion-widget.php:291
 msgid "Dropdown Icon:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:351
-#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:300
-#: includes/widgets/class-afwp-tab-widget.php:367
-#: includes/widgets/class-afwp-term-accordion-widget.php:275
+#: includes/widgets/class-afwp-accordion-widget.php:379
+#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:303
+#: includes/widgets/class-afwp-term-accordion-widget.php:300
 msgid "Active Dropdown Icon:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:357
-#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:306
-#: includes/widgets/class-afwp-tab-widget.php:373
-#: includes/widgets/class-afwp-term-accordion-widget.php:281
+#: includes/widgets/class-afwp-accordion-widget.php:388
+#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:312
+#: includes/widgets/class-afwp-tab-widget.php:391
+#: includes/widgets/class-afwp-term-accordion-widget.php:309
+#: includes/widgets/class-afwp-term-tab-widget.php:304
 msgid "Title Color:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:362
-#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:311
-#: includes/widgets/class-afwp-tab-widget.php:378
-#: includes/widgets/class-afwp-term-accordion-widget.php:286
+#: includes/widgets/class-afwp-accordion-widget.php:393
+#: includes/widgets/class-afwp-nav-menu-accordion-widget.php:317
+#: includes/widgets/class-afwp-tab-widget.php:396
+#: includes/widgets/class-afwp-term-accordion-widget.php:314
+#: includes/widgets/class-afwp-term-tab-widget.php:309
 msgid "Title Background:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:368
-#: includes/widgets/class-afwp-tab-widget.php:384
-#: includes/widgets/class-afwp-term-accordion-widget.php:292
+#: includes/widgets/class-afwp-accordion-widget.php:399
+#: includes/widgets/class-afwp-tab-widget.php:408
+#: includes/widgets/class-afwp-term-accordion-widget.php:320
+#: includes/widgets/class-afwp-term-tab-widget.php:315
 msgid "Content Color:"
 msgstr ""
 
-#: includes/widgets/class-afwp-accordion-widget.php:374
-#: includes/widgets/class-afwp-tab-widget.php:390
-#: includes/widgets/class-afwp-term-accordion-widget.php:298
+#: includes/widgets/class-afwp-accordion-widget.php:405
+#: includes/widgets/class-afwp-tab-widget.php:414
+#: includes/widgets/class-afwp-term-accordion-widget.php:326
+#: includes/widgets/class-afwp-term-tab-widget.php:321
 msgid "Content Background:"
 msgstr ""
 
@@ -413,6 +640,24 @@ msgstr ""
 msgid "Tab Post Widget"
 msgstr ""
 
+#: includes/widgets/class-afwp-tab-widget.php:346
+#: includes/widgets/class-afwp-term-tab-widget.php:258
+msgid "Active Tab Item:"
+msgstr ""
+
+#: includes/widgets/class-afwp-tab-widget.php:379
+#: includes/widgets/class-afwp-term-tab-widget.php:295
+msgid "Tab Icon:"
+msgstr ""
+
+#: includes/widgets/class-afwp-tab-widget.php:402
+msgid "Title Wraper Background:"
+msgstr ""
+
+#: includes/widgets/class-afwp-tab-widget.php:420
+msgid "Content Wraper Background:"
+msgstr ""
+
 #: includes/widgets/class-afwp-term-accordion-widget.php:28
 msgid "Widget for Term Accordion"
 msgstr ""
@@ -421,8 +666,17 @@ msgstr ""
 msgid "Accordion Term Widget"
 msgstr ""
 
-#: includes/widgets/class-afwp-term-accordion-widget.php:234
+#: includes/widgets/class-afwp-term-accordion-widget.php:246
+#: includes/widgets/class-afwp-term-tab-widget.php:250
 msgid "Show no of term:"
+msgstr ""
+
+#: includes/widgets/class-afwp-term-tab-widget.php:28
+msgid "Widget for Term Tab"
+msgstr ""
+
+#: includes/widgets/class-afwp-term-tab-widget.php:32
+msgid "Tab Term Widget"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
