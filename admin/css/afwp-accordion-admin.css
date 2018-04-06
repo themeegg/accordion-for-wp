@@ -7,6 +7,50 @@
  	display:none;
 }
 
+.afwp_group_title {
+    background: #3b90a7;
+    color: #fff;
+    padding: 6px 10px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.afwp-global-settings select[multiple] {
+    height: 150px;
+}
+
+.postbox-container .afwp-tab-wraper{
+  margin: 0 -12px -12px;
+}
+
+.afwp_shortcode_wrap{
+  position:relative;
+}
+.afwp_copy_shortcode{
+  display:none;
+  position:absolute;
+  top:0;
+  right:0;
+  color:#fff;
+  cursor:pointer;
+  padding:5px 10px;
+  background:#0085ba;
+  transition: display 2s ease;
+}
+
+.afwp_shortcode_wrap:hover .afwp_copy_shortcode{
+  display:block;
+}
+
+.afwp_generated_shortcode {
+    border: 1px solid #dedede;
+    display: block;
+    background: #fff;
+    line-height: 1.4em;
+    padding: 15px;
+}
+
 .afwp-postbox img{
   max-width:100%; 
   height:auto;

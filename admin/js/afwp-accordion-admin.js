@@ -4,7 +4,17 @@
 
 		Snipits: {
 
-			Shortcode_Generator(formData){
+			Copy_Text: function(text){
+				var input_field = document.createElement('input');
+				input_field.setAttribute("type", "text");
+				input_field.setAttribute("value", text);
+				document.body.appendChild(input_field);
+				input_field.select();
+				document.execCommand('copy');
+				document.body.removeChild(input_field);
+			},
+
+			Shortcode_Generator: function(formData){
 				var formValues = {};
 				for(var i=0; i<formData.length; i++){
 					formValues[formData[i].name] = formData[i].value;
@@ -142,6 +152,19 @@
 					tab_wraper.find('.afwp-tab-content').removeClass('afwp-content-active');
 					tab_wraper.find(tab_id).addClass('afwp-content-active');
 				}
+			});
+			$(document).on('click', '.afwp_copy_shortcode', function(){
+				var _copy_shortcode, shortcodecode_wraper, shortcodes, copy_text, copied_text;
+				_copy_shortcode=$(this);
+				shortcodecode_wraper = _copy_shortcode.siblings('code');
+				shortcodes = shortcodecode_wraper.text();
+				copy_text = _copy_shortcode.data('copy');
+				copied_text = _copy_shortcode.data('copied');
+				afwp_accordion.Snipits.Copy_Text(shortcodes);
+				_copy_shortcode.text(copied_text);
+				setTimeout(function() {
+					_copy_shortcode.text(copy_text);
+				}, 1000);
 			});
 			$('#afwp_generate_button').on('click', function(){
 				var formData = $(this).closest('form').serializeArray();

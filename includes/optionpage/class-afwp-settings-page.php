@@ -1,5 +1,6 @@
 <?php
 class AFWP_Settings_Page{
+
     /**
      * Holds the values to be used in the fields callbacks
      */
@@ -10,11 +11,10 @@ class AFWP_Settings_Page{
      */
     public function __construct(){
 
-        //add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
-        //add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
+        add_action( 'admin_menu', array( $this, 'afwp_admin_menu' ) );
+        add_action( 'admin_init', array( $this, 'afwp_admin_init' ) );
 
     }
-
 
     /**
      * Add Submenu page
@@ -23,7 +23,7 @@ class AFWP_Settings_Page{
         add_submenu_page(
             'edit.php?post_type=accordion-for-wp',
             esc_html__('Accordion WordPress Settings', 'accordion-for-wp'),
-            esc_html__('Global Settings', 'accordion-for-wp'),
+            esc_html__('Settings', 'accordion-for-wp'),
             'manage_options',
             'afwp-settings',
             array( $this, 'afwp_add_submenu_page' )
@@ -36,18 +36,23 @@ class AFWP_Settings_Page{
     public function afwp_add_submenu_page(){
 
         // Set class property
-        $this->options = get_option( 'afwp_global_settings' );
+        $default_options = array(
+            'afwp_settings_advanced_id'=>array(
+                'settings_on_posttypes'=>array( 'accordion-for-wp', 'afwp-tabs' ),
+            )
+        );
+        $this->options = get_option( 'afwp_global_settings', $default_options );
         ?>
-        <div class="wrap">
+        <div class="wrap afwp-global-settings">
             <h1><?php esc_html_e('Accordion for WordPress Settings  ', 'accordion-for-wp'); ?></h1>
             <div id="poststuff">
                 <div id="post-body" class="metabox-holder columns-2">
                     <div id="post-body-content" style="position: relative;">
                         <form class="afwp-tab-wraper" method="post" action="options.php">
                             <?php
-                                $active_tab_type = isset($this->options['active_tab_type']) ? esc_attr($this->options['active_tab_type']) : 'general';
+                                $active_tab_type = isset($this->options['active_tab_type']) ? esc_attr($this->options['active_tab_type']) : 'advanced';
                                 $list_all_tabs = array(
-                                    'general'   =>  array(
+                                    /*'general'   =>  array(
                                         'id'    => 'afwp_settings_general',
                                         'label' => esc_html__('General', 'accordion-for-wp'),
                                     ),
@@ -58,6 +63,10 @@ class AFWP_Settings_Page{
                                     'design'    =>  array(
                                         'id'    => 'afwp_settings_design',
                                         'label' => esc_html__('Design', 'accordion-for-wp'),
+                                    ), */
+                                    'advanced'    =>  array(
+                                        'id'    => 'afwp_settings_advanced',
+                                        'label' => esc_html__('Advanced', 'accordion-for-wp'),
                                     ),
                                 );
                             ?>
@@ -147,31 +156,82 @@ class AFWP_Settings_Page{
             array( $this, 'global_settings_sanitize' ) // Sanitize
         );
 
+
+        // General Settings 
         add_settings_section(
             'afwp_settings_general_id', // ID
             esc_html__('General Settings', 'accordion-for-wp'), // Title
-            array( $this, 'print_section_info' ), // Callback
+            array( $this, 'print_general_section_info' ), // Callback
             'afwp_settings_general_tab' // Page
         );
 
         add_settings_field(
             'id_number', // ID
             esc_html__('ID Number', 'accordion-for-wp'), // Title
-            array( $this, 'afwp_checkbox_callback' ), // Callback
+            array( $this, 'afwp_settings_fields' ), // Callback
             'afwp_settings_general_tab', // Page
             'afwp_settings_general_id', // Section
             array(
-                ''
+                'type'=>'text',
+                'section_id'=> 'afwp_settings_general_id',
+                'settings_id'=> 'id_number',
+                'default'=>'',
             ) //Arguments
         );
 
         add_settings_field(
             'title',
             'Title',
-            array( $this, 'title_callback' ),
+            array( $this, 'afwp_settings_fields' ),
             'afwp_settings_general_tab',
-            'afwp_settings_general_id'
+            'afwp_settings_general_id',
+            array(
+                'type'=>'text',
+                'section_id'=> 'afwp_settings_general_id',
+                'settings_id'=> 'title',
+                'default'=>'',
+            ) //Arguments
         );
+
+        // Layout Settings
+        add_settings_section(
+            'afwp_settings_layout_id', // ID
+            esc_html__('Layout Settings', 'accordion-for-wp'), // Title
+            array( $this, 'print_layout_section_info' ), // Callback
+            'afwp_settings_layout_tab' // Page
+        );
+
+        // Design Settings
+        add_settings_section(
+            'afwp_settings_design_id', // ID
+            esc_html__('Design Settings', 'accordion-for-wp'), // Title
+            array( $this, 'print_design_section_info' ), // Callback
+            'afwp_settings_design_tab' // Page
+        );
+
+        // Advanced Settings
+        add_settings_section(
+            'afwp_settings_advanced_id', // ID
+            esc_html__('Advanced Settings', 'accordion-for-wp'), // Title
+            array( $this, 'print_advanced_section_info' ), // Callback
+            'afwp_settings_advanced_tab' // Page
+        );
+
+        add_settings_field(
+            'settings_on_posttypes', // ID
+            esc_html__('Settings on posttype', 'accordion-for-wp'), // Title
+            array( $this, 'afwp_settings_fields' ), // Callback
+            'afwp_settings_advanced_tab', // Page
+            'afwp_settings_advanced_id', // Section
+            array(
+                'type'          => 'multiselect',
+                'section_id'    => 'afwp_settings_advanced_id',
+                'settings_id'   => 'settings_on_posttypes',
+                'choices'       => get_post_types(array('public'=>true)),
+            ) //Arguments
+        );
+
+
     }
 
     /**
@@ -179,26 +239,63 @@ class AFWP_Settings_Page{
      *
      * @param array $input Contains all settings fields as array keys
      */
-    public function global_settings_sanitize( $input )
-    {
-        $new_input = array();
+    public function global_settings_sanitize( $input ){
 
+        $global_settings = array();
+        
+        //Active Tab Type
         if( isset( $input['active_tab_type'] ) )
-            $new_input['active_tab_type'] = sanitize_text_field( $input['active_tab_type'] );
+            $global_settings['active_tab_type'] = sanitize_text_field( $input['active_tab_type'] );
 
-        if( isset( $input['id_number'] ) )
-            $new_input['id_number'] = absint( $input['id_number'] );
+        // General Settings
+        $general_updated_settings = array();
 
-        if( isset( $input['title'] ) )
-            $new_input['title'] = sanitize_text_field( $input['title'] );
+        $general_settings = isset($input['afwp_settings_general_id']) ? $input['afwp_settings_general_id'] : array();
+        
+        if( isset( $general_settings['id_number'] ) )
+            $general_updated_settings['id_number'] = sanitize_text_field( $general_settings['id_number'] );
 
-        return $new_input;
+        if( isset( $general_settings['title'] ) )
+            $general_updated_settings['title'] = sanitize_text_field( $general_settings['title'] );
+
+        $global_settings['afwp_settings_general_id'] = $general_updated_settings;
+
+        // Layout Settings
+        $layout_updated_settings = array();
+
+        $layout_settings = isset($input['afwp_settings_layout_id']) ? $input['afwp_settings_layout_id'] : array();
+        
+
+
+        $global_settings['afwp_settings_layout_id'] = $layout_updated_settings;
+
+        // Design Settings
+        $design_updated_settings = array();
+
+        $design_settings = isset($input['afwp_settings_design_id']) ? $input['afwp_settings_design_id'] : array();
+        
+        
+
+        $global_settings['afwp_settings_design_id'] = $design_updated_settings;
+
+        // Advanced Settings
+        $advanced_updated_settings = array();
+
+        $advanced_settings = isset($input['afwp_settings_advanced_id']) ? $input['afwp_settings_advanced_id'] : array();
+        
+        $advanced_updated_settings['settings_on_posttypes'] = isset( $advanced_settings['settings_on_posttypes'] ) ? array_map('esc_attr', $advanced_settings['settings_on_posttypes'] ) : array();
+
+        $global_settings['afwp_settings_advanced_id'] = $advanced_updated_settings;
+
+        return $global_settings;
+
     }
 
+
     /**
-     * Print the Section text
+     * Print the general Section text
      */
-    public function print_tab_title_info(){
+    public function print_general_section_info(){
 
         ?>
         <p><?php esc_html_e('You can change general settings from here.', 'accordion-for-wp'); ?></p>
@@ -207,38 +304,87 @@ class AFWP_Settings_Page{
     }
 
     /**
-     * Print the Section text
+     * Print the Layout Section text
      */
-    public function print_section_info(){
+    public function print_layout_section_info(){
 
         ?>
-        <p><?php esc_html_e('You can change general settings from here.', 'accordion-for-wp'); ?></p>
+        <p><?php esc_html_e('Layout Settings Comming Soon....', 'accordion-for-wp'); ?></p>
         <?php
 
     }
 
     /**
-     * Get the settings option array and print one of its values
+     * Print the design Section text
      */
-    public function afwp_checkbox_callback($args){
+    public function print_design_section_info(){
 
-        printf(
-            '<input type="text" id="id_number" name="afwp_global_settings[id_number]" value="%s" />',
-            isset( $this->options['id_number'] ) ? esc_attr( $this->options['id_number']) : ''
-        );
+        ?>
+        <p><?php esc_html_e('Design Settings Comming Soon....', 'accordion-for-wp'); ?></p>
+        <?php
+
+    }
+
+    /**
+     * Print the advanced Section text
+     */
+    public function print_advanced_section_info(){
+
+       // Advanced settings info goes here;
 
     }
 
     /**
      * Get the settings option array and print one of its values
      */
-    public function title_callback()
-    {
-        printf(
-            '<input type="text" id="title" name="afwp_global_settings[title]" value="%s" />',
-            isset( $this->options['title'] ) ? esc_attr( $this->options['title']) : ''
-        );
+    public function afwp_settings_fields($args){
+
+        $input_type = isset($args['type']) ? $args['type'] : '';
+        $section_id = isset($args['section_id']) ? $args['section_id'] : '';
+        $settings_id = isset($args['settings_id']) ? $args['settings_id'] : '';
+        $settings_value = isset($this->options[$section_id][$settings_id] ) ? $this->options[$section_id][$settings_id]: '';
+        switch ($input_type) {
+            case 'text':
+                printf(
+                    '<input type="text" id="'.esc_attr($settings_id).'" name="afwp_global_settings['.esc_attr($section_id).']['.esc_attr($settings_id).']" value="%s" />',
+                    esc_attr( $settings_value )
+                );
+                break;
+            case 'select':
+                $select_choices = isset($args['choices']) ? $args['choices'] : array();
+                ?>
+                    <select class="widefat" id="<?php echo esc_attr($settings_id); ?>" name="afwp_global_settings[<?php echo esc_attr($section_id); ?>][<?php echo esc_attr($settings_id); ?>]">
+                        <?php foreach($select_choices as $select_val => $select_labels): ?>
+                            <option value="<?php echo esc_attr($select_val); ?>" <?php selected($select_val, $settings_value); ?>><?php echo esc_attr($select_labels); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php
+                break;
+
+            case 'multiselect':
+                $select_choices = isset($args['choices']) ? $args['choices'] : array();
+                if(!is_array($settings_value)){
+                    $settings_value = array();
+                }
+                ?>
+                    <select class="widefat" id="<?php echo esc_attr($settings_id); ?>" multiple="multiple" name="afwp_global_settings[<?php echo esc_attr($section_id); ?>][<?php echo esc_attr($settings_id); ?>][]">
+                        <?php foreach($select_choices as $select_val => $select_labels): ?>
+                            <option value="<?php echo esc_attr($select_val); ?>" <?php selected(1, in_array($select_val, $settings_value)); ?>><?php echo esc_attr($select_labels); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php
+                break;
+            
+            default:
+                ?>
+                <p><?php esc_html_e('Sorry couldnot find input type '.esc_attr($input_type).'.'); ?></p>
+                <?php
+                break;
+
+        }
+        
     }
+
 }
 
 if( is_admin() )

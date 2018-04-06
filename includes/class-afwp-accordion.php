@@ -81,9 +81,11 @@ class Accordion_For_WP {
 		$this->define_public_hooks();
 		if(is_admin()){
 			$this->define_admin_hooks();
+			$this->admin_metabox();
+			$this->add_admin_options();
 		}
 		$this->add_shortcodes();
-		$this->add_admin_options();
+		
 		add_action( 'widgets_init', [$this, 'add_widgets'] );
 
 	}
@@ -188,7 +190,41 @@ class Accordion_For_WP {
 
 	}
 
+	function add_meta_boxes( $post_type, $post ) {
 
+		$default_options = array(
+			'afwp_settings_advanced_id'=>array(
+				'settings_on_posttypes'=>array( 'accordion-for-wp', 'afwp-tabs' ),
+			)
+		);
+		$global_settings = get_option( 'afwp_global_settings',  $default_options);
+		$metabox_on_posttype = isset($global_settings['afwp_settings_advanced_id']['settings_on_posttypes']) ? $global_settings['afwp_settings_advanced_id']['settings_on_posttypes'] : array();
+		if(!empty($metabox_on_posttype) && is_array($metabox_on_posttype)){
+			add_meta_box( 
+		        'afwp_posts_settings',
+		        esc_html__( 'Accordion Settings', 'accordion-for-wp' ),
+		        array('AFWP_Accordion_Metabox', 'metabox_template'),
+		        $metabox_on_posttype,
+		        'side',
+		        'high'
+		    );
+	    }
+
+
+	}
+
+	/**
+	 *
+	 * @since    1.3.5
+	 * @access   private
+	 */
+	private function admin_metabox() {
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/metabox/class-afwp-accordion-metabox.php';	
+		add_action( 'add_meta_boxes', array($this, 'add_meta_boxes'), 10, 2 );
+		add_action('save_post', array('AFWP_Accordion_Metabox', 'save_metabox'));
+    
+	}
 
 	/**
 	 * Register all of the hooks related to the public-facing functionality

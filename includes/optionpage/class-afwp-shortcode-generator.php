@@ -61,7 +61,10 @@ class AFWP_Shortcode_Generator{
                     <div id="post-body-content">
                         <div class="afwp_generater_wraper">
                             <p><?php esc_html_e('Change your settings from here and generate shortcode than just copy this shortcode and paste it to text editor.', 'accordion-for-wp'); ?></p>
-                            <code class="afwp_generated_shortcode">[afwp_accordion post_type="post" posts_per_page="5" order="date" perm="readable" offset="0" afwp_active_item="1" afwp_template="default" afwp_style="vertical" afwp_dropdown_icon="fa-desktop" afwp_active_dp_icon="fa-desktop"]</code>
+                            <div class="afwp_shortcode_wrap">
+                                <code class="afwp_generated_shortcode">[afwp_accordion post_type="post" posts_per_page="5" order="date" perm="readable" offset="0" afwp_active_item="1" afwp_template="default" afwp_style="vertical" afwp_dropdown_icon="fa-desktop" afwp_active_dp_icon="fa-desktop"]</code>
+                                <span class="afwp_copy_shortcode" data-copy="<?php esc_html_e('Copy', 'accordion-for-wp'); ?>" data-copied="<?php esc_html_e('Copied !!!', 'accordion-for-wp'); ?>"><?php esc_html_e('Copy', 'accordion-for-wp'); ?></span>
+                            </div>
                             <form method="post" id="afwp_shortcode_generator_form" class="afwp-tab-wraper">
                                 <?php
                                 
@@ -309,7 +312,10 @@ class AFWP_Shortcode_Generator{
                             </div>
                                 
                             </form>
-                            <code class="afwp_generated_shortcode">[afwp_accordion post_type="post" posts_per_page="5" order="date" perm="readable" offset="0" afwp_active_item="1" afwp_template="default" afwp_style="vertical" afwp_dropdown_icon="fa-desktop" afwp_active_dp_icon="fa-desktop"]</code>
+                            <div class="afwp_shortcode_wrap">
+                                <code class="afwp_generated_shortcode">[afwp_accordion post_type="post" posts_per_page="5" order="date" perm="readable" offset="0" afwp_active_item="1" afwp_template="default" afwp_style="vertical" afwp_dropdown_icon="fa-desktop" afwp_active_dp_icon="fa-desktop"]</code>
+                                <span class="afwp_copy_shortcode" data-copy="<?php esc_html_e('Copy', 'accordion-for-wp'); ?>" data-copied="<?php esc_html_e('Copied !!!', 'accordion-for-wp'); ?>"><?php esc_html_e('Copy', 'accordion-for-wp'); ?></span>
+                            </div>
                         </div>
                     </div><!-- /post-body-content -->
                     <div id="postbox-container-1" class="postbox-container ">
